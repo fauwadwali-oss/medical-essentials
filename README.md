@@ -20,6 +20,18 @@ Medical Essentials is for common public readers, not only students or healthcare
 
 Open `index.html` in a browser.
 
+## Supabase Shorts Connection
+
+The homepage includes a Trending Shorts section for the `Medical Essentials` program in the existing `masteringseries-platform` Supabase project.
+
+- Supabase project URL: `https://sayghkqlrfsszgdjxyfh.supabase.co`
+- Program slug: `medical-essentials`
+- Program ID: `5`
+- Source table: `public.shorts`
+- Filter: `program_id = 5`, `is_published = true`, `is_trending = true`
+
+Set the public anon key in `supabase-config.js` to enable live loading on GitHub Pages. Do not use the service-role key in this public website.
+
 ## GitHub Pages Setup
 
 This repo includes a `CNAME` file for:

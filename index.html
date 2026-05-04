@@ -21,6 +21,7 @@
         <a href="#public-health">Public Health</a>
         <a href="#healthcare-admin">Healthcare Admin</a>
         <a href="#life-topics">Life Topics</a>
+        <a href="#shorts">Shorts</a>
       </nav>
       <a class="nav-action" href="#newsletter">Subscribe</a>
     </header>
@@ -119,6 +120,18 @@
         </div>
       </section>
 
+      <section class="shorts" id="shorts" aria-labelledby="shorts-title">
+        <div class="section-heading">
+          <span>Trending shorts</span>
+          <h2 id="shorts-title">Short, useful health ideas from the Medical Essentials library.</h2>
+        </div>
+        <div class="shorts-meta">
+          <p id="shorts-status">Loading Medical Essentials shorts from Supabase.</p>
+          <a href="https://www.youtube.com/" target="_blank" rel="noreferrer">Open YouTube</a>
+        </div>
+        <div class="shorts-grid" id="shorts-grid" aria-live="polite"></div>
+      </section>
+
       <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
         <div>
           <h2 id="newsletter-title">Build your health understanding one clear idea at a time.</h2>
@@ -146,5 +159,7 @@
       <span>Medical Essentials</span>
       <span>Public health, healthcare administration, and life topics for common readers.</span>
     </footer>
+    <script src="supabase-config.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
