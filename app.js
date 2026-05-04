@@ -39,11 +39,7 @@ function thumbnailFor(short) {
     return "";
   }
 
-  if (short.thumbnail_url) {
-    return short.thumbnail_url;
-  }
-
-  return `https://i.ytimg.com/vi/${short.youtube_id}/hqdefault.jpg`;
+  return short.thumbnail_url || "";
 }
 
 function cleanTitle(title) {
@@ -99,49 +95,26 @@ function renderShorts(shorts, sourceLabel) {
   shortsStatus.textContent = sourceLabel;
 }
 
-async function loadShorts() {
-  const config = window.MEDICAL_ESSENTIALS_SUPABASE;
-
-  if (!config?.url || !config?.anonKey || !config?.programId) {
-    renderShorts(
-      fallbackShorts,
-      "Showing a starter selection from the 273-short Medical Essentials library."
-    );
-    return;
-  }
-
-  const params = new URLSearchParams({
-    select: "id,title,youtube_id,thumbnail_url,duration_seconds,created_at",
-    program_id: `eq.${config.programId}`,
-    is_published: "eq.true",
-    is_trending: "eq.true",
-    order: "created_at.desc",
-    limit: "12"
-  });
-
+async function loadShortsFromExport() {
   try {
-    const response = await fetch(`${config.url}/rest/v1/shorts?${params}`, {
-      headers: {
-        apikey: config.anonKey,
-        Authorization: `Bearer ${config.anonKey}`
-      }
-    });
+    const response = await fetch("data/shorts.json", { cache: "no-store" });
 
     if (!response.ok) {
-      throw new Error(`Supabase returned ${response.status}`);
+      throw new Error(`Static export returned ${response.status}`);
     }
 
-    const shorts = await response.json();
+    const payload = await response.json();
+    const shorts = Array.isArray(payload.shorts) ? payload.shorts.slice(0, 12) : [];
 
-    if (!Array.isArray(shorts) || shorts.length === 0) {
-      throw new Error("No shorts returned");
+    if (shorts.length === 0) {
+      throw new Error("Static export did not include shorts.");
     }
 
-    renderShorts(shorts, `Showing ${shorts.length} of 273 Medical Essentials trending shorts from Supabase.`);
+    renderShorts(shorts, `Showing ${shorts.length} of ${payload.count} Medical Essentials trending shorts.`);
   } catch (error) {
-    console.error("Could not load Medical Essentials shorts:", error);
-    renderShorts(fallbackShorts, "Showing a starter selection from the Medical Essentials shorts library.");
+    console.error("Could not load static shorts export:", error);
+    renderShorts(fallbackShorts, "Showing a starter selection from the 273-short Medical Essentials library.");
   }
 }
 
-loadShorts();
+loadShortsFromExport();

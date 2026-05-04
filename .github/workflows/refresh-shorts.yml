@@ -1,0 +1,41 @@
+name: Refresh Medical Essentials shorts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 8 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Export shorts from Supabase
+        env:
+          SUPABASE_URL: https://sayghkqlrfsszgdjxyfh.supabase.co
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          PROGRAM_ID: "5"
+          OUTPUT_PATH: data/shorts.json
+        run: node scripts/export-shorts.mjs
+
+      - name: Commit updated shorts
+        run: |
+          if git diff --quiet -- data/shorts.json; then
+            echo "No shorts changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/shorts.json
+          git commit -m "Refresh Medical Essentials shorts"
+          git push
