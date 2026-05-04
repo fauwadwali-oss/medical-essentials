@@ -53,3 +53,23 @@ www CNAME fauwadwali-oss.github.io
 ```
 
 For the apex domain, add GitHub Pages A records if you want `medicalessentials.com` to redirect or resolve alongside `www.medicalessentials.com`.
+
+## Cloudflare Pages Deployment
+
+Cloudflare Pages is the preferred production host for `medicalessentials.com`.
+
+The repo includes `.github/workflows/deploy-cloudflare-pages.yml`, which:
+
+- builds a clean `dist/` folder from the public site files
+- creates the Cloudflare Pages project `medical-essentials` if needed
+- deploys `dist/` to Cloudflare Pages
+- attaches `medicalessentials.com` and `www.medicalessentials.com`
+
+Required GitHub secrets:
+
+```text
+CLOUDFLARE_API_TOKEN
+CLOUDFLARE_ACCOUNT_ID
+```
+
+The API token needs permission to manage Cloudflare Pages projects and Pages custom domains for the account that owns the `medicalessentials.com` zone.

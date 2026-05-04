@@ -1,0 +1,67 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Cloudflare secrets
+        id: cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "Cloudflare secrets are not configured yet. Skipping deploy."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Check out repository
+        if: steps.cloudflare.outputs.configured == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        if: steps.cloudflare.outputs.configured == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build static site
+        if: steps.cloudflare.outputs.configured == 'true'
+        run: node scripts/build-site.mjs
+
+      - name: Create Cloudflare Pages project if needed
+        if: steps.cloudflare.outputs.configured == 'true'
+        uses: cloudflare/wrangler-action@v3
+        continue-on-error: true
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create medical-essentials --production-branch main
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.cloudflare.outputs.configured == 'true'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name medical-essentials --branch main
+
+      - name: Attach custom domains
+        if: steps.cloudflare.outputs.configured == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_PROJECT: medical-essentials
+          CLOUDFLARE_PAGES_DOMAINS: medicalessentials.com,www.medicalessentials.com
+        run: node scripts/cloudflare-add-domains.mjs
