@@ -8,47 +8,131 @@
       name="description"
       content="Medical Essentials explains public health, healthcare systems, and everyday life decisions in plain language."
     />
+    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <header class="site-header">
+      <a class="brand" href="#" aria-label="Medical Essentials home">
+        <span class="brand-mark" aria-hidden="true">ME</span>
+        <span>Medical Essentials</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#public-health">Public Health</a>
+        <a href="#healthcare-admin">Healthcare Admin</a>
+        <a href="#life-topics">Life Topics</a>
+      </nav>
+      <a class="nav-action" href="#newsletter">Subscribe</a>
+    </header>
+
     <main>
       <section class="hero" aria-labelledby="page-title">
-        <div class="hero__content">
-          <p class="eyebrow">Health, systems, and everyday choices</p>
+        <div class="hero-copy">
           <h1 id="page-title">Medical Essentials</h1>
-          <p class="lede">
-            Plain-language public health, healthcare administration, and life-topic explainers for common readers.
+          <p>
+            Clear explainers for public health, healthcare administration, and everyday life decisions,
+            written for common readers who want useful context without complicated wording.
           </p>
-          <div class="actions">
-            <a href="mailto:hello@medicalessentials.com" class="button">Contact</a>
-            <a href="#topics" class="button button--secondary">Explore topics</a>
+          <div class="actions" aria-label="Homepage actions">
+            <a href="#featured" class="button">Start Reading</a>
+            <a href="#topics" class="button button-secondary">Explore Topics</a>
+          </div>
+        </div>
+
+        <div class="hero-media" aria-label="Community health education scene">
+          <img
+            src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=82"
+            alt="People reviewing health information together at a table"
+          />
+          <div class="media-note">
+            <strong>Plain language first</strong>
+            <span>Health, systems, and daily choices explained with care.</span>
           </div>
         </div>
       </section>
 
-      <section class="topics" id="topics" aria-label="Core content areas">
-        <article>
-          <h2>Public Health</h2>
-          <p>Clear explanations of prevention, outbreaks, data, policy, and community health.</p>
-        </article>
-        <article>
-          <h2>Healthcare Administration</h2>
-          <p>Simple breakdowns of hospitals, insurance, quality, access, costs, and leadership.</p>
-        </article>
-        <article>
-          <h2>Life Topics</h2>
-          <p>Practical guidance on habits, decisions, family health, work, stress, and daily wellbeing.</p>
+      <section class="featured" id="featured" aria-labelledby="featured-title">
+        <div class="section-heading">
+          <span>Featured guide</span>
+          <h2 id="featured-title">Understand the systems around your health.</h2>
+        </div>
+        <article class="feature-card">
+          <img
+            src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=900&q=82"
+            alt="Healthcare worker and patient discussing care options"
+          />
+          <div>
+            <p class="article-label">Healthcare Administration</p>
+            <h3>Why care feels confusing, and how to ask better questions</h3>
+            <p>
+              Hospitals, insurance, appointments, referrals, costs, and quality measures can feel
+              disconnected. Medical Essentials breaks those pieces into everyday language.
+            </p>
+            <a href="#healthcare-admin">Read the guide</a>
+          </div>
         </article>
       </section>
 
-      <section class="mission" aria-label="Editorial promise">
+      <section class="topics" id="topics" aria-label="Core content areas">
+        <article id="public-health">
+          <span class="topic-number">01</span>
+          <h2>Public Health</h2>
+          <p>Prevention, outbreaks, vaccines, screening, community health, data, and policy.</p>
+          <a href="#explainers">See examples</a>
+        </article>
+        <article id="healthcare-admin">
+          <span class="topic-number">02</span>
+          <h2>Healthcare Administration</h2>
+          <p>Hospitals, insurance, access, costs, quality, patient experience, and leadership.</p>
+          <a href="#explainers">See examples</a>
+        </article>
+        <article id="life-topics">
+          <span class="topic-number">03</span>
+          <h2>Life Topics</h2>
+          <p>Habits, stress, family health, work, decision-making, wellbeing, and daily routines.</p>
+          <a href="#explainers">See examples</a>
+        </article>
+      </section>
+
+      <section class="explainers" id="explainers" aria-labelledby="explainers-title">
+        <div class="section-heading">
+          <span>What we explain</span>
+          <h2 id="explainers-title">Useful answers for real-life questions.</h2>
+        </div>
+        <div class="explainers-grid">
+          <article>
+            <h3>What does “risk” actually mean?</h3>
+            <p>Simple ways to understand numbers, headlines, and health warnings.</p>
+          </article>
+          <article>
+            <h3>Why is healthcare so expensive?</h3>
+            <p>Plain explanations of pricing, insurance, billing, and system incentives.</p>
+          </article>
+          <article>
+            <h3>How do I choose better habits?</h3>
+            <p>Practical life guidance that respects time, family, stress, and work.</p>
+          </article>
+          <article>
+            <h3>What should I ask at an appointment?</h3>
+            <p>Question prompts that help people leave with clearer next steps.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
         <div>
-          <h2>For Common Public</h2>
+          <h2 id="newsletter-title">Build your health understanding one clear idea at a time.</h2>
           <p>
-            Medical Essentials is built for people who want useful context without graduate-school wording.
-            The goal is to make health and healthcare easier to understand, question, and use in daily life.
+            Get practical explainers on public health, healthcare systems, and daily life decisions.
           </p>
         </div>
+        <form aria-label="Newsletter signup">
+          <label for="email">Email address</label>
+          <div class="signup-row">
+            <input id="email" name="email" type="email" placeholder="you@example.com" />
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
       </section>
 
       <section class="notice" aria-label="Medical disclaimer">
@@ -57,5 +141,10 @@
         </p>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <span>Medical Essentials</span>
+      <span>Public health, healthcare administration, and life topics for common readers.</span>
+    </footer>
   </body>
 </html>
