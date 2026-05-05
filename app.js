@@ -122,10 +122,10 @@ async function loadShortsFromExport() {
       throw new Error("Static export did not include shorts.");
     }
 
-    renderShorts(shorts, `Showing ${shorts.length} of ${payload.count} Medical Essentials trending shorts.`);
+    renderShorts(shorts, `Showing ${shorts.length} of ${payload.count} Mastering Essentials trending shorts.`);
   } catch (error) {
     console.error("Could not load static shorts export:", error);
-    renderShorts(fallbackShorts, "Showing a starter selection from the 273-short Medical Essentials library.");
+    renderShorts(fallbackShorts, "Showing a starter selection from the 273-short Mastering Essentials library.");
   }
 }
 

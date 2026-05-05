@@ -1,16 +1,16 @@
-# Medical Essentials
+# Mastering Essentials
 
-Medical Essentials is a public-facing education website for public health, healthcare administration, and practical life topics.
+Mastering Essentials is a public-facing education website for public health, healthcare administration, and practical life topics.
 
 Domain: https://masteringessentials.com
 
 ## Purpose
 
-This repository is the starter home for the Medical Essentials website. The first version is a lightweight static site that can be published with GitHub Pages while the brand, content categories, and publishing workflow are still being shaped.
+This repository is the starter home for the Mastering Essentials website. The first version is a lightweight static site that can be published with GitHub Pages while the brand, content categories, and publishing workflow are still being shaped.
 
 ## Editorial Direction
 
-Medical Essentials is for common public readers, not only students or healthcare professionals. The site should use simple, practical language and focus on:
+Mastering Essentials is for common public readers, not only students or healthcare professionals. The site should use simple, practical language and focus on:
 
 - public health topics such as prevention, outbreaks, policy, data, and community health
 - healthcare administration topics such as hospitals, insurance, access, quality, cost, and leadership
@@ -22,7 +22,7 @@ Open `index.html` in a browser.
 
 ## Supabase Shorts Source
 
-The homepage includes a Trending Shorts section seeded from the `Medical Essentials` program in the existing `masteringseries-platform` Supabase project.
+The homepage includes a Trending Shorts section seeded from the `Mastering Essentials` program in the existing `masteringseries-platform` Supabase project.
 
 - Supabase project URL: `https://sayghkqlrfsszgdjxyfh.supabase.co`
 - Program slug: `medical-essentials`

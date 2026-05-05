@@ -428,7 +428,7 @@ label {
 }
 
 .short-card-missing-image a::before {
-  content: "Medical Essentials";
+  content: "Mastering Essentials";
   display: grid;
   place-items: center;
   aspect-ratio: 16 / 9;

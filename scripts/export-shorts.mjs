@@ -58,4 +58,4 @@ const payload = {
 
 await writeFile(OUTPUT_PATH, `${JSON.stringify(payload, null, 2)}\n`);
 
-console.log(`Exported ${rows.length} Medical Essentials shorts to ${OUTPUT_PATH}`);
+console.log(`Exported ${rows.length} Mastering Essentials shorts to ${OUTPUT_PATH}`);
