@@ -1,4 +1,4 @@
-import { mkdir, copyFile, rm } from "node:fs/promises";
+import { cp, mkdir, copyFile, rm } from "node:fs/promises";
 
 const outputDir = "dist";
 const files = [
@@ -11,6 +11,7 @@ const files = [
 
 await rm(outputDir, { recursive: true, force: true });
 await mkdir(`${outputDir}/data`, { recursive: true });
+await cp("assets", `${outputDir}/assets`, { recursive: true });
 
 for (const file of files) {
   await copyFile(file, `${outputDir}/${file}`);

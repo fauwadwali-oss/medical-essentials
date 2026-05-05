@@ -63,16 +63,9 @@ a {
 }
 
 .brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  background: var(--green-dark);
-  color: var(--white);
-  font-size: 0.8rem;
-  letter-spacing: 0;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .nav {

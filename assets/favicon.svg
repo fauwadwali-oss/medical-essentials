@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldFill" x1="94" y1="70" x2="418" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="0.48" stop-color="#0B3D4C"/>
+      <stop offset="1" stop-color="#08233D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="134" y1="58" x2="378" y2="462" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF1A8"/>
+      <stop offset="0.48" stop-color="#D9A441"/>
+      <stop offset="1" stop-color="#8A651E"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="236" fill="#F2FBF7"/>
+  <path d="M256 57C302 91 358 101 415 96V260C415 346 353 419 256 457C159 419 97 346 97 260V96C154 101 210 91 256 57Z" fill="url(#shieldFill)" stroke="url(#gold)" stroke-width="24" stroke-linejoin="round"/>
+  <text x="256" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="124" font-weight="900" fill="#FFFFFF" letter-spacing="-7">ME</text>
+  <path d="M154 333H201L214 307L239 387L263 333H291L304 312L322 354H358" stroke="#91F5D2" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

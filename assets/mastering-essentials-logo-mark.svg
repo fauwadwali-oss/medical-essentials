@@ -1,0 +1,44 @@
+<svg width="512" height="512" viewBox="70 50 372 430" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Mastering Essentials logo mark</title>
+  <desc id="desc">A gold-rimmed teal shield with an open book, health pulse, and ME monogram.</desc>
+  <defs>
+    <linearGradient id="shieldFill" x1="94" y1="70" x2="418" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="0.48" stop-color="#0B3D4C"/>
+      <stop offset="1" stop-color="#08233D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="134" y1="58" x2="378" y2="462" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF1A8"/>
+      <stop offset="0.48" stop-color="#D9A441"/>
+      <stop offset="1" stop-color="#8A651E"/>
+    </linearGradient>
+    <linearGradient id="page" x1="162" y1="260" x2="350" y2="354" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF9E8"/>
+      <stop offset="1" stop-color="#EAD79A"/>
+    </linearGradient>
+    <filter id="shadow" x="45" y="48" width="422" height="430" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#020617" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <path d="M256 57C302 91 358 101 415 96V260C415 346 353 419 256 457C159 419 97 346 97 260V96C154 101 210 91 256 57Z" fill="url(#shieldFill)"/>
+    <path d="M256 57C302 91 358 101 415 96V260C415 346 353 419 256 457C159 419 97 346 97 260V96C154 101 210 91 256 57Z" stroke="url(#gold)" stroke-width="18" stroke-linejoin="round"/>
+    <path d="M256 92C294 119 343 128 389 126V260C389 328 339 386 256 422C173 386 123 328 123 260V126C169 128 218 119 256 92Z" stroke="#FFE9A6" stroke-opacity="0.56" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+
+  <text x="256" y="209" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="90" font-weight="900" fill="#FFFFFF" letter-spacing="-5">ME</text>
+
+  <path d="M151 246H198L211 220L236 300L260 246H288L301 225L319 267H361" stroke="#91F5D2" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g>
+    <path d="M156 302C189 288 222 290 256 312V374C221 352 188 347 156 359V302Z" fill="url(#page)" stroke="#9C7629" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M356 302C323 288 290 290 256 312V374C291 352 324 347 356 359V302Z" fill="url(#page)" stroke="#9C7629" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M256 312V376" stroke="#8A651E" stroke-width="7" stroke-linecap="round"/>
+    <path d="M179 326C199 319 219 321 239 333" stroke="#B89035" stroke-width="5" stroke-linecap="round"/>
+    <path d="M333 326C313 319 293 321 273 333" stroke="#B89035" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <path d="M185 393C223 411 289 411 327 393" stroke="url(#gold)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M166 133L173 151L192 153L177 165L181 184L165 174L148 184L153 164L138 152L158 151L166 133Z" fill="#FFF1A8"/>
+  <path d="M346 133L353 151L372 153L357 165L361 184L345 174L328 184L333 164L318 152L338 151L346 133Z" fill="#FFF1A8"/>
+</svg>
