@@ -35,11 +35,11 @@ const fallbackShorts = [
 ];
 
 function thumbnailFor(short) {
-  if (short.previewOnly) {
+  if (!short.youtube_id) {
     return "";
   }
 
-  return short.thumbnail_url || "";
+  return short.thumbnail_url || `https://i.ytimg.com/vi/${encodeURIComponent(short.youtube_id)}/maxresdefault.jpg`;
 }
 
 function cleanTitle(title) {
@@ -71,7 +71,11 @@ function renderShorts(shorts, sourceLabel) {
       const safeYoutubeId = encodeURIComponent(short.youtube_id);
       const url = `https://www.youtube.com/shorts/${safeYoutubeId}`;
       const thumbnail = thumbnailFor(short);
-      const imageMarkup = thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="" loading="lazy" />` : "";
+      const fallbackThumbnail = short.thumbnail_url || !short.youtube_id
+        ? ""
+        : `https://i.ytimg.com/vi/${safeYoutubeId}/hqdefault.jpg`;
+      const fallbackAttr = fallbackThumbnail ? ` data-fallback-src="${escapeHtml(fallbackThumbnail)}"` : "";
+      const imageMarkup = thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="" loading="eager" decoding="async"${fallbackAttr} />` : "";
       const cardClass = thumbnail ? "short-card" : "short-card short-card-missing-image";
       return `
         <article class="${cardClass}">
@@ -87,6 +91,14 @@ function renderShorts(shorts, sourceLabel) {
 
   shortsGrid.querySelectorAll("img").forEach((image) => {
     image.addEventListener("error", () => {
+      const fallbackSrc = image.dataset.fallbackSrc;
+
+      if (fallbackSrc && image.src !== fallbackSrc) {
+        image.src = fallbackSrc;
+        image.removeAttribute("data-fallback-src");
+        return;
+      }
+
       image.closest(".short-card")?.classList.add("short-card-missing-image");
       image.remove();
     });
