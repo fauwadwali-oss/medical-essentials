@@ -212,8 +212,10 @@ h1 {
 
 .featured,
 .topics,
-.explainers,
+.guides,
+.questions,
 .shorts,
+.about,
 .newsletter,
 .notice,
 .site-footer {
@@ -223,7 +225,8 @@ h1 {
 }
 
 .featured,
-.explainers,
+.guides,
+.questions,
 .shorts {
   padding: 74px 0;
 }
@@ -340,33 +343,107 @@ label {
   line-height: 1.58;
 }
 
-.explainers {
+.guides,
+.questions,
+.about {
   border-top: 1px solid var(--line);
 }
 
-.explainers-grid {
+.guide-list {
+  display: grid;
+  gap: 16px;
+}
+
+.guide-list article {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.34fr) minmax(0, 0.9fr) auto;
+  gap: 24px;
+  align-items: center;
+  min-height: 170px;
+  padding: 24px 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.guide-list article:nth-child(2) {
+  background: var(--soft-blue);
+}
+
+.guide-list article:nth-child(3) {
+  background: var(--soft-green);
+}
+
+.guide-list h3 {
+  margin-bottom: 0;
+  color: var(--green-dark);
+  font-size: clamp(1.45rem, 2.4vw, 2.25rem);
+  line-height: 1.06;
+}
+
+.guide-list p:not(.article-label) {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.62;
+}
+
+.guide-list a {
+  color: var(--green-dark);
+  font-weight: 850;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.questions-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
-.explainers-grid article {
+.questions-grid article {
   min-height: 220px;
   padding: 22px;
   border-left: 3px solid var(--green);
   background: var(--white);
 }
 
-.explainers-grid h3 {
+.questions-grid h3 {
   margin-bottom: 12px;
   color: var(--ink);
   font-size: 1.18rem;
   line-height: 1.2;
 }
 
-.explainers-grid p {
+.questions-grid p {
   color: var(--muted);
   line-height: 1.58;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+  gap: 48px;
+  padding: 74px 0;
+}
+
+.about h2 {
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: var(--green-dark);
+  font-size: clamp(2rem, 3.4vw, 3.25rem);
+  line-height: 1;
+}
+
+.about-copy {
+  display: grid;
+  gap: 18px;
+}
+
+.about-copy p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.68;
 }
 
 .shorts {
@@ -509,6 +586,13 @@ label {
   color: rgba(255, 255, 255, 0.64);
 }
 
+.form-note {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .newsletter button {
   border-color: var(--amber);
   background: var(--amber);
@@ -539,6 +623,22 @@ label {
   font-weight: 850;
 }
 
+.site-footer span:last-child {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.site-footer a {
+  color: var(--muted);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  color: var(--green-dark);
+}
+
 @media (max-width: 980px) {
   .site-header {
     align-items: flex-start;
@@ -547,7 +647,9 @@ label {
   }
 
   .nav {
+    width: 100%;
     flex-wrap: wrap;
+    gap: 14px 20px;
   }
 
   .hero,
@@ -567,9 +669,18 @@ label {
   }
 
   .topics,
-  .explainers-grid,
+  .questions-grid,
   .shorts-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .guide-list article,
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-list article {
+    align-items: start;
   }
 }
 
@@ -578,8 +689,10 @@ label {
   .hero,
   .featured,
   .topics,
-  .explainers,
+  .guides,
+  .questions,
   .shorts,
+  .about,
   .newsletter,
   .notice,
   .site-footer {
@@ -600,7 +713,7 @@ label {
   }
 
   h1 {
-    font-size: clamp(3.4rem, 18vw, 5rem);
+    font-size: clamp(3.1rem, 13.8vw, 3.55rem);
   }
 
   .hero-media,
@@ -623,9 +736,13 @@ label {
   }
 
   .topics,
-  .explainers-grid,
+  .questions-grid,
   .shorts-grid {
     grid-template-columns: 1fr;
+  }
+
+  .guide-list article {
+    padding: 22px;
   }
 
   .shorts-meta {

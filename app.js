@@ -1,5 +1,7 @@
 const shortsGrid = document.querySelector("#shorts-grid");
 const shortsStatus = document.querySelector("#shorts-status");
+const newsletterForm = document.querySelector(".newsletter form");
+const newsletterNote = document.querySelector("#newsletter-note");
 
 const fallbackShorts = [
   {
@@ -130,3 +132,15 @@ async function loadShortsFromExport() {
 }
 
 loadShortsFromExport();
+
+if (newsletterForm && newsletterNote) {
+  newsletterForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(newsletterForm);
+    const email = String(formData.get("email") || "").trim();
+
+    newsletterNote.textContent = email
+      ? "Thanks. The email list connection is coming next, so the page is ready for launch-list wiring."
+      : "Add your email address to preview the launch-list flow.";
+  });
+}
