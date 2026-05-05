@@ -1,7 +1,7 @@
 const token = process.env.CLOUDFLARE_API_TOKEN;
 const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
 const projectName = process.env.CLOUDFLARE_PAGES_PROJECT || "medical-essentials";
-const domains = (process.env.CLOUDFLARE_PAGES_DOMAINS || "medicalessentials.com,www.medicalessentials.com")
+const domains = (process.env.CLOUDFLARE_PAGES_DOMAINS || "masteringessentials.com,www.masteringessentials.com")
   .split(",")
   .map((domain) => domain.trim())
   .filter(Boolean);
