@@ -2,8 +2,6 @@ name: Refresh Mastering Essentials shorts
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "15 8 * * *"
 
 permissions:
   contents: write
@@ -20,13 +18,12 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Export shorts from Supabase
+      - name: Fetch shorts from YouTube Data API
         env:
-          SUPABASE_URL: https://sayghkqlrfsszgdjxyfh.supabase.co
-          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
-          PROGRAM_ID: "5"
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          CHANNEL_ID: UC8Ux9uG3hYIjKdym7mD-8GA
           OUTPUT_PATH: data/shorts.json
-        run: node scripts/export-shorts.mjs
+        run: node scripts/fetch-youtube-shorts.mjs
 
       - name: Commit updated shorts
         run: |

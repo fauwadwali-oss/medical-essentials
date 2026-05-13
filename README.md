@@ -20,22 +20,27 @@ Mastering Essentials is for common public readers, not only students or healthca
 
 Open `index.html` in a browser.
 
-## Supabase Shorts Source
+## Shorts Source
 
-The homepage includes a Trending Shorts section seeded from the `Mastering Essentials` program in the existing `masteringseries-platform` Supabase project.
+The homepage Shorts grid is sourced directly from the `@MasteringEssentials` YouTube channel via the YouTube Data API v3. Shorts metadata is committed to `data/shorts.json` and served as a static asset.
 
-- Supabase project URL: `https://sayghkqlrfsszgdjxyfh.supabase.co`
-- Program slug: `medical-essentials`
-- Program ID: `5`
-- Source table: `public.shorts`
-- Filter: `program_id = 5`, `is_published = true`, `is_trending = true`
+- Channel ID: `UC8Ux9uG3hYIjKdym7mD-8GA`
+- Channel: https://www.youtube.com/@MasteringEssentials
+- Filter: videos with duration ≤ 180 seconds (Shorts threshold)
+- Sort: most recently published first
 
-Do not put Supabase secret keys in this public GitHub Pages website. The repo uses `.github/workflows/refresh-shorts.yml` to keep the secret in GitHub Actions and export public-safe data to `data/shorts.json`.
+To refresh after posting new Shorts, run the **Refresh Mastering Essentials shorts** workflow manually from the GitHub Actions tab (`workflow_dispatch`). The workflow runs `scripts/fetch-youtube-shorts.mjs`, regenerates `data/shorts.json`, and auto-commits changes.
 
 Required GitHub secret:
 
 ```text
-SUPABASE_SECRET_KEY
+YOUTUBE_API_KEY
+```
+
+To run locally:
+
+```bash
+YOUTUBE_API_KEY=... node scripts/fetch-youtube-shorts.mjs
 ```
 
 ## GitHub Pages Setup
