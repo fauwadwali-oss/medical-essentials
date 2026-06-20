@@ -90,39 +90,9 @@ button {
 }
 
 .brand-mark {
-  position: relative;
-  display: inline-grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
-  width: 38px;
-  height: 32px;
-  padding: 4px 5px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--white);
-}
-
-.brand-mark::after {
-  position: absolute;
-  left: 50%;
-  bottom: 5px;
-  width: 2px;
-  height: 19px;
-  background: var(--gold);
-  content: "";
-  transform: translateX(-50%);
-}
-
-.brand-mark span {
-  display: block;
-  border: 2px solid var(--teal);
-  border-top: 0;
-  border-radius: 2px 2px 9px 2px;
-}
-
-.brand-mark span:last-child {
-  border-color: var(--gold);
-  border-radius: 2px 2px 2px 9px;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .brand-text {
