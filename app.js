@@ -61,12 +61,29 @@ function thumbnailFor(short) {
   return short.thumbnail_url || `https://i.ytimg.com/vi/${encodeURIComponent(short.youtube_id)}/hq720.jpg`;
 }
 
+function normalizeTrack(short, title) {
+  if (short.track === "MHA_MBA" || short.track === "mhamba") return "mhamba";
+  if (short.track === "MPH" || short.track === "mph") return "mph";
+  return classifyTrack(title);
+}
+
+function homepageShorts(shorts) {
+  const enriched = shorts.map((short) => ({
+    ...short,
+    homepageTrack: normalizeTrack(short, short.title || "")
+  }));
+  const mhamba = enriched.filter((short) => short.homepageTrack === "mhamba").slice(0, 4);
+  const mph = enriched.filter((short) => short.homepageTrack === "mph").slice(0, 4);
+  const selected = [...mhamba, ...mph];
+  return selected.length >= 4 ? selected : enriched.slice(0, 8);
+}
+
 function renderVideoCards(shorts) {
   if (!videoGrid || !Array.isArray(shorts) || !shorts.length) return;
 
-  videoGrid.innerHTML = shorts.slice(0, 8).map((short) => {
+  videoGrid.innerHTML = homepageShorts(shorts).map((short) => {
     const title = short.title || "Mastering Essentials Urdu video";
-    const track = classifyTrack(title);
+    const track = short.homepageTrack || normalizeTrack(short, title);
     const trackLabel = track === "mhamba" ? "MHAMBA" : "MPH";
     const safeTitle = escapeHtml(title);
     const youtubeId = encodeURIComponent(short.youtube_id || "");
