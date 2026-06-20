@@ -1,10 +1,38 @@
-const shortsGrid = document.querySelector("#shorts-grid");
-const shortsStatus = document.querySelector("#shorts-status");
+const menuToggle = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".nav");
+const filterButtons = document.querySelectorAll(".filter-button");
+const videoGrid = document.querySelector("#video-grid");
 
-function thumbnailFor(short) {
-  if (!short.youtube_id) return "";
-  return short.thumbnail_url || `https://i.ytimg.com/vi/${encodeURIComponent(short.youtube_id)}/hq720.jpg`;
-}
+menuToggle?.addEventListener("click", () => {
+  const isOpen = document.body.classList.toggle("menu-open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+nav?.addEventListener("click", (event) => {
+  if (event.target instanceof HTMLAnchorElement) {
+    document.body.classList.remove("menu-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+  }
+});
+
+const URDU_RANGE = /[\u0600-\u06ff\u0750-\u077f]/;
+const MHAMBA_HINTS = [
+  "mha",
+  "mba",
+  "mhamba",
+  "cphq",
+  "healthcare",
+  "hospital",
+  "leadership",
+  "quality",
+  "admin",
+  "management",
+  "finance",
+  "accounting",
+  "cost",
+  "insurance",
+  "policy"
+];
 
 function escapeHtml(value) {
   return String(value)
@@ -15,88 +43,85 @@ function escapeHtml(value) {
     .replace(/'/g, "&#039;");
 }
 
-const URDU_RANGE = /[؀-ۿݐ-ݿ]/;
-
 function leadsWithUrdu(title) {
-  const stripped = title.trim();
-  if (!stripped) return false;
-  for (const char of stripped) {
+  for (const char of title.trim()) {
     if (URDU_RANGE.test(char)) return true;
     if (/[A-Za-z]/.test(char)) return false;
   }
-  return URDU_RANGE.test(stripped);
+  return false;
 }
 
-function renderShorts(shorts, sourceLabel) {
-  if (!shortsGrid || !shortsStatus) return;
+function classifyTrack(title) {
+  const normalized = title.toLowerCase();
+  return MHAMBA_HINTS.some((hint) => normalized.includes(hint)) ? "mhamba" : "mph";
+}
 
-  shortsGrid.innerHTML = shorts
-    .map((short) => {
-      const safeTitle = escapeHtml(short.title || "");
-      const safeYoutubeId = encodeURIComponent(short.youtube_id);
-      const url = short.url || `https://www.youtube.com/shorts/${safeYoutubeId}`;
-      const thumb = thumbnailFor(short);
-      const fallbackThumb = short.youtube_id
-        ? `https://i.ytimg.com/vi/${safeYoutubeId}/hqdefault.jpg`
-        : "";
-      const fallbackAttr = fallbackThumb
-        ? ` data-fallback-src="${escapeHtml(fallbackThumb)}"`
-        : "";
-      const imageMarkup = thumb
-        ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" decoding="async"${fallbackAttr} />`
-        : "";
-      const cardClass = thumb ? "short-card" : "short-card short-card-missing-image";
-      const isUrdu = leadsWithUrdu(short.title || "");
-      const titleClass = isUrdu ? "" : " class=\"lang-en\"";
-      const langAttr = isUrdu ? ` lang=\"ur\"` : "";
+function thumbnailFor(short) {
+  if (!short.youtube_id) return "";
+  return short.thumbnail_url || `https://i.ytimg.com/vi/${encodeURIComponent(short.youtube_id)}/hq720.jpg`;
+}
 
-      return `
-        <article class="${cardClass}">
-          <a href="${url}" target="_blank" rel="noreferrer" aria-label="Watch on YouTube">
-            ${imageMarkup}
-            <span class="watch-label">Watch short</span>
-            <h3${titleClass}${langAttr}>${safeTitle}</h3>
-          </a>
-        </article>
-      `;
-    })
-    .join("");
+function renderVideoCards(shorts) {
+  if (!videoGrid || !Array.isArray(shorts) || !shorts.length) return;
 
-  shortsGrid.querySelectorAll("img").forEach((image) => {
-    image.addEventListener("error", () => {
-      const fallbackSrc = image.dataset.fallbackSrc;
-      if (fallbackSrc && image.src !== fallbackSrc) {
-        image.src = fallbackSrc;
-        image.removeAttribute("data-fallback-src");
-        return;
-      }
-      image.closest(".short-card")?.classList.add("short-card-missing-image");
-      image.remove();
-    });
-  });
+  videoGrid.innerHTML = shorts.slice(0, 8).map((short) => {
+    const title = short.title || "Mastering Essentials Urdu video";
+    const track = classifyTrack(title);
+    const trackLabel = track === "mhamba" ? "MHAMBA" : "MPH";
+    const safeTitle = escapeHtml(title);
+    const youtubeId = encodeURIComponent(short.youtube_id || "");
+    const url = short.url || `https://www.youtube.com/shorts/${youtubeId}`;
+    const thumbnail = thumbnailFor(short);
+    const urdu = leadsWithUrdu(title);
+    const titleLang = urdu ? ' lang="ur" dir="rtl"' : "";
 
-  shortsStatus.textContent = sourceLabel;
+    return `
+      <article class="video-card" data-track="${track}">
+        <a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">
+          <div class="thumb ${track === "mhamba" ? "thumb-gold" : "thumb-teal"}">
+            ${thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="" loading="lazy" decoding="async" />` : ""}
+            <span>${trackLabel}</span>
+            <strong${titleLang}>${safeTitle}</strong>
+            <small>Watch</small>
+          </div>
+          <h3${titleLang}>${safeTitle}</h3>
+          <p>${track === "mhamba" ? "Healthcare management and leadership in Urdu." : "Public health and health systems explained in Urdu."}</p>
+        </a>
+      </article>
+    `;
+  }).join("");
 }
 
 async function loadShorts() {
   try {
     const response = await fetch("data/shorts.json", { cache: "no-store" });
-    if (!response.ok) throw new Error(`shorts.json returned ${response.status}`);
+    if (!response.ok) return;
     const payload = await response.json();
-    const shorts = Array.isArray(payload.shorts) ? payload.shorts : [];
-    if (!shorts.length) throw new Error("shorts.json has no entries");
-
-    renderShorts(
-      shorts,
-      `Showing ${shorts.length} shorts from @MasteringEssentials.`
-    );
+    renderVideoCards(payload.shorts);
   } catch (error) {
     console.error("Could not load shorts:", error);
-    if (shortsStatus) {
-      shortsStatus.textContent =
-        "Could not load shorts. Visit the YouTube channel for the latest videos.";
-    }
   }
 }
+
+function applyFilter(filter) {
+  document.querySelectorAll(".video-card").forEach((card) => {
+    const shouldShow = filter === "all" || card.dataset.track === filter;
+    card.classList.toggle("is-hidden", !shouldShow);
+  });
+}
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter || "all";
+
+    filterButtons.forEach((item) => {
+      const isActive = item === button;
+      item.classList.toggle("active", isActive);
+      item.setAttribute("aria-selected", String(isActive));
+    });
+
+    applyFilter(filter);
+  });
+});
 
 loadShorts();

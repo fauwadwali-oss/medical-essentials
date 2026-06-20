@@ -3,15 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mastering Essentials — صحت کی الجھی ہوئی باتیں، آسان اردو میں</title>
+    <title>Mastering Essentials | Urdu learning for public health and healthcare leadership</title>
     <meta
       name="description"
-      content="Health, simplified in Urdu. Short videos and clear guides on public health, hospitals, insurance, and everyday wellbeing for Pakistani and South Asian families."
+      content="Mastering Essentials brings clear Urdu videos for Mastering MPH in Urdu and Mastering MHAMBA in Urdu: public health, hospitals, healthcare management, finance, HR, leadership, and strategy."
     />
-    <meta property="og:title" content="Mastering Essentials — Health in Urdu" />
+    <meta property="og:title" content="Mastering Essentials | MPH and MHAMBA in Urdu" />
     <meta
       property="og:description"
-      content="صحت کی الجھی ہوئی باتیں، آسان اردو میں۔ Short videos and clear guides for Pakistani and South Asian families."
+      content="Clear Urdu videos for public health, hospitals, healthcare management, finance, HR, leadership, and strategy."
     />
     <meta property="og:image" content="/assets/mastering-essentials-logo-mark.svg" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
@@ -19,195 +19,246 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://i.ytimg.com" />
     <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap"
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap"
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#page-title" aria-label="Mastering Essentials home">
-        <img class="brand-mark" src="assets/mastering-essentials-logo-mark.svg" alt="" aria-hidden="true" />
-        <span>Mastering Essentials</span>
+      <a class="brand" href="#home" aria-label="Mastering Essentials home">
+        <span class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </span>
+        <span class="brand-text">Mastering<br />Essentials</span>
       </a>
-      <nav class="nav" aria-label="Primary navigation">
-        <a href="#shorts">Shorts</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span class="sr-only">Open menu</span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Primary navigation">
+        <a href="#videos">Videos</a>
+        <a href="#mph">MPH in Urdu</a>
+        <a href="#mhamba">MHAMBA in Urdu</a>
         <a href="#topics">Topics</a>
         <a href="#about">About</a>
-        <a href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA" target="_blank" rel="noreferrer">YouTube</a>
       </nav>
-      <a class="nav-action" href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA?sub_confirmation=1" target="_blank" rel="noreferrer">Subscribe</a>
+      <a
+        class="youtube-link"
+        href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA?sub_confirmation=1"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5a3 3 0 0 0-2.1 2.1A31.2 31.2 0 0 0 2 12a31.2 31.2 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 22 12a31.2 31.2 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z" />
+        </svg>
+        Subscribe
+      </a>
     </header>
 
-    <main>
+    <main id="home">
       <section class="hero" aria-labelledby="page-title">
-        <div class="hero-copy">
-          <p class="hero-eyebrow" lang="ur" dir="rtl">اردو میں صحت کی تعلیم</p>
-          <h1 id="page-title" lang="ur" dir="rtl">صحت کی الجھی ہوئی باتیں، آسان اردو میں۔</h1>
-          <p class="hero-sub">
-            Health, simplified in Urdu. Short videos and clear guides on public health, hospitals,
-            insurance, and everyday wellbeing. Made for Pakistani and South Asian families.
-          </p>
-          <div class="actions" aria-label="Homepage actions">
-            <a href="#shorts" class="button">Shorts دیکھیں</a>
-            <a href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA?sub_confirmation=1" target="_blank" rel="noreferrer" class="button button-secondary">YouTube پر Subscribe کریں</a>
-          </div>
-        </div>
-
-        <aside class="hero-card" aria-label="Channel highlight">
-          <div class="hero-card-top">
-            <span class="hero-card-tag">Latest channel</span>
-            <span class="hero-card-count">24 shorts</span>
-          </div>
-          <p class="hero-card-title" lang="ur" dir="rtl">ہر ہفتے نئی Urdu health videos۔</p>
-          <p class="hero-card-sub">
-            Real public-health ideas, in the way Pakistanis actually speak. No fear, no jargon, no
-            sales pitch.
-          </p>
-          <ul class="hero-card-list" lang="ur" dir="rtl">
-            <li>صحت عامہ اور وبائیں</li>
-            <li>ہسپتال، ڈاکٹر اور علاج</li>
-            <li>روزمرہ زندگی اور ذہنی صحت</li>
-          </ul>
-        </aside>
-      </section>
-
-      <section class="shorts" id="shorts" aria-labelledby="shorts-title">
-        <div class="section-heading">
-          <span>Channel shorts</span>
-          <h2 id="shorts-title">
-            <span lang="ur" dir="rtl">صحت پر مختصر اردو ویڈیوز۔</span>
-            <small>Short, useful health ideas from the Mastering Essentials YouTube channel.</small>
-          </h2>
-        </div>
-        <div class="shorts-meta">
-          <p id="shorts-status">Loading shorts from @MasteringEssentials.</p>
-          <a href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA/shorts" target="_blank" rel="noreferrer">Open YouTube channel</a>
-        </div>
-        <div class="shorts-grid" id="shorts-grid" aria-live="polite"></div>
-      </section>
-
-      <section class="topics" id="topics" aria-label="Topic areas">
-        <div class="section-heading">
-          <span>Topic areas</span>
-          <h2>
-            <span lang="ur" dir="rtl">ہم کن موضوعات پر بات کرتے ہیں؟</span>
-            <small>The four areas the channel covers.</small>
-          </h2>
-        </div>
-        <div class="topics-grid">
-          <article>
-            <span class="topic-number">01</span>
-            <h3 lang="ur" dir="rtl">صحت عامہ</h3>
-            <p class="topic-en">Public Health</p>
-            <p lang="ur" dir="rtl">ویکسین، وبائیں، dengue، TB، صاف پانی، تمباکو، اور screening۔ آسان زبان میں۔</p>
-          </article>
-          <article>
-            <span class="topic-number">02</span>
-            <h3 lang="ur" dir="rtl">ہسپتال اور علاج</h3>
-            <p class="topic-en">Hospitals and Care</p>
-            <p lang="ur" dir="rtl">ڈاکٹر سے کیا پوچھیں، second opinion کب لیں، lab reports کیسے پڑھیں، اور OPD میں کیا لے کر جائیں۔</p>
-          </article>
-          <article>
-            <span class="topic-number">03</span>
-            <h3 lang="ur" dir="rtl">بیمہ اور پیسے</h3>
-            <p class="topic-en">Insurance and Costs</p>
-            <p lang="ur" dir="rtl">Sehat Card Plus، NHS، hospital bills، اور generic بمقابلہ brand medicine۔ سب کچھ سادہ اردو میں۔</p>
-          </article>
-          <article>
-            <span class="topic-number">04</span>
-            <h3 lang="ur" dir="rtl">روزمرہ زندگی</h3>
-            <p class="topic-en">Daily Life and Wellbeing</p>
-            <p lang="ur" dir="rtl">نیند، خوراک، ذہنی دباؤ، parenting، اور دیسی کھانے کے بارے میں ایماندار مشورہ۔</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="questions" aria-labelledby="questions-title">
-        <div class="section-heading">
-          <span lang="ur" dir="rtl">روز کے سوالات</span>
-          <h2 id="questions-title">
-            <span lang="ur" dir="rtl">صحت کے بارے میں صحیح سوال کیسے کریں؟</span>
-            <small>A smarter way to think about health decisions.</small>
-          </h2>
-        </div>
-        <div class="questions-grid">
-          <article>
-            <h3 lang="ur" dir="rtl">اصل فیصلہ کیا ہے؟</h3>
-            <p lang="ur" dir="rtl">ہم background معلومات کو اگلے عملی قدم سے الگ کرتے ہیں۔</p>
-          </article>
-          <article>
-            <h3 lang="ur" dir="rtl">قیمت اور فائدہ کیا ہے؟</h3>
-            <p lang="ur" dir="rtl">پیسہ، وقت، رسائی، خطرہ، اور غیر یقینی کو سادہ زبان میں سمجھاتے ہیں۔</p>
-          </article>
-          <article>
-            <h3 lang="ur" dir="rtl">کس سے پوچھنا چاہیے؟</h3>
-            <p lang="ur" dir="rtl">کونسا سوال ڈاکٹر کا ہے، کونسا hospital کا، اور کونسا گھر والوں کے ساتھ بیٹھ کر طے کرنا ہے۔</p>
-          </article>
-          <article>
-            <h3 lang="ur" dir="rtl">کیا بات صرف ایک headline پر یقین کرنے کی نہیں؟</h3>
-            <p lang="ur" dir="rtl">Viral دعوؤں کو دھیما کرتے ہیں اور ثبوت، context، اور common sense کے لیے جگہ بناتے ہیں۔</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="about" id="about" aria-labelledby="about-title">
-        <div>
-          <span class="article-label">Our standard</span>
-          <h2 id="about-title">
-            <span lang="ur" dir="rtl">عام لوگوں کے لیے واضح۔ سنجیدہ معاملات کے قابلِ بھروسہ۔</span>
-            <small>Clear enough for the public. Serious enough to be useful.</small>
-          </h2>
-        </div>
-        <div class="about-copy">
-          <p lang="ur" dir="rtl">
-            Mastering Essentials کا مقصد سادہ ہے: صحت عامہ، ہسپتال، اور روزمرہ زندگی کے فیصلے بغیر کسی technical
-            background کے سمجھانا۔ خاص طور پر اردو بولنے والے پاکستانی اور South Asian خاندانوں کے لیے۔
-          </p>
+        <img class="hero-image" src="assets/hero-learning.png" alt="Urdu online learning desk with public health and healthcare leadership lesson" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <h1 id="page-title">Urdu learning for public health, hospitals, and healthcare leadership.</h1>
           <p>
-            We avoid scare tactics, miracle claims, and unnecessary jargon. When a topic needs a
-            doctor, we say so. When a topic is about systems, costs, access, or policy, we explain
-            the moving parts in language a normal reader can follow.
+            Mastering Essentials is the home for clear short videos in Urdu, including
+            <strong>Mastering MPH in Urdu</strong> and <strong>Mastering MHAMBA in Urdu</strong>.
           </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#tracks">Explore the tracks</a>
+            <a class="secondary-action" href="#videos">Watch latest videos</a>
+          </div>
         </div>
       </section>
 
-      <section class="newsletter" id="newsletter" aria-labelledby="newsletter-title">
+      <section class="tracks-preview" id="tracks" aria-label="Learning tracks">
+        <a class="track-card track-mph" href="#mph">
+          <span class="track-label">Mastering MPH in Urdu</span>
+          <strong lang="ur" dir="rtl">عوامی صحت کو آسان اردو میں سمجھیں</strong>
+          <span>Public health, epidemiology, biostatistics, health policy, prevention, and systems.</span>
+        </a>
+        <a class="track-card track-mhamba" href="#mhamba">
+          <span class="track-label">Mastering MHAMBA in Urdu</span>
+          <strong lang="ur" dir="rtl">ہیلتھ کیئر مینجمنٹ اور بزنس</strong>
+          <span>Hospital leadership, operations, finance, marketing, HR, accounting, and strategy.</span>
+        </a>
+      </section>
+
+      <section class="video-section" id="videos" aria-labelledby="videos-title">
+        <div class="section-title">
+          <p lang="ur" dir="rtl">نئی اردو ویڈیوز</p>
+          <h2 id="videos-title">Latest lessons from both learning paths</h2>
+        </div>
+        <div class="video-controls" role="tablist" aria-label="Video filters">
+          <button class="filter-button active" type="button" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-button" type="button" data-filter="mph" role="tab" aria-selected="false">MPH</button>
+          <button class="filter-button" type="button" data-filter="mhamba" role="tab" aria-selected="false">MHAMBA</button>
+        </div>
+        <div class="video-grid" id="video-grid">
+          <article class="video-card" data-track="mph">
+            <div class="thumb thumb-teal">
+              <span>MPH</span>
+              <strong lang="ur" dir="rtl">وبائی امراض کیسے پھیلتے ہیں؟</strong>
+              <small>6:42</small>
+            </div>
+            <h3>How outbreaks spread in a community</h3>
+            <p>Simple Urdu explanation of transmission, prevention, and what families can do early.</p>
+          </article>
+          <article class="video-card" data-track="mhamba">
+            <div class="thumb thumb-gold">
+              <span>MHAMBA</span>
+              <strong lang="ur" dir="rtl">ہسپتال کا بجٹ کیسے بنتا ہے؟</strong>
+              <small>8:03</small>
+            </div>
+            <h3>How hospital budgets actually work</h3>
+            <p>A practical first look at revenue, costs, staffing, supplies, and service planning.</p>
+          </article>
+          <article class="video-card" data-track="mph">
+            <div class="thumb thumb-sky">
+              <span>MPH</span>
+              <strong lang="ur" dir="rtl">اعداد و شمار سے فیصلہ کیسے بنتا ہے؟</strong>
+              <small>7:15</small>
+            </div>
+            <h3>Biostatistics without the fear</h3>
+            <p>Rates, risks, and comparisons explained for public-health learners and families.</p>
+          </article>
+          <article class="video-card" data-track="mhamba">
+            <div class="thumb thumb-ink">
+              <span>MHAMBA</span>
+              <strong lang="ur" dir="rtl">لیڈرشپ صرف عہدہ نہیں</strong>
+              <small>6:21</small>
+            </div>
+            <h3>Leadership inside health organizations</h3>
+            <p>How managers communicate, make decisions, and build stronger healthcare teams.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="split-track" id="mph" aria-labelledby="mph-title">
+        <div class="track-copy">
+          <p class="section-kicker">Mastering MPH in Urdu</p>
+          <h2 id="mph-title">Public health concepts for students, families, and future MPH learners.</h2>
+          <p>
+            This path keeps the original health mission strong: clean explanations of disease prevention,
+            epidemiology, statistics, health systems, environmental health, and public-health policy.
+          </p>
+          <ul class="check-list">
+            <li>Epidemiology and outbreaks</li>
+            <li>Biostatistics and research basics</li>
+            <li>Health policy and public programs</li>
+            <li>Community health and prevention</li>
+          </ul>
+        </div>
+        <img src="assets/mph-track.png" alt="Urdu public health education in a community learning setting" />
+      </section>
+
+      <section class="split-track reverse" id="mhamba" aria-labelledby="mhamba-title">
+        <img src="assets/mhamba-track.png" alt="Healthcare management learners reviewing finance and operations dashboards" />
+        <div class="track-copy">
+          <p class="section-kicker gold">Mastering MHAMBA in Urdu</p>
+          <h2 id="mhamba-title">Healthcare management, business, and leadership explained in Urdu.</h2>
+          <p>
+            MHAMBA broadens the brand beyond health education into how health organizations work:
+            management, accounting, finance, marketing, HR, operations, strategy, and leadership.
+          </p>
+          <ul class="check-list gold-list">
+            <li>Healthcare finance and accounting</li>
+            <li>Marketing, HR, and operations</li>
+            <li>Hospital strategy and leadership</li>
+            <li>Economics and decision making</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="topics" id="topics" aria-labelledby="topics-title">
+        <div class="section-title">
+          <p lang="ur" dir="rtl">موضوعات</p>
+          <h2 id="topics-title">A broader library for health and healthcare business</h2>
+        </div>
+        <div class="topic-grid">
+          <article>
+            <span>01</span>
+            <h3>Public Health</h3>
+            <p>Epidemics, prevention, vaccination, screening, sanitation, and community programs.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Health Systems</h3>
+            <p>Hospitals, insurance, access, quality, policy, and patient-centered care.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Healthcare Management</h3>
+            <p>Operations, planning, teams, service lines, projects, and performance improvement.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Finance and Accounting</h3>
+            <p>Budgets, costs, billing, revenue, accounting logic, and resource decisions.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Marketing and HR</h3>
+            <p>Patient communication, service positioning, staffing, culture, and workforce issues.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3>Leadership</h3>
+            <p>Strategy, ethics, decision making, communication, and change in health organizations.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="standard" id="about" aria-labelledby="standard-title">
         <div>
-          <h2 id="newsletter-title">
-            <span lang="ur" dir="rtl">ہر ہفتے ایک نئی Urdu health video۔</span>
-            <small>Subscribe on YouTube to get a new Urdu health short every week.</small>
-          </h2>
-          <p lang="ur" dir="rtl">
-            ابھی Mastering Essentials کا YouTube channel ہمارا گھر ہے۔ Email list جلد آ رہی ہے۔
-          </p>
+          <p class="section-kicker">Teaching standard</p>
+          <h2 id="standard-title">Clear enough for beginners. Serious enough for professional learners.</h2>
         </div>
-        <div class="newsletter-cta">
-          <a class="button" href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA?sub_confirmation=1" target="_blank" rel="noreferrer">Subscribe on YouTube</a>
-          <p class="form-note">Email signup coming soon.</p>
+        <div class="standard-grid">
+          <article>
+            <h3>Short videos</h3>
+            <p>Focused lessons designed for YouTube and social platforms without losing substance.</p>
+          </article>
+          <article>
+            <h3>Urdu-first explanation</h3>
+            <p>English terms are translated, unpacked, and connected to real South Asian context.</p>
+          </article>
+          <article>
+            <h3>Practical examples</h3>
+            <p>Hospital, community, finance, and management examples make abstract concepts usable.</p>
+          </article>
+          <article>
+            <h3>No fear tactics</h3>
+            <p>Health topics stay calm, evidence-aware, and careful about what education can and cannot do.</p>
+          </article>
         </div>
       </section>
 
-      <section class="notice" aria-label="Medical disclaimer">
-        <p lang="ur" dir="rtl">
-          یہ معلومات صرف تعلیمی مقصد کے لیے ہیں۔ علاج کے لیے ہمیشہ مستند ڈاکٹر سے رجوع کریں۔
-        </p>
-        <p>
-          Mastering Essentials is for education only and does not replace care from a licensed
-          clinician.
-        </p>
+      <section class="final-cta">
+        <h2>Mastering MPH and Mastering MHAMBA are now in one place.</h2>
+        <p lang="ur" dir="rtl">عوامی صحت کی سمجھ بھی، اور ہیلتھ کیئر لیڈرشپ کی مہارت بھی۔</p>
+        <p>Build the Urdu learning library around public health knowledge and healthcare leadership skills.</p>
+        <a
+          class="primary-action"
+          href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA?sub_confirmation=1"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Subscribe on YouTube
+        </a>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>Mastering Essentials</span>
-      <span class="footer-links">
-        <a href="#shorts">Shorts</a>
-        <a href="#topics">Topics</a>
-        <a href="#about">About</a>
-        <a href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA" target="_blank" rel="noreferrer">YouTube</a>
-      </span>
+      <span>Education only. For medical care, consult a qualified clinician.</span>
     </footer>
+
     <script src="app.js"></script>
   </body>
 </html>
