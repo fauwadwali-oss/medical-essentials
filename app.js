@@ -82,9 +82,9 @@ function renderVideoCards(shorts) {
   if (!videoGrid || !Array.isArray(shorts) || !shorts.length) return;
 
   videoGrid.innerHTML = homepageShorts(shorts).map((short) => {
-    const title = short.title || "Mastering Essentials Urdu video";
+    const title = short.title || "Mastering Essentials کی اردو ویڈیو";
     const track = short.homepageTrack || normalizeTrack(short, title);
-    const trackLabel = track === "mhamba" ? "MHAMBA" : "MPH";
+    const trackLabel = track === "mhamba" ? "MHA/MBA" : "MPH";
     const safeTitle = escapeHtml(title);
     const youtubeId = encodeURIComponent(short.youtube_id || "");
     const url = short.url || `https://www.youtube.com/shorts/${youtubeId}`;
@@ -99,10 +99,10 @@ function renderVideoCards(shorts) {
             ${thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="" loading="lazy" decoding="async" />` : ""}
             <span>${trackLabel}</span>
             <strong${titleLang}>${safeTitle}</strong>
-            <small>Watch</small>
+            <small lang="ur" dir="rtl">دیکھیں</small>
           </div>
           <h3${titleLang}>${safeTitle}</h3>
-          <p>${track === "mhamba" ? "Healthcare management and leadership in Urdu." : "Public health and health systems explained in Urdu."}</p>
+          <p lang="ur" dir="rtl">${track === "mhamba" ? "ہیلتھ کیئر مینجمنٹ، فنانس، accounting اور leadership آسان اردو میں۔" : "عوامی صحت، بچاؤ، policy اور health systems آسان اردو میں۔"}</p>
         </a>
       </article>
     `;

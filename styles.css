@@ -224,6 +224,12 @@ button {
   letter-spacing: 0;
 }
 
+.hero-content h1[lang="ur"] {
+  max-width: 760px;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.48;
+}
+
 .hero-content p {
   max-width: 610px;
   margin: 28px 0 0;
@@ -348,6 +354,13 @@ section:not(.hero) {
   font-size: clamp(32px, 4.8vw, 56px);
   line-height: 1.03;
   letter-spacing: 0;
+}
+
+.section-title h2[lang="ur"],
+.track-copy h2[lang="ur"],
+.standard h2[lang="ur"],
+.final-cta h2[lang="ur"] {
+  line-height: 1.62;
 }
 
 .video-controls {
@@ -477,6 +490,11 @@ section:not(.hero) {
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.video-card h3[lang="ur"] {
+  min-height: 72px;
+  line-height: 1.8;
 }
 
 .video-card p {
@@ -753,15 +771,21 @@ section:not(.hero) {
   }
 
   .hero {
-    min-height: 690px;
+    min-height: 620px;
   }
 
   .hero-content h1 {
-    font-size: clamp(42px, 13vw, 58px);
+    font-size: clamp(36px, 11vw, 48px);
+  }
+
+  .hero-content h1[lang="ur"] {
+    font-size: clamp(31px, 8.4vw, 38px);
+    line-height: 1.45;
   }
 
   .hero-content p {
-    font-size: 17px;
+    font-size: 16px;
+    line-height: 1.9;
   }
 
   .tracks-preview {
