@@ -56,11 +56,6 @@ function classifyTrack(title) {
   return MHAMBA_HINTS.some((hint) => normalized.includes(hint)) ? "mhamba" : "mph";
 }
 
-function thumbnailFor(short) {
-  if (!short.youtube_id) return "";
-  return short.thumbnail_url || `https://i.ytimg.com/vi/${encodeURIComponent(short.youtube_id)}/hq720.jpg`;
-}
-
 function normalizeTrack(short, title) {
   if (short.track === "MHA_MBA" || short.track === "mhamba") return "mhamba";
   if (short.track === "MPH" || short.track === "mph") return "mph";
@@ -88,7 +83,6 @@ function renderVideoCards(shorts) {
     const safeTitle = escapeHtml(title);
     const youtubeId = encodeURIComponent(short.youtube_id || "");
     const url = short.url || `https://www.youtube.com/shorts/${youtubeId}`;
-    const thumbnail = thumbnailFor(short);
     const urdu = leadsWithUrdu(title);
     const titleLang = urdu ? ' lang="ur" dir="rtl"' : "";
 
@@ -96,7 +90,6 @@ function renderVideoCards(shorts) {
       <article class="video-card" data-track="${track}">
         <a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">
           <div class="thumb ${track === "mhamba" ? "thumb-gold" : "thumb-teal"}">
-            ${thumbnail ? `<img src="${escapeHtml(thumbnail)}" alt="" loading="lazy" decoding="async" />` : ""}
             <span>${trackLabel}</span>
             <strong${titleLang}>${safeTitle}</strong>
             <small lang="ur" dir="rtl">دیکھیں</small>

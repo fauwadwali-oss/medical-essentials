@@ -6,7 +6,9 @@ const files = [
   "styles.css",
   "app.js",
   "CNAME",
-  "_headers"
+  "_headers",
+  "robots.txt",
+  "sitemap.xml"
 ];
 
 await rm(outputDir, { recursive: true, force: true });
