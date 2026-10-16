@@ -1,447 +1,1926 @@
 {
-  "exported_at": "2026-06-20T23:09:46.381Z",
+  "exported_at": "2026-09-25T21:49:33.266946+00:00",
   "source": {
-    "channel": "@MasteringEssentials",
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
-    "method": "youtube-shorts-tab-public-html"
+    "method": "youtube-public-channel-tabs",
+    "ordering": "Shorts newest first, then regular videos in tab order"
   },
-  "count": 48,
-  "counts": {
-    "MHA_MBA": 19,
-    "MPH": 29
-  },
+  "count": 273,
   "shorts": [
+    {
+      "youtube_id": "9_Lh8yy7rB4",
+      "title": "اسکول کا اچھا لنچ مہنگا ہونا ضروری نہیں",
+      "url": "https://www.youtube.com/shorts/9_Lh8yy7rB4",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "DPsFV0ez6I0",
+      "title": "پھل کھائیں یا جوس پئیں؟ فرق سمجھ لیجیے",
+      "url": "https://www.youtube.com/shorts/DPsFV0ez6I0",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "GH0XpsOnEkE",
+      "title": "پرانا برش کب بدلیں؟",
+      "url": "https://www.youtube.com/shorts/GH0XpsOnEkE",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "wjZ1Ix4wZ2g",
+      "title": "دانتوں کے درمیان بھی صفائی",
+      "url": "https://www.youtube.com/shorts/wjZ1Ix4wZ2g",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "zVuu4ERDpF4",
+      "title": "چکن پکا ہے؟ ناپ کر جانیں",
+      "url": "https://www.youtube.com/shorts/zVuu4ERDpF4",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "SI3243UxUdg",
+      "title": "ایک ایکسٹینشن پر سب کچھ نہیں",
+      "url": "https://www.youtube.com/shorts/SI3243UxUdg",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "awD6ez1WyCg",
+      "title": "دھوئیں کا الارم جانچیں",
+      "url": "https://www.youtube.com/shorts/awD6ez1WyCg",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "yWtk8KjngoU",
+      "title": "بزرگوں کے لیے گھر محفوظ بنائیں",
+      "url": "https://www.youtube.com/shorts/yWtk8KjngoU",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "uWkokhgFzWM",
+      "title": "نہلاتے وقت بچہ اکیلا نہیں",
+      "url": "https://www.youtube.com/shorts/uWkokhgFzWM",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "TpMY6x0ygBc",
+      "title": "بچے کو گاڑی میں اکیلا نہ چھوڑیں",
+      "url": "https://www.youtube.com/shorts/TpMY6x0ygBc",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "6IHxiQ6z7Dc",
+      "title": "بچے کی گاڑی کمبل سے نہ ڈھانپیں",
+      "url": "https://www.youtube.com/shorts/6IHxiQ6z7Dc",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "T0PG0ijxIgA",
+      "title": "سن اسکرین دوبارہ بھی لگائیں",
+      "url": "https://www.youtube.com/shorts/T0PG0ijxIgA",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "6Ly4VvYaLwI",
+      "title": "ہیڈفون کی آواز کم رکھیں",
+      "url": "https://www.youtube.com/shorts/6Ly4VvYaLwI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "0CNA8QirfDs",
+      "title": "لینز اور پانی، اچھا ساتھ نہیں",
+      "url": "https://www.youtube.com/shorts/0CNA8QirfDs",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xoLUGc8WzaE",
+      "title": "آنکھ کے قطرے صاف رکھیں",
+      "url": "https://www.youtube.com/shorts/xoLUGc8WzaE",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "C2b8KrzcyYI",
+      "title": "اپنی دوا دوسروں کو نہ دیں",
+      "url": "https://www.youtube.com/shorts/C2b8KrzcyYI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "6b82zXynU50",
+      "title": "دوا کی تاریخ ضرور دیکھیں",
+      "url": "https://www.youtube.com/shorts/6b82zXynU50",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "BBn7xFkeujk",
+      "title": "گھر میں بلڈ پریشر درست ناپیں",
+      "url": "https://www.youtube.com/shorts/BBn7xFkeujk",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "PF0vTWGilfE",
+      "title": "فارمولا دودھ، درست مقدار",
+      "url": "https://www.youtube.com/shorts/PF0vTWGilfE",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "eIQ70ZOLeVw",
+      "title": "بچے کی محفوظ نیند",
+      "url": "https://www.youtube.com/shorts/eIQ70ZOLeVw",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "cYkWTUbNaHI",
+      "title": "ایک سال سے پہلے شہد نہیں",
+      "url": "https://www.youtube.com/shorts/cYkWTUbNaHI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "53yrJ2IgJmg",
+      "title": "چھوٹے مقناطیس، بڑا خطرہ",
+      "url": "https://www.youtube.com/shorts/53yrJ2IgJmg",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "0Y-ucWSCR6U",
+      "title": "بٹن بیٹری نگلنے کا شک؟",
+      "url": "https://www.youtube.com/shorts/0Y-ucWSCR6U",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "IngCl-fgmnU",
+      "title": "کپڑوں کی پوڈ، ٹافی نہیں",
+      "url": "https://www.youtube.com/shorts/IngCl-fgmnU",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "5szZZSR4W0o",
+      "title": "کلینر پانی کی بوتل میں؟",
+      "url": "https://www.youtube.com/shorts/5szZZSR4W0o",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "u4574UHqkS0",
+      "title": "صفائی کے محلول نہ ملائیں",
+      "url": "https://www.youtube.com/shorts/u4574UHqkS0",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "wKki_JRUR5M",
+      "title": "بجلی گئی، فریج کب تک محفوظ؟",
+      "url": "https://www.youtube.com/shorts/wKki_JRUR5M",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "tBWoTtZ_-Rw",
+      "title": "بچے ہوئے چاول محفوظ رکھیں",
+      "url": "https://www.youtube.com/shorts/tBWoTtZ_-Rw",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "wGOGHhFzB1M",
+      "title": "جما ہوا گوشت کہاں پگھلائیں؟",
+      "url": "https://www.youtube.com/shorts/wGOGHhFzB1M",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "QaaS4Gkzmb4",
+      "title": "سلاد کے لیے الگ تختہ",
+      "url": "https://www.youtube.com/shorts/QaaS4Gkzmb4",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "SiUr48tXJAk",
+      "title": "سبزی پر صابن؟ نہیں",
+      "url": "https://www.youtube.com/shorts/SiUr48tXJAk",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "68R6beDXaVw",
+      "title": "کچا چکن دھونا ضروری ہے؟",
+      "url": "https://www.youtube.com/shorts/68R6beDXaVw",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "mgjsaTj6Hew",
+      "title": "بچے کے گلے میں چیز پھنس جائے تو یہ کریں",
+      "url": "https://www.youtube.com/shorts/mgjsaTj6Hew",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "ibpjL0encG4",
+      "title": "کتے کے کاٹنے پر زخم پندرہ منٹ دھوئیں",
+      "url": "https://www.youtube.com/shorts/ibpjL0encG4",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "UmK-QxH0hM8",
+      "title": "بخار میں بچے کو ٹھنڈے پانی سے نہ نہلائیں",
+      "url": "https://www.youtube.com/shorts/UmK-QxH0hM8",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Jm2ll2BpWiY",
+      "title": "شوگر کے مریض کا زخم بغیر درد کے بڑھتا ہے",
+      "url": "https://www.youtube.com/shorts/Jm2ll2BpWiY",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "vjcxO6c_kyI",
+      "title": "بچوں کے پیٹ میں کیڑے بہت عام ہیں",
+      "url": "https://www.youtube.com/shorts/vjcxO6c_kyI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "deMdQuWaO60",
+      "title": "آنکھ آنے میں سٹیرائیڈ قطرے نظر چھین سکتے ہیں",
+      "url": "https://www.youtube.com/shorts/deMdQuWaO60",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xH2zpJCy1dM",
+      "title": "ہر سر درد معمولی نہیں ہوتا",
+      "url": "https://www.youtube.com/shorts/xH2zpJCy1dM",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "LtVWq-Tn3J0",
+      "title": "ہڈیاں کمزور ہونے کی کوئی آواز نہیں ہوتی",
+      "url": "https://www.youtube.com/shorts/LtVWq-Tn3J0",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "jnI-7C40_kI",
+      "title": "گردے کی پتھری کی سب سے بڑی وجہ پانی کم پینا ہے",
+      "url": "https://www.youtube.com/shorts/jnI-7C40_kI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "i85URdItyYg",
+      "title": "روز سو بال گرنا بالکل نارمل ہے",
+      "url": "https://www.youtube.com/shorts/i85URdItyYg",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "KFOEEZ57WgI",
+      "title": "نکسیر میں سر پیچھے کرنا خطرناک ہے",
+      "url": "https://www.youtube.com/shorts/KFOEEZ57WgI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "U9yQ5qlt4ik",
+      "title": "جلنے پر ٹوتھ پیسٹ لگانا سب سے بڑی غلطی ہے",
+      "url": "https://www.youtube.com/shorts/U9yQ5qlt4ik",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "iGjvCrGVids",
+      "title": "گھٹنے کے درد میں مکمل آرام نقصان دیتا ہے",
+      "url": "https://www.youtube.com/shorts/iGjvCrGVids",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "eOYmWay8t18",
+      "title": "موبائل دیکھتے وقت گردن پر پانچ گنا بوجھ پڑتا ہے",
+      "url": "https://www.youtube.com/shorts/eOYmWay8t18",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "NDkexG5BAMo",
+      "title": "حمل میں پہلا چیک اپ جتنا جلد، اتنا بہتر",
+      "url": "https://www.youtube.com/shorts/NDkexG5BAMo",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "3qAP-0Sux78",
+      "title": "ہر بخار میں اینٹی بائیوٹک کی ضرورت نہیں",
+      "url": "https://www.youtube.com/shorts/3qAP-0Sux78",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "i6w81e2ZcJw",
+      "title": "ہیپاٹائٹس اکثر حجام اور سرنج سے پھیلتا ہے",
+      "url": "https://www.youtube.com/shorts/i6w81e2ZcJw",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Jlyv01ebc2Q",
+      "title": "دو ہفتے سے زیادہ کھانسی کو نظر انداز نہ کریں",
+      "url": "https://www.youtube.com/shorts/Jlyv01ebc2Q",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "uRAGeH02iEc",
+      "title": "صحت مند بچے کو بھی ٹیکے کی ضرورت ہے",
+      "url": "https://www.youtube.com/shorts/uRAGeH02iEc",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "R7IdNDgzcTs",
+      "title": "نسوار اور گٹکا سگریٹ سے کم خطرناک نہیں",
+      "url": "https://www.youtube.com/shorts/R7IdNDgzcTs",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Bvcl6X09yV0",
+      "title": "ذہنی دباؤ کمزوری نہیں، ایک حقیقی مسئلہ ہے",
+      "url": "https://www.youtube.com/shorts/Bvcl6X09yV0",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "HK4-F_HAEo8",
+      "title": "تیزابیت کی گولی روز کھانا حل نہیں",
+      "url": "https://www.youtube.com/shorts/HK4-F_HAEo8",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "sTeHlBeHGa8",
+      "title": "خواتین میں خون کی کمی کو کمزوری نہ سمجھیں",
+      "url": "https://www.youtube.com/shorts/sTeHlBeHGa8",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "TVXVkuqrgO0",
+      "title": "کم وزن ہونے کے باوجود شوگر ہو سکتی ہے",
+      "url": "https://www.youtube.com/shorts/TVXVkuqrgO0",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "aAEfUACrEzg",
+      "title": "بلڈ پریشر کو خاموش قاتل کیوں کہتے ہیں",
+      "url": "https://www.youtube.com/shorts/aAEfUACrEzg",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "DoXG_6hu3J0",
+      "title": "موبائل سے آنکھیں کمزور نہیں ہوتیں، تھک جاتی ہیں",
+      "url": "https://www.youtube.com/shorts/DoXG_6hu3J0",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "EtUxUY5B1UY",
+      "title": "کمر درد اٹھانے کے انداز سے شروع ہوتا ہے",
+      "url": "https://www.youtube.com/shorts/EtUxUY5B1UY",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "m38SL3kGJzc",
+      "title": "نیند سستی نہیں، جسم کی مرمت کا وقت ہے",
+      "url": "https://www.youtube.com/shorts/m38SL3kGJzc",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Bzq5RbcJD3w",
+      "title": "دانتوں کا درد اچانک نہیں ہوتا",
+      "url": "https://www.youtube.com/shorts/Bzq5RbcJD3w",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "FXMKLUYRERY",
+      "title": "بچوں کے دست روکنے کا سب سے سستا علاج",
+      "url": "https://www.youtube.com/shorts/FXMKLUYRERY",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xBKn7ORB4NM",
+      "title": "گرمی میں کھانا دو گھنٹے میں خراب ہو جاتا ہے",
+      "url": "https://www.youtube.com/shorts/xBKn7ORB4NM",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "qGeQo1RTy5Q",
+      "title": "لو لگنے سے پہلے جسم اشارہ دیتا ہے",
+      "url": "https://www.youtube.com/shorts/qGeQo1RTy5Q",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "3NDaLtXyBzA",
+      "title": "پینے کا پانی صاف لگتا ہے، محفوظ نہیں",
+      "url": "https://www.youtube.com/shorts/3NDaLtXyBzA",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "7Wb2ZB4pjWM",
+      "title": "ڈینگی صاف پانی میں پلتا ہے، گندے میں نہیں",
+      "url": "https://www.youtube.com/shorts/7Wb2ZB4pjWM",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "cNfTjxzSy0E",
+      "title": "کیا infectious diseases ماضی کا قصہ ہیں؟ بالکل نہیں",
+      "url": "https://www.youtube.com/shorts/cNfTjxzSy0E",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "88OafApSts8",
+      "title": "program مقبول ہونا کافی نہیں — کیا اس نے کام کیا؟",
+      "url": "https://www.youtube.com/shorts/88OafApSts8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "3fS26qvt8oc",
+      "title": "environment کی حفاظت یعنی لوگوں کی حفاظت",
+      "url": "https://www.youtube.com/shorts/3fS26qvt8oc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "B2SMRhZzjv8",
+      "title": "Epidemiology — public health کی جاسوسی، بیماری کے سراغ",
+      "url": "https://www.youtube.com/shorts/B2SMRhZzjv8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "OYRbeFNjKS4",
+      "title": "environmental health کا مستقبل — تین بڑی طاقتیں",
+      "url": "https://www.youtube.com/shorts/OYRbeFNjKS4",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "sbEoMYPmQts",
+      "title": "dengue اور malaria نئے علاقوں میں کیوں پھیل رہے ہیں؟",
+      "url": "https://www.youtube.com/shorts/sbEoMYPmQts",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "90cBQk8hZrk",
+      "title": "اچھا health program flyer سے نہیں — needs assessment سے شروع ہوتا ہے",
+      "url": "https://www.youtube.com/shorts/90cBQk8hZrk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "RsNqFlD74xw",
+      "title": "آلودگی سب کو برابر نقصان نہیں دیتی — بچے سب سے زیادہ متاثر",
+      "url": "https://www.youtube.com/shorts/RsNqFlD74xw",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "J-0_IVhgbBk",
+      "title": "measles واپس کیوں آ رہی ہے؟ vaccine کا اصل امتحان",
+      "url": "https://www.youtube.com/shorts/J-0_IVhgbBk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "djekEBw1JbA",
+      "title": "آپ سوال کیسے پوچھتے ہیں، جواب اسی پر منحصر ہے",
+      "url": "https://www.youtube.com/shorts/djekEBw1JbA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "0ryko42UwJ4",
+      "title": "آپ کے کمرے سے پورے سیارے تک — environmental health ہر سطح پر",
+      "url": "https://www.youtube.com/shorts/0ryko42UwJ4",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "YuODmSxKwzc",
+      "title": "موٹاپا صرف willpower کا مسئلہ نہیں — food پالیسی ہے",
+      "url": "https://www.youtube.com/shorts/YuODmSxKwzc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "FgkCByy6Ikk",
+      "title": "اگلی وبا کہاں سے آئے گی؟ One Health کا جواب",
+      "url": "https://www.youtube.com/shorts/FgkCByy6Ikk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "jvG_HgyIKys",
+      "title": "ندی میں گرتے لوگ — prevention کی سب سے مشہور کہانی",
+      "url": "https://www.youtube.com/shorts/jvG_HgyIKys",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Jkk5YGZZApU",
+      "title": "Mental health صرف فرد کا نہیں — پوری کمیونٹی کا مسئلہ ہے",
+      "url": "https://www.youtube.com/shorts/Jkk5YGZZApU",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "pu94TQBynas",
+      "title": "ہر screening test اچھا نہیں ہوتا — false positive کیا ہے؟",
+      "url": "https://www.youtube.com/shorts/pu94TQBynas",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "98vylkT5UA0",
+      "title": "صاف ہوا اور صاف پانی — کیا یہ آپ کے zip code پر ہونا چاہیے؟",
+      "url": "https://www.youtube.com/shorts/98vylkT5UA0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "m4K7-JYSj2U",
+      "title": "Ozempic سب کا مسئلہ حل کر دے گی؟ عوامی صحت کا بڑا سوال",
+      "url": "https://www.youtube.com/shorts/m4K7-JYSj2U",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "rg2IURrANig",
+      "title": "Quantitative vs Qualitative — فرق دراصل بہت سادہ ہے",
+      "url": "https://www.youtube.com/shorts/rg2IURrANig",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "EaTkd2sJdjo",
+      "title": "انوائرنمنٹ صرف جنگل اور دریا نہیں — آپ کا گھر بھی ہے",
+      "url": "https://www.youtube.com/shorts/EaTkd2sJdjo",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "h2pzvRP660s",
+      "title": "Vision کو daily action میں کیسے بدلیں؟",
+      "url": "https://www.youtube.com/shorts/h2pzvRP660s",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "0sTCMcgHE7w",
+      "title": "Chronic disease کیسے روکی جاتی ہے؟",
+      "url": "https://www.youtube.com/shorts/0sTCMcgHE7w",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "HzrJ_79B26k",
+      "title": "Healthcare ایک global business کیوں ہے؟",
+      "url": "https://www.youtube.com/shorts/HzrJ_79B26k",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "OLLq2WbhL7I",
+      "title": "Healthcare policy ایک daily strategy ہے",
+      "url": "https://www.youtube.com/shorts/OLLq2WbhL7I",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "1VMXpqt5-bE",
+      "title": "Environmental health صرف toxins تک محدود نہیں",
+      "url": "https://www.youtube.com/shorts/1VMXpqt5-bE",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "nlEO5VHFEnk",
+      "title": "DEI صرف statement نہیں، leadership capability ہے",
+      "url": "https://www.youtube.com/shorts/nlEO5VHFEnk",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "zwjIn2PV6rI",
+      "title": "Why a Clear Research Question Matters",
+      "url": "https://www.youtube.com/shorts/zwjIn2PV6rI",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "koqe5ScGtXQ",
+      "title": "Why Hospital Prices Vary So Much",
+      "url": "https://www.youtube.com/shorts/koqe5ScGtXQ",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "WqaV8SXoR7M",
+      "title": "Why Full Hospitals Can Still Lose Money",
+      "url": "https://www.youtube.com/shorts/WqaV8SXoR7M",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Mg-RoHIJGa8",
+      "title": "Why Busy Hospitals Can Still Lose Money",
+      "url": "https://www.youtube.com/shorts/Mg-RoHIJGa8",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "dPYa4pWmO8w",
+      "title": "Revenue Cycle as a Leadership Priority",
+      "url": "https://www.youtube.com/shorts/dPYa4pWmO8w",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "WkL9Mc5C9BQ",
+      "title": "Public Health Prevents Disease Upstream",
+      "url": "https://www.youtube.com/shorts/WkL9Mc5C9BQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "8k1JJPrVPoU",
+      "title": "Incidence vs Prevalence",
+      "url": "https://www.youtube.com/shorts/8k1JJPrVPoU",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "KpPQAtzjizc",
+      "title": "Environmental Health and Place",
+      "url": "https://www.youtube.com/shorts/KpPQAtzjizc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "tu7aRz5EnUE",
+      "title": "Biostatistics in Public Health",
+      "url": "https://www.youtube.com/shorts/tu7aRz5EnUE",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "NhgK9kvKDvI",
+      "title": "Prior Authorization as a Strategic Issue",
+      "url": "https://www.youtube.com/shorts/NhgK9kvKDvI",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "DrjAQQ14wuw",
+      "title": "Trust as Public Health Leadership",
+      "url": "https://www.youtube.com/shorts/DrjAQQ14wuw",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "pg3jtbiVKLw",
+      "title": "Public Health Emergency Readiness",
+      "url": "https://www.youtube.com/shorts/pg3jtbiVKLw",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "bRa82nM-wYo",
+      "title": "Tobacco Control as a Public Health Success",
+      "url": "https://www.youtube.com/shorts/bRa82nM-wYo",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "tzb7TIyONEs",
+      "title": "Ecohealth: Human Health Depends on Ecosystems",
+      "url": "https://www.youtube.com/shorts/tzb7TIyONEs",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "CQZIJcharP0",
+      "title": "AI in Healthcare: ROI Over Hype",
+      "url": "https://www.youtube.com/shorts/CQZIJcharP0",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "voqvbhVybqk",
+      "title": "Population Health — Exam Room سے باہر | اردو",
+      "url": "https://www.youtube.com/shorts/voqvbhVybqk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "hnZdAVtCLFY",
+      "title": "Budget Variance ایک Control Tool | اردو میں آسان",
+      "url": "https://www.youtube.com/shorts/hnZdAVtCLFY",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Ud-UNNGLg_M",
+      "title": "Contribution Margin in Healthcare | اردو میں آسان",
+      "url": "https://www.youtube.com/shorts/Ud-UNNGLg_M",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "BQzXYTrJJGs",
+      "title": "Performance Management in Healthcare | اردو میں آسان",
+      "url": "https://www.youtube.com/shorts/BQzXYTrJJGs",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "NxLoQyjBrMg",
+      "title": "Strategic Healthcare Recruitment | اردو میں آسان",
+      "url": "https://www.youtube.com/shorts/NxLoQyjBrMg",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "e9Fc8p4VeQg",
+      "title": "Diversity, Inclusion اور Belonging in Healthcare | اردو",
+      "url": "https://www.youtube.com/shorts/e9Fc8p4VeQg",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "52ZIkhWh3bY",
+      "title": "Burnout دراصل Job Design کا مسئلہ ہے | اردو",
+      "url": "https://www.youtube.com/shorts/52ZIkhWh3bY",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "uQiRM4Bdyu4",
+      "title": "Credentialing مریض کی حفاظت کیسے کرتی ہے؟ | اردو",
+      "url": "https://www.youtube.com/shorts/uQiRM4Bdyu4",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "6dW6TCmxu1E",
+      "title": "Vision کو Daily Action میں کیسے بدلیں؟ | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/6dW6TCmxu1E",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "RASv-xtSXrQ",
+      "title": "Epidemiology — بیماری کی Detective Work | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/RASv-xtSXrQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "waYZ8UrdF_s",
+      "title": "Virtual Teams میں Trust کیسے بنائیں؟ | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/waYZ8UrdF_s",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "q5b-saXke8E",
+      "title": "Confounding in Epidemiology | اردو میں آسان مثال #Shorts",
+      "url": "https://www.youtube.com/shorts/q5b-saXke8E",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "vLJZ4aa_hQM",
+      "title": "Compensation ایک Management Signal | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/vLJZ4aa_hQM",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "PgjvUNgiiVE",
+      "title": "Employee Turnover کی چھپی ہوئی قیمت | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/PgjvUNgiiVE",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "3Tp01_QhJTo",
+      "title": "Needs vs Wants in Healthcare Marketing | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/3Tp01_QhJTo",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "ED9mBNMQT-4",
+      "title": "Medicare vs Medicaid کا فرق | اردو میں آسان #Shorts",
+      "url": "https://www.youtube.com/shorts/ED9mBNMQT-4",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "5Q4hOnLDZis",
+      "title": "Risk-Based Contracts in Healthcare | اردو میں آسان #Shorts",
+      "url": "https://www.youtube.com/shorts/5Q4hOnLDZis",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "S2ITxqt2LH8",
+      "title": "ہسپتالوں کی قیمتیں مختلف کیوں ہوتی ہیں؟ | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/S2ITxqt2LH8",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "e4g_qNey8-0",
+      "title": "Healthcare Change ایک Human Process ہے | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/e4g_qNey8-0",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "_FQUoxl6KJY",
+      "title": "Healthcare Supply Chain = Patient Care | اردو #Shorts",
+      "url": "https://www.youtube.com/shorts/_FQUoxl6KJY",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "98EQSyVBueU",
+      "title": "Healthcare Demand Elasticity | اردو میں آسان #Shorts",
+      "url": "https://www.youtube.com/shorts/98EQSyVBueU",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
     {
       "youtube_id": "vVxkTCcrhKQ",
       "title": "Cash Flow in Healthcare Finance | اردو میں آسان #Shorts",
       "url": "https://www.youtube.com/shorts/vVxkTCcrhKQ",
       "track": "MHA_MBA",
-      "sort_order": 1,
-      "views_text": "10 views",
-      "classification_reason": "matched_mha_mba_keyword:healthcare finance"
+      "format": "short"
     },
     {
       "youtube_id": "SF5iqrU8K9Q",
       "title": "Capital Budgeting in Healthcare | اردو میں آسان #Shorts",
       "url": "https://www.youtube.com/shorts/SF5iqrU8K9Q",
       "track": "MHA_MBA",
-      "sort_order": 2,
-      "views_text": "77 views",
-      "classification_reason": "matched_mha_mba_keyword:budget"
+      "format": "short"
     },
     {
       "youtube_id": "J5szLp6v3kc",
       "title": "Training مریضوں کی حفاظت کیسے کرتی ہے؟ | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/J5szLp6v3kc",
       "track": "MHA_MBA",
-      "sort_order": 3,
-      "views_text": "85 views",
-      "classification_reason": "matched_mha_mba_keyword:training"
+      "format": "short"
     },
     {
       "youtube_id": "3V3AiuNLjio",
       "title": "Employment Law اور Healthcare Management | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/3V3AiuNLjio",
       "track": "MHA_MBA",
-      "sort_order": 4,
-      "views_text": "3 views",
-      "classification_reason": "matched_mha_mba_keyword:healthcare management"
+      "format": "short"
     },
     {
       "youtube_id": "mZUiXkokrxo",
       "title": "Healthcare Service کے Gaps کیسے بند کریں؟ | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/mZUiXkokrxo",
       "track": "MHA_MBA",
-      "sort_order": 5,
-      "views_text": "25 views",
-      "classification_reason": "matched_mha_mba_keyword:healthcare service"
+      "format": "short"
     },
     {
       "youtube_id": "pdULgRGYQZU",
       "title": "Healthcare Marketing صرف Promotion نہیں | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/pdULgRGYQZU",
       "track": "MHA_MBA",
-      "sort_order": 6,
-      "views_text": "No views",
-      "classification_reason": "matched_mha_mba_keyword:marketing"
+      "format": "short"
     },
     {
       "youtube_id": "6qT_7TtpJcI",
       "title": "Common Cost Allocation میں انصاف | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/6qT_7TtpJcI",
       "track": "MHA_MBA",
-      "sort_order": 7,
-      "views_text": "88 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "3Z1HzjYhjyI",
       "title": "Joint Costs اور Decision Relevance | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/3Z1HzjYhjyI",
       "track": "MHA_MBA",
-      "sort_order": 8,
-      "views_text": "76 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "0ackoLIOYCg",
       "title": "Operation Costing — Hybrid System | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/0ackoLIOYCg",
       "track": "MHA_MBA",
-      "sort_order": 9,
-      "views_text": "33 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "GiSJlSYKCZY",
       "title": "FIFO vs Weighted Average Process Costing | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/GiSJlSYKCZY",
       "track": "MHA_MBA",
-      "sort_order": 10,
-      "views_text": "48 views",
-      "classification_reason": "matched_mha_mba_keyword:process costing"
+      "format": "short"
     },
     {
       "youtube_id": "qLJ-CC0e06Q",
       "title": "Weighted Average Process Costing | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/qLJ-CC0e06Q",
       "track": "MHA_MBA",
-      "sort_order": 11,
-      "views_text": "47 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "Q0098CPDDb4",
       "title": "Physical Units دھوکا کیوں دیتی ہیں؟ | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/Q0098CPDDb4",
       "track": "MHA_MBA",
-      "sort_order": 12,
-      "views_text": "67 views",
-      "classification_reason": "matched_mha_mba_keyword:physical units"
+      "format": "short"
     },
     {
       "youtube_id": "7n8Z7YBq_yw",
       "title": "Process Costing کا 5-Step Roadmap | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/7n8Z7YBq_yw",
       "track": "MHA_MBA",
-      "sort_order": 13,
-      "views_text": "19 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "Mo6rmrmYg7k",
       "title": "Equivalent Units کا مطلب آسان لفظوں میں | اردو #Shorts",
       "url": "https://www.youtube.com/shorts/Mo6rmrmYg7k",
       "track": "MHA_MBA",
-      "sort_order": 14,
-      "views_text": "41 views",
-      "classification_reason": "matched_mha_mba_keyword:equivalent units"
+      "format": "short"
     },
     {
       "youtube_id": "_FyRZo5UWvQ",
       "title": "Materials vs Conversion Completion | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/_FyRZo5UWvQ",
       "track": "MHA_MBA",
-      "sort_order": 15,
-      "views_text": "96 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "5FDM24szjwE",
       "title": "Equivalent Units کیوں ضروری ہیں؟ | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/5FDM24szjwE",
       "track": "MHA_MBA",
-      "sort_order": 16,
-      "views_text": "94 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "aQ5AnwB5OwY",
       "title": "Process Costing کیسے پہچانیں؟ | اردو Accounting #Shorts",
       "url": "https://www.youtube.com/shorts/aQ5AnwB5OwY",
       "track": "MHA_MBA",
-      "sort_order": 17,
-      "views_text": "41 views",
-      "classification_reason": "matched_mha_mba_keyword:accounting"
+      "format": "short"
     },
     {
       "youtube_id": "ZzoLsQjSCiA",
       "title": "Job Costing vs Process Costing | اردو میں آسان فرق #Shorts",
       "url": "https://www.youtube.com/shorts/ZzoLsQjSCiA",
       "track": "MHA_MBA",
-      "sort_order": 18,
-      "views_text": "57 views",
-      "classification_reason": "matched_mha_mba_keyword:process costing"
+      "format": "short"
     },
     {
       "youtube_id": "d4gf4d-sIMo",
       "title": "تنہائی: روزانہ 15 سگریٹ کے برابر؟ #Shorts",
       "url": "https://www.youtube.com/shorts/d4gf4d-sIMo",
       "track": "MPH",
-      "sort_order": 19,
-      "views_text": "88 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "i1vnnka-Ihk",
       "title": "Measles واپس آ گئی: Herd Immunity کا سبق #Shorts",
       "url": "https://www.youtube.com/shorts/i1vnnka-Ihk",
       "track": "MPH",
-      "sort_order": 20,
-      "views_text": "53 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "dLANqmzvEOo",
       "title": "Protein-Maxing بند کریں: آپ کو اتنا protein نہیں چاہیے #Shorts",
       "url": "https://www.youtube.com/shorts/dLANqmzvEOo",
-      "track": "MPH",
-      "sort_order": 21,
-      "views_text": "44 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "track": "HEALTH",
+      "format": "short"
     },
     {
       "youtube_id": "2Lrg4Y_hxQo",
       "title": "Ultra-Processed Foods آپ کا دماغ سکیڑ رہے ہیں؟ #Shorts",
       "url": "https://www.youtube.com/shorts/2Lrg4Y_hxQo",
       "track": "MPH",
-      "sort_order": 22,
-      "views_text": "52 views",
-      "classification_reason": "matched_mph_keyword:ultra-processed"
+      "format": "short"
     },
     {
       "youtube_id": "Jn4CKrgVg14",
       "title": "Scromiting کیا ہے؟ High-potency THC کا نیا خطرہ #Shorts",
       "url": "https://www.youtube.com/shorts/Jn4CKrgVg14",
-      "track": "MPH",
-      "sort_order": 23,
-      "views_text": "6 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "track": "HEALTH",
+      "format": "short"
     },
     {
       "youtube_id": "gG6mOVi7StQ",
       "title": "Public Health میں کیریئر: سوچ سے زیادہ راستے #Shorts",
       "url": "https://www.youtube.com/shorts/gG6mOVi7StQ",
       "track": "MPH",
-      "sort_order": 24,
-      "views_text": "69 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "T99RrWjyEOA",
       "title": "آپ کی صحت کو اصل میں کیا شکل دیتا ہے؟ #Shorts",
       "url": "https://www.youtube.com/shorts/T99RrWjyEOA",
       "track": "MPH",
-      "sort_order": 25,
-      "views_text": "78 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "iCcqYp-5YnE",
       "title": "Vaccines سب کی حفاظت کیسے کرتی ہیں؟ Herd Immunity #Shorts",
       "url": "https://www.youtube.com/shorts/iCcqYp-5YnE",
       "track": "MPH",
-      "sort_order": 26,
-      "views_text": "55 views",
-      "classification_reason": "matched_mph_keyword:vaccine"
+      "format": "short"
     },
     {
       "youtube_id": "_yo9Qwk9Wh0",
       "title": "ذہنی صحت بھی Public Health ہے #Shorts",
       "url": "https://www.youtube.com/shorts/_yo9Qwk9Wh0",
       "track": "MPH",
-      "sort_order": 27,
-      "views_text": "81 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "0WHxAf77CSc",
       "title": "Epidemiology اصل میں کرتی کیا ہے؟ بیماری کے detectives #Shorts",
       "url": "https://www.youtube.com/shorts/0WHxAf77CSc",
       "track": "MPH",
-      "sort_order": 28,
-      "views_text": "57 views",
-      "classification_reason": "matched_mph_keyword:epidemiology"
+      "format": "short"
     },
     {
       "youtube_id": "xwWst6aVPhg",
       "title": "Health Equity 60 سیکنڈ میں: برابری بمقابلہ انصاف #Shorts",
       "url": "https://www.youtube.com/shorts/xwWst6aVPhg",
       "track": "MPH",
-      "sort_order": 29,
-      "views_text": "76 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "VQadZJSswAY",
       "title": "Public Health آپ کے سوچنے سے زیادہ اہم کیوں ہے؟ #Shorts",
       "url": "https://www.youtube.com/shorts/VQadZJSswAY",
       "track": "MPH",
-      "sort_order": 30,
-      "views_text": "28 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "ocp5GYhLjUw",
       "title": "اگلی وبا آئے گی: کیا public health تیار ہے؟ #Shorts",
       "url": "https://www.youtube.com/shorts/ocp5GYhLjUw",
       "track": "MPH",
-      "sort_order": 31,
-      "views_text": "6 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "eJ2ogYQLEX8",
       "title": "Food as Medicine: غذا اب core public health ہے #Shorts",
       "url": "https://www.youtube.com/shorts/eJ2ogYQLEX8",
       "track": "MPH",
-      "sort_order": 32,
-      "views_text": "97 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "NXCWxSsNjZU",
       "title": "Maternal Health: ایک بحران جو سامنے ہوتے ہوئے نظر نہیں آتا #Shorts",
       "url": "https://www.youtube.com/shorts/NXCWxSsNjZU",
       "track": "MPH",
-      "sort_order": 33,
-      "views_text": "98 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "DLTEfKbx7Yg",
       "title": "AI in Public Health: سوال یہ نہیں کہ کام کرتا ہے، کس کے لیے؟ #Shorts",
       "url": "https://www.youtube.com/shorts/DLTEfKbx7Yg",
       "track": "MPH",
-      "sort_order": 34,
-      "views_text": "4 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "n86Bnlfhjr4",
       "title": "Long COVID گیا نہیں: کروڑوں لوگ اب بھی متاثر #Shorts",
       "url": "https://www.youtube.com/shorts/n86Bnlfhjr4",
       "track": "MPH",
-      "sort_order": 35,
-      "views_text": "1 view",
-      "classification_reason": "matched_mph_keyword:covid"
+      "format": "short"
     },
     {
       "youtube_id": "jYVE6FiDKSE",
       "title": "Antimicrobial Resistance: خاموش وبا جو ہر سال 10 لاکھ جانیں لیتی ہے #Shorts",
       "url": "https://www.youtube.com/shorts/jYVE6FiDKSE",
       "track": "MPH",
-      "sort_order": 36,
-      "views_text": "No views",
-      "classification_reason": "matched_mph_keyword:antimicrobial"
+      "format": "short"
     },
     {
       "youtube_id": "DU34w4ZCx8A",
       "title": "Harm Reduction: لوگوں کو جہاں ہیں وہیں مدد دینا #Shorts",
       "url": "https://www.youtube.com/shorts/DU34w4ZCx8A",
       "track": "MPH",
-      "sort_order": 37,
-      "views_text": "No views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "5pZ_p-ILWEs",
       "title": "Public Health کی اگلی بنیاد: Data Modernization #Shorts",
       "url": "https://www.youtube.com/shorts/5pZ_p-ILWEs",
       "track": "MPH",
-      "sort_order": 38,
-      "views_text": "2 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "yiVn1l_689M",
       "title": "HIV کا خاتمہ ممکن ہے: مسئلہ science کا نہیں، access کا ہے #Shorts",
       "url": "https://www.youtube.com/shorts/yiVn1l_689M",
       "track": "MPH",
-      "sort_order": 39,
-      "views_text": "No views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "Sg_YLGTo-ow",
       "title": "خودکشی کی روک تھام: ایک Public Health مسئلہ #Shorts",
       "url": "https://www.youtube.com/shorts/Sg_YLGTo-ow",
       "track": "MPH",
-      "sort_order": 40,
-      "views_text": "No views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "DWwR3-GQ3Y4",
       "title": "Public Health Law، Ethics اور Leadership: متنازع میدان #Shorts",
       "url": "https://www.youtube.com/shorts/DWwR3-GQ3Y4",
-      "track": "MHA_MBA",
-      "sort_order": 41,
-      "views_text": "No views",
-      "classification_reason": "matched_mha_mba_keyword:leadership;also_matched_mph_keyword:public health"
+      "track": "MPH",
+      "format": "short"
     },
     {
       "youtube_id": "lzhphxS_0Zo",
       "title": "ابھرتی متعدی بیماریاں اور Vaccine Policy کا چیلنج #Shorts",
       "url": "https://www.youtube.com/shorts/lzhphxS_0Zo",
       "track": "MPH",
-      "sort_order": 42,
-      "views_text": "1 view",
-      "classification_reason": "matched_mph_keyword:vaccine"
+      "format": "short"
     },
     {
       "youtube_id": "m4zA9VDFvsk",
       "title": "بڑھتی عمر کی آبادی: Geriatric Public Health کیوں ضروری ہے؟ #Shorts",
       "url": "https://www.youtube.com/shorts/m4zA9VDFvsk",
       "track": "MPH",
-      "sort_order": 43,
-      "views_text": "No views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "ZvGWNKY9nRU",
       "title": "Public Health میں پیسے کی اصل قدر؟ Health Economics کی بنیاد #Shorts",
       "url": "https://www.youtube.com/shorts/ZvGWNKY9nRU",
       "track": "MPH",
-      "sort_order": 44,
-      "views_text": "11 views",
-      "classification_reason": "matched_mph_keyword:public health"
+      "format": "short"
     },
     {
       "youtube_id": "9N1pRrM1sfw",
       "title": "Antimicrobial Resistance: خاموش وبا اور One Health",
       "url": "https://www.youtube.com/shorts/9N1pRrM1sfw",
       "track": "MPH",
-      "sort_order": 45,
-      "views_text": "No views",
-      "classification_reason": "matched_mph_keyword:antimicrobial"
+      "format": "short"
     },
     {
       "youtube_id": "Xwq-tgpJWlc",
       "title": "Healthy Aging: لمبی نہیں، باوقار زندگی",
       "url": "https://www.youtube.com/shorts/Xwq-tgpJWlc",
       "track": "MPH",
-      "sort_order": 46,
-      "views_text": "No views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "hF-v3QJT9I8",
       "title": "Implementation Science: علم اور عمل کے درمیان پل",
       "url": "https://www.youtube.com/shorts/hF-v3QJT9I8",
       "track": "MPH",
-      "sort_order": 47,
-      "views_text": "No views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
     },
     {
       "youtube_id": "0UUGsAfpTVU",
       "title": "Cannabis Policy اور نوجوان: توازن کہاں ہے؟",
       "url": "https://www.youtube.com/shorts/0UUGsAfpTVU",
       "track": "MPH",
-      "sort_order": 48,
-      "views_text": "229 views",
-      "classification_reason": "defaulted_to_mph_health_public_health_context"
+      "format": "short"
+    },
+    {
+      "youtube_id": "Skp57zghT10",
+      "title": "Immigration Policy اور صحت: خاموش اثرات",
+      "url": "https://www.youtube.com/shorts/Skp57zghT10",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "M_CifGKwy6k",
+      "title": "Public Health Funding: بحران سے پہلے سرمایہ کاری کیوں ضروری؟",
+      "url": "https://www.youtube.com/shorts/M_CifGKwy6k",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "G4ruZYYUlq4",
+      "title": "دل کی بیماری سے بچاؤ: چھوٹی تبدیلیاں، بڑا فرق",
+      "url": "https://www.youtube.com/shorts/G4ruZYYUlq4",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "kBvmXI7mxZc",
+      "title": "جنگ، بے گھری اور صحت کا بحران: humanitarian health",
+      "url": "https://www.youtube.com/shorts/kBvmXI7mxZc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "XM0kepcd8KU",
+      "title": "Occupational Health: مزدوروں کی صحت اور حفاظت کا مسئلہ",
+      "url": "https://www.youtube.com/shorts/XM0kepcd8KU",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "jzV1UeUiao4",
+      "title": "Opioid بحران: سزا نہیں، علاج اور harm reduction",
+      "url": "https://www.youtube.com/shorts/jzV1UeUiao4",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "c1AJjg_cJq0",
+      "title": "Public Health پر اعتماد دوبارہ کیسے بحال ہو؟",
+      "url": "https://www.youtube.com/shorts/c1AJjg_cJq0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "-gYXCViPn_8",
+      "title": "Planetary Health: زمین کی صحت اور انسانی صحت کا گہرا رشتہ",
+      "url": "https://www.youtube.com/shorts/-gYXCViPn_8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "JjhujM4G2wg",
+      "title": "موٹاپا: ذاتی choice یا نظام کی ناکامی؟",
+      "url": "https://www.youtube.com/shorts/JjhujM4G2wg",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "_G2f-5-ypbA",
+      "title": "Reproductive Health: حق، رسائی، اور equity کا سوال",
+      "url": "https://www.youtube.com/shorts/_G2f-5-ypbA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Fw8F1tseIWk",
+      "title": "بحران میں Public Health Leadership: اعتماد کیسے بنتا ہے؟",
+      "url": "https://www.youtube.com/shorts/Fw8F1tseIWk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "dMg18r-h870",
+      "title": "Vaccine Hesitancy: لوگ انکار کیوں کرتے ہیں اور اعتماد کیسے بحال ہو؟",
+      "url": "https://www.youtube.com/shorts/dMg18r-h870",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Aj0wbZ7dY6Q",
+      "title": "شدید گرمی: ایک خاموش health emergency اور اس سے بچاؤ",
+      "url": "https://www.youtube.com/shorts/Aj0wbZ7dY6Q",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "7KC114s3xPc",
+      "title": "Public Health Data: بیماری کو پھیلنے سے پہلے پکڑنے کا نظام",
+      "url": "https://www.youtube.com/shorts/7KC114s3xPc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "jntQaFV6Ipo",
+      "title": "صحت کے بارے میں غلط معلومات: عوام کا اعتماد کیسے ٹوٹتا ہے؟",
+      "url": "https://www.youtube.com/shorts/jntQaFV6Ipo",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "fIh0js0jRJQ",
+      "title": "ماں اور بچے کی صحت: زندگیاں بچانے والی بنیادی دیکھ بھال",
+      "url": "https://www.youtube.com/shorts/fIh0js0jRJQ",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "tTwtyzXViUM",
+      "title": "دیہی علاقوں میں صحت کی سہولت کا بحران اور اس کا حل",
+      "url": "https://www.youtube.com/shorts/tTwtyzXViUM",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "iWkTXIa5I9Y",
+      "title": "Script 2 — Public Health Cybersecurity and Et | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/iWkTXIa5I9Y",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "f4xFlEyF8kM",
+      "title": "Script 2 — Nutrition and Food Systems | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/f4xFlEyF8kM",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "91aCZVWxuiM",
+      "title": "Script 1 — Health Informatics | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/91aCZVWxuiM",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "liH050DFDNQ",
+      "title": "Script 1 — Genomics and Precision Public Health | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/liH050DFDNQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "pMjoue_2VzI",
+      "title": "Script 9 — One Health and Interdisciplinary Approa | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/pMjoue_2VzI",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "cEPR9BfnS28",
+      "title": "Script 8 — Epidemiology and Biostatistical Methods | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/cEPR9BfnS28",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "NX5kMskB9jQ",
+      "title": "Script 7 — Health Policy, Advocacy, and Systems Th | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/NX5kMskB9jQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Tb4GS25tBe4",
+      "title": "Script 7 — Health Policy, Advocacy, and Systems Th | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/Tb4GS25tBe4",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Ir8ukwFub50",
+      "title": "Script 6 — Global Health Security and Humanitarian | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/Ir8ukwFub50",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "GwdiNIbiT5g",
+      "title": "Script 5 — Big Data, Analytics, and AI in Public H | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/GwdiNIbiT5g",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Ql4ncJudazA",
+      "title": "Script 5 — Big Data, Analytics, and AI in Public H | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/Ql4ncJudazA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "NNYe1ISCj1c",
+      "title": "Mental Health Crisis and Public Health",
+      "url": "https://www.youtube.com/shorts/NNYe1ISCj1c",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "9BSmyxuPl28",
+      "title": "Script 3 — Infectious Disease Control, Pandemic Pr | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/9BSmyxuPl28",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "pL1OP--3dAg",
+      "title": "Script 2 — Health Equity, Social Justice, and Disp | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/pL1OP--3dAg",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "_rD2erA2ZYg",
+      "title": "Script 10 — Community Engagement, Qualitative Meth | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/_rD2erA2ZYg",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "3wc1DnBazDk",
+      "title": "Script 1 — Climate Change and Environmental Health | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/3wc1DnBazDk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "8xy8vlfFGVQ",
+      "title": "Script 1 — Climate Change and Environmental Health | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/8xy8vlfFGVQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xpCXDiUvPHg",
+      "title": "Short 5 Disease X, Rat Lungworm, and the Surveilla | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/xpCXDiUvPHg",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "wIPunRab9v0",
+      "title": "Short 5 Disease X, Rat Lungworm, and the Surveilla | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/wIPunRab9v0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "ffZ0VMMSgl8",
+      "title": "Short 4 What War Does to a Health System  Sudan,  | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/ffZ0VMMSgl8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "wrM4IQykUko",
+      "title": "Short 3 Global Health Funding Is Being Cut. Here's | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/wrM4IQykUko",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "WLY-SJseqD8",
+      "title": "Short 3 Global Health Funding Is Being Cut. Here's | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/WLY-SJseqD8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "67f5GGbvkTs",
+      "title": "Short 2 Climate Change Is Driving More Vector-Born | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/67f5GGbvkTs",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "2i7qmc51AJQ",
+      "title": "Short 2 Climate Change Is Driving More Vector-Born | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/2i7qmc51AJQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "YQfxzddWD_0",
+      "title": "Short 1 Cholera and Mpox in Crisis Zones  Public  | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/YQfxzddWD_0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "owMf6s2kXV0",
+      "title": "Short 9 Bird Flu Update 2026 – What Is Happening i | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/owMf6s2kXV0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "K4vSPRW2mbA",
+      "title": "Short 8 Global Health Crises in 2026 – Why Funding | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/K4vSPRW2mbA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "v-wOxonMQCU",
+      "title": "Short 8 Global Health Crises in 2026 – Why Funding | Mastering Essentials",
+      "url": "https://www.youtube.com/shorts/v-wOxonMQCU",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "kwhs28VDKHA",
+      "title": "Climate change صرف environment کا مسئلہ نہیں.Extreme heat، wildfires، floods، air quality، food secu",
+      "url": "https://www.youtube.com/shorts/kwhs28VDKHA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "hUF8hJ5rNPA",
+      "title": "Antimicrobial resistance خاموش pandemic بن رہی ہے.جب antibiotics کام کرنا چھوڑ دیں تو simple infecti",
+      "url": "https://www.youtube.com/shorts/hUF8hJ5rNPA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "nppX60ldYE8",
+      "title": "Cars vs movement ایک real public health issue ہے.اگر neighborhood walking، cycling اور safe movement",
+      "url": "https://www.youtube.com/shorts/nppX60ldYE8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "EpvjWMIANPY",
+      "title": "Mental health crisis کم نہیں ہو رہی.Anxiety، depression، stress، conflict اور economic pressure بڑھ",
+      "url": "https://www.youtube.com/shorts/EpvjWMIANPY",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "_UOZ0P-Ylis",
+      "title": "چار میں سے دس cancers prevent ہو سکتے ہیں.Tobacco، HPV vaccination، hepatitis B، obesity، physical i",
+      "url": "https://www.youtube.com/shorts/_UOZ0P-Ylis",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xhpfgj4NUaU",
+      "title": "Airborne viruses ختم نہیں ہوئے.COVID، flu اور RSV respiratory particles کے ذریعے indoor spaces میں پ",
+      "url": "https://www.youtube.com/shorts/xhpfgj4NUaU",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "3-UEOI9MTb8",
+      "title": "Flu season ابھی ختم نہیں ہوا.H3N2، RSV اور COVID ایک ساتھ hospitals پر pressure ڈال سکتے ہیں. Public",
+      "url": "https://www.youtube.com/shorts/3-UEOI9MTb8",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "zrRsE1WTVwY",
+      "title": "Heart disease مردوں میں earlier کیوں آتی ہے؟New research بتاتی ہے کہ cardiovascular risk صرف ایک fac",
+      "url": "https://www.youtube.com/shorts/zrRsE1WTVwY",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "BBtYjKz6WF8",
+      "title": "بچوں کے دانت صرف smile کا مسئلہ نہیں.Untreated dental disease بچے کی sleep، school performance، nutr",
+      "url": "https://www.youtube.com/shorts/BBtYjKz6WF8",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "7mlNMWdb5AI",
+      "title": "GLP-1 medicines صرف weight loss کی بات نہیں رہیں.یہ drugs diabetes، obesity، heart risk، kidney dise",
+      "url": "https://www.youtube.com/shorts/7mlNMWdb5AI",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "FpEUEko1hzE",
+      "title": "AI plus wearables prevention کو بدل سکتے ہیں.Smartwatches heart rate، sleep، blood oxygen، اور activ",
+      "url": "https://www.youtube.com/shorts/FpEUEko1hzE",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "R2RDcMiGiFk",
+      "title": "Food as Medicine ایک powerful public health idea ہے.اگر diet disease risk کو بدل سکتی ہے، تو food ac",
+      "url": "https://www.youtube.com/shorts/R2RDcMiGiFk",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "L3btx6j6ONw",
+      "title": "Vaccine policy میں تبدیلی public health کو directly affect کرتی ہے.Immunization schedules decades of",
+      "url": "https://www.youtube.com/shorts/L3btx6j6ONw",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "uBwdgCDEACs",
+      "title": "Women’s heart health کو اکثر overlook کیا جاتا ہے.Heart disease خواتین کو بہت زیادہ متاثر کرتی ہے، م",
+      "url": "https://www.youtube.com/shorts/uBwdgCDEACs",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Y9_21ADY19c",
+      "title": "Measles دوبارہ کیوں بڑھ رہا ہے؟Measles کو روکنے کے لیے بہت high herd immunity چاہیے. جب vaccine cove",
+      "url": "https://www.youtube.com/shorts/Y9_21ADY19c",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "ErTHyn-T8Vc",
+      "title": "Flu ختم نہیں ہوئی، second peak آ سکتی ہے.CDC data دکھاتا ہے کہ flu activity دوبارہ بڑھ سکتی ہے، خاص",
+      "url": "https://www.youtube.com/shorts/ErTHyn-T8Vc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "vrXXl5-rPN0",
+      "title": "AlphaGenome AI اور DNA research کو بدل سکتا ہے.Google DeepMind کا Alpha Genome non-coding DNA کو سمج",
+      "url": "https://www.youtube.com/shorts/vrXXl5-rPN0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "M_Anb-9ZHLc",
+      "title": "Nipah virus ایک serious public health warning ہے.Nipah کی case fatality بہت high ہو سکتی ہے، اور یہ",
+      "url": "https://www.youtube.com/shorts/M_Anb-9ZHLc",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "sAQbLl9fcNw",
+      "title": "Mental health care میں doctors کافی نہیں ہیں.دنیا کے بہت سے علاقوں میں psychiatrists کی شدید کمی ہے.",
+      "url": "https://www.youtube.com/shorts/sAQbLl9fcNw",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "K5M680XEJYw",
+      "title": "Maternal health crisis صرف statistics نہیں، system failure ہے.امریکہ میں maternal mortality develope",
+      "url": "https://www.youtube.com/shorts/K5M680XEJYw",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "lqBhu2ddpbI",
+      "title": "Precision public health کا مقصد ہے right help, right place, right time.Data، genomics، environment،",
+      "url": "https://www.youtube.com/shorts/lqBhu2ddpbI",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "tuhwjg8oglE",
+      "title": "Climate change مچھروں کو نئی جگہوں تک لے جا رہا ہے.Dengue، Zika، chikungunya، اور malaria جیسے vecto",
+      "url": "https://www.youtube.com/shorts/tuhwjg8oglE",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "D5YjeK-66Ww",
+      "title": "Ultra-processed foods کو tobacco-style warning labels مل سکتے ہیں.UPFs صرف unhealthy نہیں. یہ gut mi",
+      "url": "https://www.youtube.com/shorts/D5YjeK-66Ww",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "BNMpxbMJXxY",
+      "title": "آپ کا wastewater outbreak سے پہلے warning دے سکتا ہے.Digital epidemiology clinic visits سے پہلے sign",
+      "url": "https://www.youtube.com/shorts/BNMpxbMJXxY",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "XDHFyLW9FbE",
+      "title": "Loneliness صرف احساس نہیں، health risk factor ہے.Research loneliness کو heart disease، dementia، dep",
+      "url": "https://www.youtube.com/shorts/XDHFyLW9FbE",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "aN8c_Pyanv0",
+      "title": "H5N1 اب dairy cattle میں آ گیا ہے.Avian flu پہلے زیادہ تر birds تک محدود تھا. لیکن جب virus mammals",
+      "url": "https://www.youtube.com/shorts/aN8c_Pyanv0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "NpBtq2bG8Y0",
+      "title": "AI can spread health misinformation, but it can also explain health in plain language. The key",
+      "url": "https://www.youtube.com/shorts/NpBtq2bG8Y0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "_SOTWKT-JeM",
+      "title": "Antimicrobial resistance خاموش pandemic بن رہی ہے.جب antibiotics کام کرنا چھوڑ دیں تو simple infecti",
+      "url": "https://www.youtube.com/shorts/_SOTWKT-JeM",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Iv3a1LkUoNE",
+      "title": "آپ کا zip code آپ کے genetic code سے زیادہ health predict کر سکتا ہے.Public health میں یہ بات بہت اہ",
+      "url": "https://www.youtube.com/shorts/Iv3a1LkUoNE",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "GBV4Gevh3VI",
+      "title": "CPHQ کیا ہے؟Doctors اور nurses جانیں بچاتے ہیں، مگر hospital system کو safe کون بناتا ہے؟ CPHQ یعنی",
+      "url": "https://www.youtube.com/shorts/GBV4Gevh3VI",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "8LpM9owaH4o",
+      "title": "MPH, MHA, MBA - healthcare میں کون سی degree آپ کے لیے ہے؟MPH disease causes، populations، اور resea",
+      "url": "https://www.youtube.com/shorts/8LpM9owaH4o",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "HIrmu1VJbuQ",
+      "title": "Ice cream sales بڑھیں تو shark attacks بھی بڑھتے ہیں. کیا ice cream sharks کو attract کرتی ہے؟نہیں.",
+      "url": "https://www.youtube.com/shorts/HIrmu1VJbuQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xcxnKxXoFBg",
+      "title": "Public health surveillance reactive نہیں رہنی چاہیے.AI search data، social media keywords، medical n",
+      "url": "https://www.youtube.com/shorts/xcxnKxXoFBg",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "1Nqo7VNAs3I",
+      "title": "MPH کے بعد CPH credential واقعی worth it ہے؟Public health degrees ہر school میں different ہوتی ہیں.",
+      "url": "https://www.youtube.com/shorts/1Nqo7VNAs3I",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "XT81x3vICFA",
+      "title": "Medicine اور public health ایک جیسے نہیں ہیں.Medicine ایک patient کو treat کرتی ہے. Public health پو",
+      "url": "https://www.youtube.com/shorts/XT81x3vICFA",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "xZ5vPb5UTng",
+      "title": "Climate change کا اصل سوال یہ ہے: کیا hospital heatwave survive کر سکتا ہے؟Heat waves ER overload، d",
+      "url": "https://www.youtube.com/shorts/xZ5vPb5UTng",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Y8UvyyLYjdo",
+      "title": "Climate change صرف ہوا اور پانی کا مسئلہ نہیں 🌍یہ آپ کے دماغ کا بھی مسئلہ ہے۔ سائنس دانوں نے اب ایک",
+      "url": "https://www.youtube.com/shorts/Y8UvyyLYjdo",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "BZOwsCh6Sts",
+      "title": "پرانی بیماریاں واپس کیوں آ رہی ہیں؟Measles اور drug-resistant infections دوبارہ بڑھ رہے ہیں. وجہ sim",
+      "url": "https://www.youtube.com/shorts/BZOwsCh6Sts",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "e6EpLTzEULQ",
+      "title": "AI healthcare میں paperwork کم کر رہا ہے، لیکن ایک خطرہ بھی ہے.اگر powerful AI صرف rich hospitals کے",
+      "url": "https://www.youtube.com/shorts/e6EpLTzEULQ",
+      "track": "MHA_MBA",
+      "format": "short"
+    },
+    {
+      "youtube_id": "i8THN_4DCdQ",
+      "title": "ذہنی صحت کا خیال crisis کے بعد نہیں، پہلے ہونا چاہیے.2026 میں public health کا بڑا shift یہی ہے: men",
+      "url": "https://www.youtube.com/shorts/i8THN_4DCdQ",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "bvvbPOFgpxc",
+      "title": "آپ کا ڈاکٹر blood pressure، cholesterol، اور blood sugar تو چیک کرتا ہے 🩺لیکن inflammation؟ یہ خاموش",
+      "url": "https://www.youtube.com/shorts/bvvbPOFgpxc",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "jg0g5la71l8",
+      "title": "بس Probiotic لینا کافی نہیں 🦠2026 میں gut health صرف ایک supplement کا کھیل نہیں۔ آپ کا microbiome آ",
+      "url": "https://www.youtube.com/shorts/jg0g5la71l8",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "4kRTih2Ju94",
+      "title": "کیا سالانہ Checkup اب پرانی بات ہے؟ 🩺پچاس سالوں سے annual physical ہی gold standard تھا۔ لیکن 2026 م",
+      "url": "https://www.youtube.com/shorts/4kRTih2Ju94",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "Gk8qB7oDns8",
+      "title": "کیا سالانہ Checkup اب پرانی بات ہے؟ 🩺پچاس سالوں سے annual physical ہی gold standard تھا۔ لیکن 2026 م",
+      "url": "https://www.youtube.com/shorts/Gk8qB7oDns8",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "1I2Pw9qjo8U",
+      "title": "Ozempic صرف وزن کم کرنے کی دوا نہیں 💊GLP-1 agonists نے obesity medicine کا نقشہ ہمیشہ کے لیے بدل دیا",
+      "url": "https://www.youtube.com/shorts/1I2Pw9qjo8U",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "j1pkyaijZLc",
+      "title": "اب صحت مند بڑھاپے کی تعریف بدل گئی ہے 💪آپ کا blood pressure یا BMI نہیں — آپ کا muscle mass ہی آپ کا",
+      "url": "https://www.youtube.com/shorts/j1pkyaijZLc",
+      "track": "HEALTH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "C4i4zdGJqU0",
+      "title": "اگر ہمیں COVID کا تین ماہ پہلے پتہ چل جاتا تو؟ 🤖AI آج public health کے لیے یہ ممکن بنا رہا ہے۔ اگلی",
+      "url": "https://www.youtube.com/shorts/C4i4zdGJqU0",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "ur9LGRqB3cE",
+      "title": "کیا آپ کا دوپہر کا کھانا نیا سگریٹ ہے؟ 🚬🍔Ultra-processed food اب اپنا \"tobacco moment\" دیکھ رہا ہے۔",
+      "url": "https://www.youtube.com/shorts/ur9LGRqB3cE",
+      "track": "MPH",
+      "format": "short"
+    },
+    {
+      "youtube_id": "TdDGkT-8KCE",
+      "title": "نقل مکانی اور صحت: 12 کروڑ سے زائد بے گھر افراد #Shorts",
+      "url": "https://www.youtube.com/watch?v=TdDGkT-8KCE",
+      "track": "MPH",
+      "format": "video",
+      "duration_seconds": 185
+    },
+    {
+      "youtube_id": "bBoe2gzlyd8",
+      "title": "Global Health Funding کے کٹوتیاں اور پائیدار financing #Shorts",
+      "url": "https://www.youtube.com/watch?v=bBoe2gzlyd8",
+      "track": "MPH",
+      "format": "video",
+      "duration_seconds": 183
+    },
+    {
+      "youtube_id": "YcbEdCtGQi4",
+      "title": "شدید گرمی: hurricanes اور floods سے زیادہ جان لیوا #Shorts",
+      "url": "https://www.youtube.com/watch?v=YcbEdCtGQi4",
+      "track": "MPH",
+      "format": "video",
+      "duration_seconds": 191
+    },
+    {
+      "youtube_id": "kCIKD4DvKE0",
+      "title": "LGBTQ+ Health Equity: فرق biology کا نہیں، نظام کا ہے #Shorts",
+      "url": "https://www.youtube.com/watch?v=kCIKD4DvKE0",
+      "track": "MPH",
+      "format": "video",
+      "duration_seconds": 185
     }
   ]
 }

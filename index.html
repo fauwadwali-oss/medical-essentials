@@ -23,7 +23,7 @@
       property="og:description"
       content="عوامی صحت، ہسپتال، ہیلتھ کیئر مینجمنٹ، فنانس، HR، لیڈرشپ اور strategy پر آسان اردو ویڈیوز۔"
     />
-    <meta property="og:image" content="https://www.masteringessentials.com/assets/hero-learning.png" />
+    <meta property="og:image" content="https://www.masteringessentials.com/assets/hero-learning.jpg" />
     <meta property="og:image:width" content="1782" />
     <meta property="og:image:height" content="883" />
     <meta property="og:image:alt" content="Mastering Essentials Urdu lessons for public health and healthcare leadership" />
@@ -33,7 +33,7 @@
       name="twitter:description"
       content="عوامی صحت، ہیلتھ کیئر مینجمنٹ، فنانس، HR، لیڈرشپ اور strategy پر مختصر اردو ویڈیوز۔"
     />
-    <meta name="twitter:image" content="https://www.masteringessentials.com/assets/hero-learning.png" />
+    <meta name="twitter:image" content="https://www.masteringessentials.com/assets/hero-learning.jpg" />
     <meta name="twitter:image:alt" content="Mastering Essentials Urdu lessons for public health and healthcare leadership" />
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,7 +42,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260620-4" />
+    <link rel="stylesheet" href="styles.css?v=20260907-2" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -82,7 +82,7 @@
             "inLanguage": "ur",
             "primaryImageOfPage": {
               "@type": "ImageObject",
-              "url": "https://www.masteringessentials.com/assets/hero-learning.png",
+              "url": "https://www.masteringessentials.com/assets/hero-learning.jpg",
               "width": 1782,
               "height": 883
             }
@@ -111,6 +111,7 @@
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#home" lang="ur" dir="rtl">مرکزی مواد پر جائیں</a>
     <header class="site-header">
       <a class="brand" href="#home" aria-label="Mastering Essentials home">
         <img class="brand-mark" src="assets/mastering-essentials-logo-mark.svg" alt="" aria-hidden="true" />
@@ -123,14 +124,15 @@
         <span class="sr-only">مینو کھولیں</span>
       </button>
       <nav class="nav" id="site-nav" aria-label="Primary navigation">
-        <a href="#videos" lang="ur" dir="rtl">ویڈیوز</a>
-        <a href="#mph">MPH اردو</a>
-        <a href="#mhamba">MHA/MBA اردو</a>
+        <a href="#start" lang="ur" dir="rtl">یہاں سے شروع کریں</a>
+        <a href="library.html" lang="ur" dir="rtl">ویڈیو لائبریری</a>
+        <a href="#mph" lang="ur" dir="rtl"><bdi dir="ltr">MPH</bdi> اردو</a>
+        <a href="#mhamba" lang="ur" dir="rtl"><bdi dir="ltr">MHA/MBA</bdi> اردو</a>
         <a href="#topics" lang="ur" dir="rtl">موضوعات</a>
         <a href="#about" lang="ur" dir="rtl">ہمارا انداز</a>
       </nav>
       <a
-        class="youtube-link"
+        class="youtube-link" aria-label="YouTube پر سبسکرائب کریں"
         href="https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA?sub_confirmation=1"
         target="_blank"
         rel="noreferrer"
@@ -144,16 +146,19 @@
 
     <main id="home">
       <section class="hero" aria-labelledby="page-title">
-        <img class="hero-image" src="assets/hero-learning.png" alt="Urdu online learning desk with public health and healthcare leadership lesson" />
+        <picture>
+          <source type="image/avif" srcset="assets/hero-learning.avif" />
+          <img class="hero-image" src="assets/hero-learning.jpg" width="1782" height="883" fetchpriority="high" decoding="async" alt="Urdu online learning desk with public health and healthcare leadership lesson" />
+        </picture>
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
-          <h1 id="page-title" lang="ur" dir="rtl">عوامی صحت اور ہیلتھ کیئر لیڈرشپ، آسان اردو میں۔</h1>
+          <h1 id="page-title" lang="ur" dir="rtl">عوامی صحت اور ہیلتھ کیئر مینجمنٹ، آسان اردو میں۔</h1>
           <p lang="ur" dir="rtl">
             یہاں ماسٹرنگ ایم پی ایچ اردو اور
             ماسٹرنگ ایم ایچ اے/ایم بی اے اردو کی مختصر، واضح ویڈیوز ملیں گی۔
           </p>
           <div class="hero-actions">
-            <a class="primary-action" href="#tracks" lang="ur" dir="rtl">دونوں ٹریک دیکھیں</a>
+            <a class="primary-action" href="#start" lang="ur" dir="rtl">سیکھنا شروع کریں</a>
             <a class="secondary-action" href="#videos" lang="ur" dir="rtl">نئی ویڈیوز دیکھیں</a>
           </div>
         </div>
@@ -172,15 +177,27 @@
         </a>
       </section>
 
+      <section class="learning-start" id="start" aria-labelledby="start-title" lang="ur" dir="rtl">
+        <p class="section-kicker">نئے سیکھنے والوں کے لیے</p>
+        <h2 id="start-title">یہاں سے شروع کریں</h2>
+        <p>اپنا ٹریک منتخب کریں اور چار منتخب ویڈیوز ترتیب سے دیکھیں۔</p>
+        <div class="pathway-grid">
+          <a class="pathway-card" href="learn/mph.html"><span class="track-label"><bdi dir="ltr">MPH</bdi> · ۴ ویڈیوز</span><h3>عوامی صحت کی بنیادیں</h3><p>تعارف ← صحت کے عوامل ← وبائیات ← اجتماعی تحفظ</p><span class="text-link">پہلا سبق دیکھیں ←</span></a>
+          <a class="pathway-card pathway-gold" href="learn/mhamba.html"><span class="track-label"><bdi dir="ltr">MHA/MBA</bdi> · ۴ ویڈیوز</span><h3>ہیلتھ کیئر مینجمنٹ کا آغاز</h3><p>مارکیٹنگ ← خدمات ← تربیت ← نقدی کا بہاؤ</p><span class="text-link">پہلا سبق دیکھیں ←</span></a>
+        </div>
+      </section>
+
       <section class="video-section" id="videos" aria-labelledby="videos-title">
         <div class="section-title">
           <p lang="ur" dir="rtl">نئی اردو ویڈیوز</p>
-          <h2 id="videos-title" lang="ur" dir="rtl">دونوں لرننگ ٹریکس کی تازہ ویڈیوز</h2>
+          <h2 id="videos-title" lang="ur" dir="rtl">چینل کی تازہ ویڈیوز</h2>
         </div>
-        <div class="video-controls" role="tablist" aria-label="Video filters">
-          <button class="filter-button active" type="button" data-filter="all" role="tab" aria-selected="true" lang="ur" dir="rtl">سب</button>
-          <button class="filter-button" type="button" data-filter="mph" role="tab" aria-selected="false">MPH</button>
-          <button class="filter-button" type="button" data-filter="mhamba" role="tab" aria-selected="false">MHA/MBA</button>
+        <p class="library-intro" lang="ur" dir="rtl">روزمرہ صحت، عوامی صحت اور ہیلتھ کیئر مینجمنٹ کی ویڈیوز۔ <a class="text-link" href="library.html">تمام ۲۳۹ ویڈیوز تلاش کریں ←</a></p>
+        <div class="video-controls" role="group" aria-label="Video filters">
+          <button class="filter-button active" type="button" data-filter="all" aria-pressed="true" lang="ur" dir="rtl">سب</button>
+          <button class="filter-button" type="button" data-filter="health" aria-pressed="false" lang="ur" dir="rtl">روزمرہ صحت</button>
+          <button class="filter-button" type="button" data-filter="mph" aria-pressed="false">MPH</button>
+          <button class="filter-button" type="button" data-filter="mhamba" aria-pressed="false">MHA/MBA</button>
         </div>
         <div class="video-grid" id="video-grid">
           <article class="video-card" data-track="mph">
@@ -225,7 +242,7 @@
       <section class="split-track" id="mph" aria-labelledby="mph-title">
         <div class="track-copy">
           <p class="section-kicker" lang="ur" dir="rtl">ماسٹرنگ ایم پی ایچ اردو</p>
-          <h2 id="mph-title" lang="ur" dir="rtl">طلبہ، خاندانوں، اور future MPH learners کے لیے عوامی صحت کے بنیادی concepts۔</h2>
+          <h2 id="mph-title" lang="ur" dir="rtl">عوامی صحت کی بنیادی باتیں</h2>
           <p lang="ur" dir="rtl">
             اس ٹریک میں بیماریوں سے بچاؤ، وبائیات، اعداد و شمار، health systems،
             environmental health اور public-health policy کو صاف اور آسان اردو میں سمجھایا جاتا ہے۔
@@ -237,14 +254,20 @@
             <li lang="ur" dir="rtl">Community health اور بیماریوں سے بچاؤ</li>
           </ul>
         </div>
-        <img src="assets/mph-track.png" alt="Urdu public health education in a community learning setting" />
+        <picture>
+          <source type="image/avif" srcset="assets/mph-track.avif" />
+          <img src="assets/mph-track.jpg" width="1536" height="1024" loading="lazy" decoding="async" alt="Urdu public health education in a community learning setting" />
+        </picture>
       </section>
 
       <section class="split-track reverse" id="mhamba" aria-labelledby="mhamba-title">
-        <img src="assets/mhamba-track.png" alt="Healthcare management learners reviewing finance and operations dashboards" />
+        <picture>
+          <source type="image/avif" srcset="assets/mhamba-track.avif" />
+          <img src="assets/mhamba-track.jpg" width="1717" height="916" loading="lazy" decoding="async" alt="Healthcare management learners reviewing finance and operations dashboards" />
+        </picture>
         <div class="track-copy">
           <p class="section-kicker gold" lang="ur" dir="rtl">ماسٹرنگ ایم ایچ اے/ایم بی اے اردو</p>
-          <h2 id="mhamba-title" lang="ur" dir="rtl">ہیلتھ کیئر management، business، اور leadership اردو میں۔</h2>
+          <h2 id="mhamba-title" lang="ur" dir="rtl">ہسپتال، مینجمنٹ اور قیادت</h2>
           <p lang="ur" dir="rtl">
             یہ ٹریک health education سے آگے بڑھ کر یہ سمجھاتا ہے کہ health organizations کیسے چلتی ہیں:
             management، accounting، finance، marketing، HR، operations، strategy اور leadership آسان اردو میں۔
@@ -261,46 +284,23 @@
       <section class="topics" id="topics" aria-labelledby="topics-title">
         <div class="section-title">
           <p lang="ur" dir="rtl">موضوعات</p>
-          <h2 id="topics-title" lang="ur" dir="rtl">صحت اور ہیلتھ کیئر بزنس کی وسیع اردو لائبریری</h2>
+          <h2 id="topics-title" lang="ur" dir="rtl">اپنا موضوع منتخب کریں</h2>
         </div>
-        <div class="topic-grid">
-          <article>
-            <span>01</span>
-            <h3 lang="ur" dir="rtl">عوامی صحت</h3>
-            <p lang="ur" dir="rtl">وبائیں، prevention، vaccination، screening، sanitation اور community programs۔</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3 lang="ur" dir="rtl">ہیلتھ سسٹمز</h3>
-            <p lang="ur" dir="rtl">Hospitals، insurance، access، quality، policy اور patient-centered care۔</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3 lang="ur" dir="rtl">ہیلتھ کیئر مینجمنٹ</h3>
-            <p lang="ur" dir="rtl">Operations، planning، teams، service lines، projects اور performance improvement۔</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3 lang="ur" dir="rtl">فنانس اور Accounting</h3>
-            <p lang="ur" dir="rtl">Budgets، costs، billing، revenue، accounting logic اور resource decisions۔</p>
-          </article>
-          <article>
-            <span>05</span>
-            <h3 lang="ur" dir="rtl">مارکیٹنگ اور HR</h3>
-            <p lang="ur" dir="rtl">Patient communication، service positioning، staffing، culture اور workforce issues۔</p>
-          </article>
-          <article>
-            <span>06</span>
-            <h3 lang="ur" dir="rtl">لیڈرشپ</h3>
-            <p lang="ur" dir="rtl">Strategy، ethics، decision making، communication اور health organizations میں change۔</p>
-          </article>
+        <div class="topic-grid" dir="rtl">
+          <a class="topic-card" href="topics/everyday-health.html" lang="ur" dir="rtl"><span>32 ویڈیوز</span><h3>صحت کی عام باتیں</h3><p>بچوں کی صحت، روزمرہ علامات اور بیماریوں سے بچاؤ کے بارے میں ویڈیوز۔</p><strong class="text-link">ویڈیوز دیکھیں ←</strong></a>
+          <a class="topic-card" href="topics/public-health.html" lang="ur" dir="rtl"><span>12 ویڈیوز</span><h3>عوامی صحت</h3><p>بیماریوں سے بچاؤ، وبائیات اور معاشرتی صحت کے اسباق۔</p><strong class="text-link">اسباق دیکھیں ←</strong></a>
+          <a class="topic-card" href="topics/health-systems.html" lang="ur" dir="rtl"><span>10 ویڈیوز</span><h3>ہیلتھ سسٹمز</h3><p>صحت کی خدمات، مساوی رسائی اور پالیسی کو سمجھیں۔</p><strong class="text-link">اسباق دیکھیں ←</strong></a>
+          <a class="topic-card" href="topics/management.html" lang="ur" dir="rtl"><span>7 ویڈیوز</span><h3>ہیلتھ کیئر مینجمنٹ</h3><p>خدمات، تربیت اور ہسپتال کے انتظام سے متعلق اسباق۔</p><strong class="text-link">اسباق دیکھیں ←</strong></a>
+          <a class="topic-card" href="topics/finance.html" lang="ur" dir="rtl"><span>19 ویڈیوز</span><h3>فنانس اور اکاؤنٹنگ</h3><p>مالی فیصلے، نقدی کا بہاؤ اور لاگت کا حساب۔</p><strong class="text-link">اسباق دیکھیں ←</strong></a>
+          <a class="topic-card" href="topics/marketing-hr.html" lang="ur" dir="rtl"><span>10 ویڈیوز</span><h3>مارکیٹنگ اور انسانی وسائل</h3><p>خدمات کی مارکیٹنگ، عملے کی تربیت اور ملازمت کے قوانین۔</p><strong class="text-link">اسباق دیکھیں ←</strong></a>
+          <a class="topic-card" href="topics/leadership.html" lang="ur" dir="rtl"><span>7 ویڈیوز</span><h3>لیڈرشپ</h3><p>قانون، اخلاقیات اور عملی فیصلوں سے متعلق منتخب اسباق۔</p><strong class="text-link">اسباق دیکھیں ←</strong></a>
         </div>
       </section>
 
       <section class="standard" id="about" aria-labelledby="standard-title">
         <div>
-          <p class="section-kicker" lang="ur" dir="rtl">ہمارا teaching standard</p>
-          <h2 id="standard-title" lang="ur" dir="rtl">نئے learners کے لیے آسان، professional learners کے لیے سنجیدہ۔</h2>
+          <p class="section-kicker" lang="ur" dir="rtl">ہمارا اندازِ تدریس</p>
+          <h2 id="standard-title" lang="ur" dir="rtl">آسان زبان، سنجیدہ تعلیم</h2>
         </div>
         <div class="standard-grid">
           <article>
@@ -342,6 +342,6 @@
       <span lang="ur" dir="rtl">یہ مواد صرف تعلیم کے لیے ہے۔ علاج کے لیے qualified clinician سے رجوع کریں۔</span>
     </footer>
 
-    <script src="app.js?v=20260620-4"></script>
+    <script src="app.js?v=20260907-1"></script>
   </body>
 </html>
