@@ -6,7 +6,7 @@
 //   /learn/<slug>/        ordered starter paths (MPH, MHA/MBA)
 //   /videos/              searchable library of every video
 //   /videos/<id>/         one watch page per video (VideoObject structured data)
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 
 const OUT = "dist";
@@ -31,11 +31,68 @@ const meta = await readJson("data/video-meta.json");
 const healthTopics = await readJson("data/health-topics.json");
 const learning = await readJson("data/learning.json");
 
+// Written guides: data/guides/<youtube_id>.md, shown under the video on its watch page.
+// Format: a front matter block (summary, reviewed, sources as "Name | URL" lines),
+// then Markdown limited to ## / ### headings, paragraphs, "- " and "1. " lists, **bold**.
+function parseGuide(id, text) {
+  const m = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!m) throw new Error(`guides/${id}.md: missing front matter`);
+  const head = { sources: [] };
+  let inSources = false;
+  for (const line of m[1].split("\n")) {
+    if (/^sources:\s*$/.test(line)) { inSources = true; continue; }
+    if (inSources && /^\s*-\s+/.test(line)) {
+      const [name, url] = line.replace(/^\s*-\s+/, "").split(/\s+\|\s+/);
+      if (!/^https:\/\//.test(url || "")) throw new Error(`guides/${id}.md: bad source line "${line}"`);
+      head.sources.push({ name: name.trim(), url: url.trim() });
+      continue;
+    }
+    inSources = false;
+    const kv = line.match(/^(\w+):\s*(.*)$/);
+    if (kv) head[kv[1]] = kv[2].trim();
+  }
+  for (const key of ["summary", "reviewed"]) if (!head[key]) throw new Error(`guides/${id}.md: missing ${key}`);
+  if (head.sources.length < 2) throw new Error(`guides/${id}.md: needs at least 2 sources`);
+  const words = m[2].split(/\s+/).filter(Boolean).length;
+  return { ...head, words, html: renderMarkdown(m[2]) };
+}
+
+function renderMarkdown(md) {
+  const inline = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  const out = [];
+  let list = null;
+  const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+  for (const raw of md.split("\n")) {
+    const line = raw.trim();
+    if (!line) { close(); continue; }
+    let m;
+    if ((m = line.match(/^(#{2,3})\s+(.*)$/))) { close(); out.push(`<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`); continue; }
+    if ((m = line.match(/^[-•]\s+(.*)$/)) || (m = line.match(/^\d+[.)]\s+(.*)$/))) {
+      const kind = /^\d/.test(line) ? "ol" : "ul";
+      if (list !== kind) { close(); out.push(`<${kind}>`); list = kind; }
+      out.push(`<li>${inline(m[1])}</li>`);
+      continue;
+    }
+    close();
+    out.push(`<p>${inline(line)}</p>`);
+  }
+  close();
+  return out.join("\n");
+}
+
+const guides = new Map();
+for (const file of (await readdir("data/guides").catch(() => [])).filter(f => f.endsWith(".md"))) {
+  const id = file.slice(0, -3);
+  guides.set(id, parseGuide(id, await readFile(`data/guides/${file}`, "utf8")));
+}
+
 // ---------- helpers ----------
 
-const esc = value => String(value ?? "")
-  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-  .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+function esc(value) {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
 const urduDigits = value => String(value).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
 const MONTHS = ["جنوری", "فروری", "مارچ", "اپریل", "مئی", "جون", "جولائی", "اگست", "ستمبر", "اکتوبر", "نومبر", "دسمبر"];
 const urduDate = iso => {
@@ -99,13 +156,15 @@ const videos = shorts.map(v => {
     views: m.views,
     blocks,
     summary: truncate(plainSummary(blocks) || title, 155),
-    topic: topicOf.get(v.youtube_id) || null
+    topic: topicOf.get(v.youtube_id) || null,
+    guide: guides.get(v.youtube_id) || null
   };
 }).sort((a, b) => b.published.localeCompare(a.published));
 const byId = new Map(videos.map(v => [v.id, v]));
 const health = videos.filter(v => v.track === "HEALTH");
 const popular = [...health].sort((a, b) => b.views - a.views);
 
+for (const id of guides.keys()) if (!byId.has(id)) throw new Error(`data/guides/${id}.md has no matching video`);
 for (const c of [...healthTopics, ...learning]) {
   for (const id of c.ids) if (!byId.has(id)) throw new Error(`${c.slug} lists unknown video ${id}`);
 }
@@ -268,7 +327,7 @@ ${socialLinks("social")}
 function videoCard(v, { eager = false, showTopic = false } = {}) {
   return `<li class="vcard${v.vertical ? "" : " vcard-wide"}" data-title="${esc(v.title)}" data-topic="${esc(v.topic?.slug || "")}" data-track="${esc(v.track)}">
 <a href="${watchPath(v.id)}">
-<span class="vthumb"><img src="${thumb(v.id)}" alt="" width="480" height="360" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"><span class="vdur" dir="ltr">${clock(v.seconds)}</span></span>
+<span class="vthumb"><img src="${thumb(v.id)}" alt="" width="480" height="360" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"><span class="vdur" dir="ltr">${clock(v.seconds)}</span>${v.guide ? `<span class="vguide">تحریری رہنما</span>` : ""}</span>
 <span class="vtitle" dir="auto">${esc(v.title)}</span>
 ${showTopic && v.topic ? `<span class="vtopic">${esc(v.topic.title)}</span>` : ""}
 </a>
@@ -480,7 +539,8 @@ ${breadcrumbs(crumbs)}
 ${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.title)}</a>` : ""}
 <h1 dir="auto">${esc(v.title)}</h1>
 <p class="watch-meta"><time datetime="${v.published.slice(0, 10)}">${urduDate(v.published)}</time> · <span dir="ltr">${clock(v.seconds)}</span></p>
-<div class="watch-body" dir="auto">${description}</div>
+<div class="watch-body" dir="auto">${v.guide ? `<p>${esc(v.guide.summary)}</p>` : description}</div>
+${v.guide ? `<a class="guide-jump" href="#guide">مکمل تحریری رہنما پڑھیں ${icon("arrow")}</a>` : ""}
 <div class="watch-actions">
 <a class="btn" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")} سبسکرائب کریں</a>
 <a class="btn btn-ghost" href="${esc(v.youtubeUrl)}" target="_blank" rel="noopener">یوٹیوب پر کھولیں</a>
@@ -488,6 +548,17 @@ ${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.t
 <p class="disclaimer">${icon("shield")} یہ عام معلومات ہیں، ڈاکٹر کے مشورے کا متبادل نہیں۔</p>
 </div>
 </div>
+</div>
+${v.guide ? `<div class="guide" id="guide">
+<p class="kicker">تحریری رہنما</p>
+<div class="guide-body">${v.guide.html}</div>
+<aside class="guide-sources" aria-labelledby="sources-title">
+<h2 id="sources-title">ذرائع</h2>
+<ol>${v.guide.sources.map(src => `<li><a href="${esc(src.url)}" target="_blank" rel="noopener" lang="en" dir="ltr">${esc(src.name)}</a></li>`).join("")}</ol>
+<p>آخری نظرِ ثانی: <time datetime="${esc(v.guide.reviewed)}">${urduDate(v.guide.reviewed)}</time></p>
+</aside>
+<p class="disclaimer">${icon("shield")} یہ رہنما عام معلومات کے لیے ہے۔ علاج، دوا یا خوراک میں تبدیلی کے لیے اپنے ڈاکٹر یا فارماسسٹ سے مشورہ کریں۔</p>
+</div>` : ""}
 </div>
 </article>
 <section class="section section-tint" aria-labelledby="related">
@@ -500,9 +571,9 @@ ${videoGrid(related)}
   return page({
     path: watchPath(v.id),
     title: v.title,
-    description: v.summary,
+    description: v.guide ? v.guide.summary : v.summary,
     image: v.poster,
-    ogType: "video.other",
+    ogType: v.guide ? "article" : "video.other",
     schema: [
       ORG,
       {
@@ -519,6 +590,22 @@ ${videoGrid(related)}
         publisher: { "@id": `${BASE}/#organization` },
         ...(v.views ? { interactionStatistic: { "@type": "InteractionCounter", interactionType: { "@type": "WatchAction" }, userInteractionCount: v.views } } : {})
       },
+      ...(v.guide ? [{
+        "@type": "Article",
+        "@id": `${BASE}${watchPath(v.id)}#guide`,
+        headline: v.title,
+        description: v.guide.summary,
+        inLanguage: "ur",
+        datePublished: v.guide.reviewed,
+        dateModified: v.guide.reviewed,
+        wordCount: v.guide.words,
+        image: v.poster,
+        author: { "@id": `${BASE}/#organization` },
+        publisher: { "@id": `${BASE}/#organization` },
+        mainEntityOfPage: `${BASE}${watchPath(v.id)}`,
+        video: { "@id": `${BASE}${watchPath(v.id)}#video` },
+        citation: v.guide.sources.map(src => src.url)
+      }] : []),
       breadcrumbSchema(crumbs)
     ],
     body
@@ -622,7 +709,7 @@ for (const p of learnPaths) lastmod.set(`/learn/${p.slug}/`, newest(p.ids.map(id
 const xml = s => esc(s);
 const urls = [...pages.keys()].map(path => {
   const v = path.startsWith("/videos/") && path !== "/videos/" ? byId.get(path.split("/")[2]) : null;
-  return `<url><loc>${BASE}${path}</loc><lastmod>${v ? v.published.slice(0, 10) : lastmod.get(path)}</lastmod>${v ? `
+  return `<url><loc>${BASE}${path}</loc><lastmod>${v ? (v.guide?.reviewed || v.published.slice(0, 10)) : lastmod.get(path)}</lastmod>${v ? `
 <video:video><video:thumbnail_loc>${v.poster}</video:thumbnail_loc><video:title>${xml(v.title)}</video:title><video:description>${xml(truncate(plainSummary(v.blocks) || v.title, 2000))}</video:description><video:player_loc>https://www.youtube.com/embed/${v.id}</video:player_loc><video:duration>${v.seconds}</video:duration><video:publication_date>${v.published}</video:publication_date></video:video>` : ""}</url>`;
 }).join("\n");
 await writeFile(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>
@@ -636,4 +723,5 @@ await cp("data/shorts.json", `${OUT}/data/shorts.json`);
 
 const unplaced = health.filter(v => !v.topic);
 if (unplaced.length) console.warn(`build-site: ${unplaced.length} health videos have no topic yet (add them to data/health-topics.json): ${unplaced.map(v => v.id).join(" ")}`);
+console.log(`build-site: ${guides.size} written guides`);
 console.log(`build-site: ${pages.size} pages (${videos.length} watch pages) in ${OUT}/`);

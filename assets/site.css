@@ -248,6 +248,27 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .watch-actions .btn:first-child { background: var(--yt); }
 .watch-actions .btn:first-child:hover { background: #c81d23; }
 
+/* written guide */
+.vguide { position: absolute; inset-block-start: 8px; inset-inline-end: 8px; padding: 0 8px; border-radius: 6px; background: var(--accent); color: #fff; font-size: 11px; line-height: 2; }
+.guide-jump { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; color: var(--brand); font-weight: 700; }
+.guide-jump .icon { transform: rotate(-90deg); }
+.guide { max-width: 780px; margin: 56px auto 0; padding-top: 32px; border-top: 1px solid var(--line); }
+.guide-body { font-size: 18px; line-height: 2.15; display: grid; gap: 14px; }
+.guide-body h2 { font-size: clamp(1.3rem, 2.4vw, 1.65rem); margin-top: 18px; color: var(--brand-ink); }
+.guide-body h3 { font-size: 1.12rem; margin-top: 6px; }
+.guide-body ul, .guide-body ol { display: grid; gap: 6px; padding-inline-start: 4px; }
+.guide-body ul li { position: relative; padding-inline-start: 24px; }
+.guide-body ul li::before { content: ""; position: absolute; inset-inline-start: 2px; top: 0.95em; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+.guide-body ol { counter-reset: n; }
+.guide-body ol li { counter-increment: n; position: relative; padding-inline-start: 34px; }
+.guide-body ol li::before { content: counter(n, arabic-indic); position: absolute; inset-inline-start: 0; top: 0.35em; width: 26px; height: 26px; border-radius: 50%; background: var(--brand-soft); color: var(--brand-ink); display: grid; place-items: center; font-size: 14px; line-height: 1; }
+.guide-body strong { color: var(--ink); }
+.guide-sources { margin-top: 28px; padding: 18px 20px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); font-size: 14px; }
+.guide-sources h2 { font-size: 17px; }
+.guide-sources ol { list-style: decimal; padding-inline-start: 22px; display: grid; gap: 4px; margin-block: 6px 10px; }
+.guide-sources a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
+.guide-sources p { color: var(--muted); }
+
 /* ---------- library ---------- */
 .library-tools { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 20px 14px; align-items: center; }
 .library-search { position: relative; flex: 1; min-width: 240px; max-width: 560px; }
