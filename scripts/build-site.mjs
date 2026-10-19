@@ -34,16 +34,16 @@ const learning = await readJson("data/learning.json");
 // Written guides: data/guides/<youtube_id>.md, shown under the video on its watch page.
 // Format: a front matter block (summary, reviewed, sources as "Name | URL" lines),
 // then Markdown limited to ## / ### headings, paragraphs, "- " and "1. " lists, **bold**.
-function parseGuide(id, text) {
+function parseGuide(id, text, where = "guides") {
   const m = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (!m) throw new Error(`guides/${id}.md: missing front matter`);
+  if (!m) throw new Error(`${where}/${id}.md: missing front matter`);
   const head = { sources: [] };
   let inSources = false;
   for (const line of m[1].split("\n")) {
     if (/^sources:\s*$/.test(line)) { inSources = true; continue; }
     if (inSources && /^\s*-\s+/.test(line)) {
       const [name, url] = line.replace(/^\s*-\s+/, "").split(/\s+\|\s+/);
-      if (!/^https:\/\//.test(url || "")) throw new Error(`guides/${id}.md: bad source line "${line}"`);
+      if (!/^https:\/\//.test(url || "")) throw new Error(`${where}/${id}.md: bad source line "${line}"`);
       head.sources.push({ name: name.trim(), url: url.trim() });
       continue;
     }
@@ -51,22 +51,33 @@ function parseGuide(id, text) {
     const kv = line.match(/^(\w+):\s*(.*)$/);
     if (kv) head[kv[1]] = kv[2].trim();
   }
-  for (const key of ["summary", "reviewed"]) if (!head[key]) throw new Error(`guides/${id}.md: missing ${key}`);
-  if (head.sources.length < 2) throw new Error(`guides/${id}.md: needs at least 2 sources`);
-  const words = m[2].split(/\s+/).filter(Boolean).length;
-  return { ...head, words, html: renderMarkdown(m[2]) };
+  for (const key of ["summary", "reviewed"]) if (!head[key]) throw new Error(`${where}/${id}.md: missing ${key}`);
+  if (head.sources.length < 2) throw new Error(`${where}/${id}.md: needs at least 2 sources`);
+  const words = m[2].replace(/\[\[video:[\w-]+\]\]/g, "").split(/\s+/).filter(Boolean).length;
+  return { ...head, words, markdown: m[2], html: where === "guides" ? renderMarkdown(m[2]) : "" };
 }
 
-function renderMarkdown(md) {
+// embed(id) renders a "[[video:ID]]" line; headings get ids when an article needs a contents list.
+function renderMarkdown(md, { embed = null, headingIds = false } = {}) {
   const inline = t => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   const out = [];
+  let h2 = 0;
   let list = null;
   const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
   for (const raw of md.split("\n")) {
     const line = raw.trim();
     if (!line) { close(); continue; }
     let m;
-    if ((m = line.match(/^(#{2,3})\s+(.*)$/))) { close(); out.push(`<h${m[1].length}>${inline(m[2])}</h${m[1].length}>`); continue; }
+    if ((m = line.match(/^\[\[video:([\w-]{11})\]\]$/))) {
+      if (!embed) throw new Error(`video embed not allowed here: ${line}`);
+      close(); out.push(embed(m[1])); continue;
+    }
+    if ((m = line.match(/^(#{2,3})\s+(.*)$/))) {
+      close();
+      const id = headingIds && m[1].length === 2 ? ` id="s${++h2}"` : "";
+      out.push(`<h${m[1].length}${id}>${inline(m[2])}</h${m[1].length}>`);
+      continue;
+    }
     if ((m = line.match(/^[-•]\s+(.*)$/)) || (m = line.match(/^\d+[.)]\s+(.*)$/))) {
       const kind = /^\d/.test(line) ? "ol" : "ul";
       if (list !== kind) { close(); out.push(`<${kind}>`); list = kind; }
@@ -78,6 +89,19 @@ function renderMarkdown(md) {
   }
   close();
   return out.join("\n");
+}
+
+// Topic articles: data/articles/<slug>.md, long guides at /guides/<slug>/ with shorts
+// embedded inline via "[[video:ID]]" lines. Extra front matter: title, topic.
+const articles = new Map();
+for (const file of (await readdir("data/articles").catch(() => [])).filter(f => f.endsWith(".md"))) {
+  const slug = file.slice(0, -3);
+  const a = parseGuide(slug, await readFile(`data/articles/${file}`, "utf8"), "articles");
+  if (!a.title || !a.topic) throw new Error(`articles/${file}: needs title and topic`);
+  a.slug = slug;
+  a.videoIds = [...a.markdown.matchAll(/^\[\[video:([\w-]{11})\]\]$/gm)].map(x => x[1]);
+  if (!a.videoIds.length) throw new Error(`articles/${file}: embeds no videos`);
+  articles.set(slug, a);
 }
 
 const guides = new Map();
@@ -165,6 +189,14 @@ const health = videos.filter(v => v.track === "HEALTH");
 const popular = [...health].sort((a, b) => b.views - a.views);
 
 for (const id of guides.keys()) if (!byId.has(id)) throw new Error(`data/guides/${id}.md has no matching video`);
+const articleOf = new Map();
+for (const a of articles.values()) {
+  if (!healthTopics.some(t => t.slug === a.topic)) throw new Error(`articles/${a.slug}.md: unknown topic ${a.topic}`);
+  for (const id of a.videoIds) {
+    if (!byId.has(id)) throw new Error(`articles/${a.slug}.md embeds unknown video ${id}`);
+    if (!articleOf.has(id)) articleOf.set(id, a);
+  }
+}
 for (const c of [...healthTopics, ...learning]) {
   for (const id of c.ids) if (!byId.has(id)) throw new Error(`${c.slug} lists unknown video ${id}`);
 }
@@ -277,6 +309,7 @@ function header(path) {
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">مینو</span></button>
 <nav class="site-nav" id="site-nav" aria-label="مرکزی">
 ${link("/#topics", "موضوعات")}
+${articles.size ? link("/guides/", "مکمل رہنما") : ""}
 ${link("/videos/", "تمام ویڈیوز")}
 ${link("/#students", "طلبہ کے لیے")}
 ${link("/#about", "ہمارے بارے میں")}
@@ -399,6 +432,13 @@ ${sectionHead("موضوع کے لحاظ سے", "آپ کس بارے میں جان
 </div>
 </section>
 
+${articles.size ? `<section class="section" aria-labelledby="guides">
+<div class="wrap">
+${sectionHead("تفصیل سے پڑھیں", "مکمل رہنما", "guides", { href: "/guides/", label: "تمام رہنما" })}
+${articleCards([...articles.values()])}
+</div>
+</section>` : ""}
+
 <section class="section section-tint" aria-labelledby="popular">
 <div class="wrap">
 ${sectionHead("ناظرین کی پسند", "سب سے زیادہ دیکھی گئی ویڈیوز", "popular", { href: "/videos/?sort=popular", label: "سب دیکھیں" })}
@@ -466,7 +506,7 @@ ${socialLinks("social social-cta")}
   });
 }
 
-function collectionPage({ path, title, description, kicker, list, crumbs, ordered = false }) {
+function collectionPage({ path, title, description, kicker, list, crumbs, ordered = false, featured = [] }) {
   const body = `
 <section class="page-head">
 <div class="wrap">
@@ -478,6 +518,7 @@ ${breadcrumbs(crumbs)}
 </section>
 <section class="section section-tight">
 <div class="wrap">
+${featured.length ? articleCards(featured) : ""}
 ${ordered
     ? `<ol class="path-list">${list.map((v, i) => `<li><a href="${watchPath(v.id)}"><span class="step">${urduDigits(i + 1)}</span><img src="${thumb(v.id)}" alt="" width="480" height="360"><span dir="auto">${esc(v.title)}</span></a></li>`).join("")}</ol>`
     : videoGrid(list, { eager: true })}
@@ -541,6 +582,7 @@ ${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.t
 <p class="watch-meta"><time datetime="${v.published.slice(0, 10)}">${urduDate(v.published)}</time> · <span dir="ltr">${clock(v.seconds)}</span></p>
 <div class="watch-body" dir="auto">${v.guide ? `<p>${esc(v.guide.summary)}</p>` : description}</div>
 ${v.guide ? `<a class="guide-jump" href="#guide">مکمل تحریری رہنما پڑھیں ${icon("arrow")}</a>` : ""}
+${articleOf.has(v.id) ? `<a class="article-backlink" href="/guides/${articleOf.get(v.id).slug}/">${icon("student")}<span>یہ ویڈیو اس مکمل رہنما کا حصہ ہے: <strong>${esc(articleOf.get(v.id).title)}</strong></span></a>` : ""}
 <div class="watch-actions">
 <a class="btn" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")} سبسکرائب کریں</a>
 <a class="btn btn-ghost" href="${esc(v.youtubeUrl)}" target="_blank" rel="noopener">یوٹیوب پر کھولیں</a>
@@ -612,6 +654,121 @@ ${videoGrid(related)}
   });
 }
 
+function articleCards(list) {
+  return `<ul class="article-grid">${list.map(a => {
+    const cover = byId.get(a.videoIds[0]);
+    return `<li><a class="article-card" href="/guides/${a.slug}/">
+<span class="article-thumbs">${a.videoIds.slice(0, 3).map(id => `<img src="${thumb(id)}" alt="" width="480" height="360" loading="lazy">`).join("")}</span>
+<span class="article-text"><span class="kicker">مکمل رہنما · ${urduDigits(a.videoIds.length)} ویڈیوز</span><strong>${esc(a.title)}</strong><span>${esc(a.summary)}</span></span>
+</a></li>`;
+  }).join("\n")}</ul>`;
+}
+
+function inlineVideo(id) {
+  const v = byId.get(id);
+  return `<figure class="inline-video">
+<button class="player" type="button" data-video="${v.id}" data-title="${esc(v.title)}" aria-label="ویڈیو چلائیں: ${esc(v.title)}">
+<img src="${thumb(v.id)}" alt="" width="480" height="360" loading="lazy"><span class="play-btn">${icon("play")}</span>
+</button>
+<figcaption><strong dir="auto">${esc(v.title)}</strong><span dir="ltr">${clock(v.seconds)}</span><a href="${watchPath(v.id)}">${v.guide ? "ویڈیو کا صفحہ اور تحریری رہنما" : "ویڈیو کا صفحہ"} ${icon("arrow")}</a></figcaption>
+</figure>`;
+}
+
+function videoSchema(v) {
+  return {
+    "@type": "VideoObject",
+    name: v.title,
+    description: truncate(plainSummary(v.blocks) || v.title, 500),
+    thumbnailUrl: [...new Set([v.poster, thumb(v.id)])],
+    uploadDate: v.published,
+    duration: isoDuration(v.seconds),
+    embedUrl: `https://www.youtube.com/embed/${v.id}`
+  };
+}
+
+function articlePage(a) {
+  const path = `/guides/${a.slug}/`;
+  const topic = healthTopics.find(t => t.slug === a.topic);
+  const crumbs = [{ name: "ہوم", path: "/" }, { name: "مکمل رہنما", path: "/guides/" }, { name: a.title, path }];
+  const html = renderMarkdown(a.markdown, { embed: inlineVideo, headingIds: true });
+  const toc = [...html.matchAll(/<h2 id="(s\d+)">(.*?)<\/h2>/g)];
+  const minutes = Math.max(3, Math.round(a.words / 180));
+  const vids = a.videoIds.map(id => byId.get(id));
+  const body = `
+<article class="article">
+<div class="wrap">
+${breadcrumbs(crumbs)}
+<header class="article-head">
+<p class="kicker">مکمل رہنما · ${urduDigits(minutes)} منٹ مطالعہ · ${urduDigits(vids.length)} ویڈیوز</p>
+<h1>${esc(a.title)}</h1>
+<p class="lede">${esc(a.summary)}</p>
+<p class="byline"><span lang="en" dir="ltr">Mastering Essentials</span> · آخری نظرِ ثانی: <time datetime="${esc(a.reviewed)}">${urduDate(a.reviewed)}</time></p>
+</header>
+<div class="article-layout">
+<nav class="toc" aria-labelledby="toc-title"><h2 id="toc-title">اس رہنما میں</h2><ol>${toc.map(([, id, text]) => `<li><a href="#${id}">${text}</a></li>`).join("")}</ol></nav>
+<div class="article-body guide-body">${html}
+<aside class="guide-sources" aria-labelledby="sources-title">
+<h2 id="sources-title">ذرائع</h2>
+<ol>${a.sources.map(src => `<li><a href="${esc(src.url)}" target="_blank" rel="noopener" lang="en" dir="ltr">${esc(src.name)}</a></li>`).join("")}</ol>
+<p>آخری نظرِ ثانی: <time datetime="${esc(a.reviewed)}">${urduDate(a.reviewed)}</time></p>
+</aside>
+<p class="disclaimer">${icon("shield")} یہ رہنما عام معلومات کے لیے ہے، ڈاکٹر کے معائنے کا متبادل نہیں۔ ہنگامی صورت میں فوراً قریبی ہسپتال جائیں۔</p>
+</div>
+</div>
+</div>
+</article>
+<section class="section section-tint" aria-labelledby="all-videos">
+<div class="wrap">
+${sectionHead(esc(a.title), "اس رہنما کی تمام ویڈیوز", "all-videos", topic ? { href: `/topics/${topic.slug}/`, label: topic.title } : null)}
+${videoGrid(vids)}
+</div>
+</section>`;
+  return page({
+    path,
+    title: a.title,
+    description: a.summary,
+    image: byId.get(a.videoIds[0]).poster,
+    ogType: "article",
+    schema: [
+      ORG,
+      {
+        "@type": "Article",
+        "@id": `${BASE}${path}#article`,
+        headline: a.title,
+        description: a.summary,
+        inLanguage: "ur",
+        datePublished: a.reviewed,
+        dateModified: a.reviewed,
+        wordCount: a.words,
+        image: byId.get(a.videoIds[0]).poster,
+        author: { "@id": `${BASE}/#organization` },
+        publisher: { "@id": `${BASE}/#organization` },
+        mainEntityOfPage: `${BASE}${path}`,
+        citation: a.sources.map(src => src.url),
+        video: vids.map(videoSchema)
+      },
+      breadcrumbSchema(crumbs)
+    ],
+    body
+  });
+}
+
+function articlesIndexPage() {
+  const crumbs = [{ name: "ہوم", path: "/" }, { name: "مکمل رہنما", path: "/guides/" }];
+  return page({
+    path: "/guides/",
+    title: "مکمل رہنما: صحت کے اہم موضوعات تفصیل سے",
+    description: "صحت کے اہم موضوعات پر تفصیلی اردو رہنما، ہر ایک میں مختصر ویڈیوز اور معتبر ذرائع کے حوالے۔",
+    schema: [ORG, breadcrumbSchema(crumbs)],
+    body: `<section class="page-head"><div class="wrap">
+${breadcrumbs(crumbs)}
+<h1>مکمل رہنما</h1>
+<p class="lede">ایک موضوع، پوری بات۔ ہر رہنما میں متعلقہ مختصر ویڈیوز اور معتبر ذرائع کے حوالے شامل ہیں۔</p>
+</div></section>
+<section class="section section-tight"><div class="wrap">${articleCards([...articles.values()])}</div></section>`
+  });
+}
+
 function libraryPage() {
   const filters = [
     `<button type="button" class="chip" data-filter="all" aria-pressed="true">سب</button>`,
@@ -672,6 +829,7 @@ for (const t of healthTopics) {
   const list = t.ids.map(id => byId.get(id)).sort((a, b) => b.published.localeCompare(a.published));
   pages.set(`/topics/${t.slug}/`, collectionPage({
     path: `/topics/${t.slug}/`, title: t.title, description: t.description, kicker: "روزمرہ صحت", list,
+    featured: [...articles.values()].filter(a => a.topic === t.slug),
     crumbs: [{ name: "ہوم", path: "/" }, { name: t.title, path: `/topics/${t.slug}/` }]
   }));
 }
@@ -688,6 +846,10 @@ for (const p of learnPaths) {
     list: p.ids.map(id => byId.get(id)),
     crumbs: [{ name: "ہوم", path: "/" }, { name: "طلبہ کے لیے", path: "/#students" }, { name: p.title, path: `/learn/${p.slug}/` }]
   }));
+}
+if (articles.size) {
+  pages.set("/guides/", articlesIndexPage());
+  for (const a of articles.values()) pages.set(`/guides/${a.slug}/`, articlePage(a));
 }
 pages.set("/videos/", libraryPage());
 for (const v of videos) pages.set(watchPath(v.id), watchPage(v));
@@ -706,6 +868,8 @@ const newest = list => list.map(v => v.published).sort().at(-1).slice(0, 10);
 const lastmod = new Map([["/", newest(videos)], ["/videos/", newest(videos)]]);
 for (const c of [...healthTopics, ...studentTopics]) lastmod.set(`/topics/${c.slug}/`, newest(c.ids.map(id => byId.get(id))));
 for (const p of learnPaths) lastmod.set(`/learn/${p.slug}/`, newest(p.ids.map(id => byId.get(id))));
+for (const a of articles.values()) lastmod.set(`/guides/${a.slug}/`, a.reviewed);
+if (articles.size) lastmod.set("/guides/", [...articles.values()].map(a => a.reviewed).sort().at(-1));
 const xml = s => esc(s);
 const urls = [...pages.keys()].map(path => {
   const v = path.startsWith("/videos/") && path !== "/videos/" ? byId.get(path.split("/")[2]) : null;
@@ -723,5 +887,5 @@ await cp("data/shorts.json", `${OUT}/data/shorts.json`);
 
 const unplaced = health.filter(v => !v.topic);
 if (unplaced.length) console.warn(`build-site: ${unplaced.length} health videos have no topic yet (add them to data/health-topics.json): ${unplaced.map(v => v.id).join(" ")}`);
-console.log(`build-site: ${guides.size} written guides`);
+console.log(`build-site: ${guides.size} written guides, ${articles.size} topic articles`);
 console.log(`build-site: ${pages.size} pages (${videos.length} watch pages) in ${OUT}/`);

@@ -269,6 +269,37 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .guide-sources a { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; font-size: 13px; }
 .guide-sources p { color: var(--muted); }
 
+/* topic articles */
+.article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+.article-card { display: flex; flex-direction: column; height: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: box-shadow .18s ease, border-color .18s ease; }
+.article-card:hover { border-color: var(--brand); box-shadow: var(--shadow); }
+.article-thumbs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--line); aspect-ratio: 16 / 9; overflow: hidden; }
+.article-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.article-text { display: flex; flex-direction: column; gap: 4px; padding: 16px 18px 20px; }
+.article-text strong { font-size: 19px; line-height: 1.9; }
+.article-text > span:last-child { color: var(--muted); font-size: 14px; }
+.article { padding-block: 24px 56px; }
+.article-head { max-width: 780px; }
+.article-head h1 { font-size: clamp(1.8rem, 3.8vw, 2.7rem); margin-block: 4px 6px; }
+.byline { color: var(--muted); font-size: 14px; margin-top: 8px; }
+.article-layout { display: grid; grid-template-columns: 240px minmax(0, 780px); gap: 48px; margin-top: 28px; align-items: start; }
+.toc { position: sticky; top: 88px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; font-size: 14px; }
+.toc h2 { font-size: 15px; margin-bottom: 4px; }
+.toc ol { display: grid; gap: 2px; list-style: decimal; padding-inline-start: 20px; }
+.toc a { color: var(--muted); }
+.toc a:hover { color: var(--brand); }
+.article-body h2 { scroll-margin-top: 90px; }
+.inline-video { display: grid; grid-template-columns: 170px 1fr; gap: 18px; align-items: center; margin: 10px 0; padding: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.inline-video .player, .inline-video iframe { width: 170px; aspect-ratio: 9 / 16; border-radius: 14px; box-shadow: var(--shadow); border: 0; }
+.inline-video .play-btn .icon { width: 52px; height: 52px; padding: 15px; }
+.inline-video figcaption { display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+.inline-video figcaption strong { font-size: 17px; line-height: 1.9; }
+.inline-video figcaption span { color: var(--muted); font-size: 13px; }
+.inline-video figcaption a { display: inline-flex; align-items: center; gap: 6px; color: var(--brand); font-weight: 700; }
+.inline-video figcaption a .icon { width: 16px; height: 16px; }
+.article-backlink { display: flex; align-items: center; gap: 10px; margin-top: 16px; padding: 10px 14px; border-radius: var(--radius-sm); background: var(--brand-soft); color: var(--brand-ink); font-size: 15px; }
+.article-backlink .icon { width: 22px; height: 22px; flex: none; }
+
 /* ---------- library ---------- */
 .library-tools { display: flex; flex-wrap: wrap; gap: 12px; margin-block: 20px 14px; align-items: center; }
 .library-search { position: relative; flex: 1; min-width: 240px; max-width: 560px; }
@@ -305,6 +336,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .header-search { display: none; }
   .site-nav { margin-inline-start: auto; }
 }
+@media (max-width: 1080px) {
+  .article-layout { grid-template-columns: 1fr; gap: 20px; }
+  .toc { position: static; }
+  .article-grid { grid-template-columns: repeat(2, 1fr); }
+}
 @media (max-width: 860px) {
   .hero-inner { grid-template-columns: 1fr; gap: 8px; padding-block: 36px 40px; }
   .hero-stack { height: 300px; order: -1; }
@@ -335,6 +371,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
+  .article-grid { grid-template-columns: 1fr; }
+  .inline-video { grid-template-columns: 120px 1fr; gap: 12px; padding: 10px; }
+  .inline-video .player, .inline-video iframe { width: 120px; }
   .section { padding-block: 44px; }
   .topic-grid { grid-template-columns: 1fr; }
   .vgrid { grid-template-columns: repeat(2, 1fr); gap: 18px 12px; }
