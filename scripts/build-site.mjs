@@ -236,6 +236,12 @@ const ORG = {
   name: SITE,
   url: `${BASE}/`,
   logo: `${BASE}/assets/mastering-essentials-logo-mark.svg`,
+  parentOrganization: {
+    "@type": "Organization",
+    "@id": "https://nusratwaliventures.com/#organization",
+    name: "Nusrat Wali Ventures LLC",
+    url: "https://nusratwaliventures.com/"
+  },
   sameAs: [CHANNEL_URL, ...SOCIAL.map(s => s.url)]
 };
 
