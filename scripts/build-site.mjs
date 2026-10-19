@@ -223,6 +223,7 @@ function page({ path, title, description, image, imageAlt, schema = [], body, og
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script defer src="https://msdrills.com/site-monitoring/vitals.js" data-site-id="masteringessentials"></script>
 <title>${esc(fullTitle)}</title>
 <meta name="description" content="${esc(description)}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
