@@ -251,6 +251,29 @@ const ORG = {
   sameAs: [CHANNEL_URL, ...SOCIAL.map(s => s.url)]
 };
 
+const HOME_FAQ = [
+  {
+    question: "Mastering Essentials کس کے لیے ہے؟",
+    answer: "یہ اردو بولنے والے خاندانوں، طلبہ اور ہیلتھ کیئر سے وابستہ افراد کے لیے ہے۔ یہاں روزمرہ صحت کے مختصر مواد کے ساتھ پبلک ہیلتھ اور ہیلتھ کیئر مینجمنٹ کے تعارفی اسباق بھی موجود ہیں۔"
+  },
+  {
+    question: "کیا یہ طبی مشورہ یا تشخیص فراہم کرتا ہے؟",
+    answer: "نہیں۔ یہ مواد عام تعلیمی معلومات کے لیے ہے اور ڈاکٹر کی تشخیص یا علاج کا متبادل نہیں۔ ہنگامی صورت میں فوراً مقامی ایمرجنسی سروس یا قریبی ہسپتال سے رابطہ کریں۔"
+  },
+  {
+    question: "صحت کی معلومات کن ذرائع پر مبنی ہیں؟",
+    answer: "مواد تیار کرتے وقت عالمی ادارۂ صحت اور سرکاری صحت اداروں جیسے معتبر ذرائع دیکھے جاتے ہیں۔ جہاں دستیاب ہوں، تحریری رہنما میں اصل حوالوں کے روابط بھی دیے جاتے ہیں۔"
+  },
+  {
+    question: "کیا تمام مواد اردو میں ہے؟",
+    answer: "روزمرہ صحت کا بنیادی مواد صاف اور عام فہم اردو میں ہے۔ پبلک ہیلتھ اور ہیلتھ کیئر مینجمنٹ کے بعض پرانے اسباق میں انگریزی اصطلاحات بھی استعمال ہو سکتی ہیں۔"
+  },
+  {
+    question: "میں کسی خاص موضوع کی ویڈیو کیسے تلاش کروں؟",
+    answer: "ہوم پیج یا تمام ویڈیوز کے صفحے پر تلاش استعمال کریں، یا بچوں کی صحت، دوا، غذائیت، گھر کی حفاظت اور عام بیماریوں جیسے موضوعات میں سے انتخاب کریں۔"
+  }
+];
+
 function analytics() {
   const id = config.gaMeasurementId;
   if (!id) return "";
@@ -482,6 +505,15 @@ ${icon("student", "icon icon-lg")}
 </div>
 </section>
 
+<section class="section section-tint" aria-labelledby="faq-title">
+<div class="wrap faq-wrap">
+${sectionHead("عام سوالات", '<span lang="en" dir="ltr">Mastering Essentials</span> کے بارے میں', "faq-title")}
+<div class="faq-list">
+${HOME_FAQ.map(item => `<details><summary>${esc(item.question).replace("Mastering Essentials", '<span lang="en" dir="ltr">Mastering Essentials</span>')}</summary><p>${esc(item.answer)}</p></details>`).join("\n")}
+</div>
+</div>
+</section>
+
 <section class="section section-tint" aria-labelledby="students">
 <div class="wrap">
 ${sectionHead("طلبہ اور پیشہ ور افراد کے لیے", "پبلک ہیلتھ اور ہیلتھ کیئر مینجمنٹ، اردو میں", "students")}
@@ -517,6 +549,15 @@ ${socialLinks("social social-cta")}
           target: { "@type": "EntryPoint", urlTemplate: `${BASE}/videos/?q={search_term_string}` },
           "query-input": "required name=search_term_string"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${BASE}/#faq`,
+        mainEntity: HOME_FAQ.map(item => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer }
+        }))
       }
     ],
     body
