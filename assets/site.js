@@ -1,5 +1,38 @@
 // Mastering Essentials: menu, click-to-load player, library filters, analytics events.
 const track = (name, params = {}) => { if (typeof window.gtag === "function") window.gtag("event", name, params); };
+const conversionEndpoint = "https://msdrills.com/site-monitoring/api/events";
+
+function conversionEventId() {
+  if (typeof crypto.randomUUID === "function") return crypto.randomUUID();
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, char => {
+    const value = crypto.getRandomValues(new Uint8Array(1))[0] & 15;
+    return (char === "x" ? value : (value & 3) | 8).toString(16);
+  });
+}
+
+function trackCentralYouTubeEngagement() {
+  try {
+    const body = JSON.stringify({
+      site_id: "masteringessentials",
+      event_name: "youtube_engagement",
+      event_id: conversionEventId()
+    });
+    const blob = new Blob([body], { type: "text/plain" });
+    if (navigator.sendBeacon?.(conversionEndpoint, blob)) return;
+    void fetch(conversionEndpoint, { method: "POST", body, headers: { "content-type": "text/plain" }, keepalive: true }).catch(() => {});
+  } catch {
+    // Measurement must never interrupt a lesson or outbound action.
+  }
+}
+
+document.addEventListener("click", event => {
+  const anchor = event.target instanceof Element ? event.target.closest("a") : null;
+  if (!anchor) return;
+  try {
+    const url = new URL(anchor.href, location.href);
+    if (["youtube.com", "www.youtube.com", "youtu.be"].includes(url.hostname)) trackCentralYouTubeEngagement();
+  } catch { /* Ignore malformed links. */ }
+});
 
 // Mobile menu
 const toggle = document.querySelector(".menu-toggle");
@@ -29,6 +62,7 @@ document.querySelectorAll(".player[data-video]").forEach(button => {
     button.replaceWith(iframe);
     iframe.focus();
     track("video_play", { video_id: id, video_title: button.dataset.title || "" });
+    trackCentralYouTubeEngagement();
   }, { once: true });
 });
 
