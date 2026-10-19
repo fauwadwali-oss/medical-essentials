@@ -438,7 +438,10 @@ function homePage() {
 <span class="topic-foot"><span class="topic-count">${urduDigits(t.ids.length)} ویڈیوز</span><span class="topic-thumbs">${sample.map(v => `<img src="${thumb(v.id, "default")}" alt="" width="120" height="90" loading="lazy">`).join("")}</span></span>
 </a></li>`;
   }).join("\n");
-  const chips = healthTopics.slice(0, 5).map(t => `<a class="chip" href="/topics/${t.slug}/">${esc(t.title)}</a>`).join("");
+  const chips = [
+    ...healthTopics.slice(0, 4).map(t => `<a class="chip" href="/topics/${t.slug}/">${esc(t.title)}</a>`),
+    `<a class="chip chip-students" href="#students">طلبہ: MPH اور MHA/MBA</a>`
+  ].join("");
 
   const body = `
 <section class="hero">
