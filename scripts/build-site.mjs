@@ -236,6 +236,12 @@ const ORG = {
   name: SITE,
   url: `${BASE}/`,
   logo: `${BASE}/assets/mastering-essentials-logo-mark.svg`,
+  founder: {
+    "@type": "Person",
+    "@id": "https://fauwadahmed.com/#person",
+    name: "Fauwad Ahmed",
+    url: "https://fauwadahmed.com/"
+  },
   parentOrganization: {
     "@type": "Organization",
     "@id": "https://nusratwaliventures.com/#organization",
@@ -464,10 +470,14 @@ ${videoGrid(latest)}
 <div class="wrap">
 ${sectionHead("ہمارا طریقہ", "ہم یہ ویڈیوز کیسے بناتے ہیں", "about")}
 <ul class="promise">
-<li>${icon("shield", "icon icon-lg")}<h3>معتبر ذرائع</h3><p>ہر بات عالمی ادارۂ صحت اور سرکاری صحت اداروں جیسے معتبر ذرائع سے لی جاتی ہے، اور ویڈیو کی تفصیل میں حوالہ دیا جاتا ہے۔</p></li>
+<li>${icon("shield", "icon icon-lg")}<h3>معتبر ذرائع</h3><p>مواد تیار کرتے وقت عالمی ادارۂ صحت اور سرکاری صحت اداروں جیسے معتبر ذرائع دیکھے جاتے ہیں۔ جہاں دستیاب ہوں، حوالے تحریری رہنما یا ویڈیو کی تفصیل میں شامل کیے جاتے ہیں۔</p></li>
 <li>${icon("chat", "icon icon-lg")}<h3>صاف اردو</h3><p>مشکل طبی الفاظ کے بجائے وہ زبان جو گھر میں بولی جاتی ہے، تاکہ ہر عمر کے لوگ سمجھ سکیں۔</p></li>
 <li>${icon("clock", "icon icon-lg")}<h3>ایک منٹ سے کم</h3><p>ایک ویڈیو، ایک بات۔ جو آج ہی گھر میں آزمائی جا سکے۔</p></li>
 </ul>
+<div class="editorial-note">
+${icon("student", "icon icon-lg")}
+<div><p class="kicker">بانی اور ادارتی نگرانی</p><h3>ڈاکٹر فواد احمد</h3><p>طبی، عوامی صحت اور ہیلتھ کیئر آپریشنز کے پس منظر کے ساتھ، صحت کی بات کو صاف اور قابلِ عمل اردو میں پیش کرنے کی کوشش۔</p><a class="more" href="https://fauwadahmed.com/" target="_blank" rel="noopener">تعارف پڑھیں ${icon("arrow")}</a></div>
+</div>
 <p class="disclaimer">${icon("shield")} یہ ویڈیوز عام معلومات کے لیے ہیں۔ علاج یا دوا میں تبدیلی کے لیے ہمیشہ اپنے ڈاکٹر سے مشورہ کریں۔</p>
 </div>
 </section>
@@ -649,7 +659,7 @@ ${videoGrid(related)}
         dateModified: v.guide.reviewed,
         wordCount: v.guide.words,
         image: v.poster,
-        author: { "@id": `${BASE}/#organization` },
+        author: { "@id": "https://fauwadahmed.com/#person" },
         publisher: { "@id": `${BASE}/#organization` },
         mainEntityOfPage: `${BASE}${watchPath(v.id)}`,
         video: { "@id": `${BASE}${watchPath(v.id)}#video` },
@@ -709,7 +719,7 @@ ${breadcrumbs(crumbs)}
 <p class="kicker">مکمل رہنما · ${urduDigits(minutes)} منٹ مطالعہ · ${urduDigits(vids.length)} ویڈیوز</p>
 <h1>${esc(a.title)}</h1>
 <p class="lede">${esc(a.summary)}</p>
-<p class="byline"><span lang="en" dir="ltr">Mastering Essentials</span> · آخری نظرِ ثانی: <time datetime="${esc(a.reviewed)}">${urduDate(a.reviewed)}</time></p>
+<p class="byline"><a href="https://fauwadahmed.com/">فواد احمد</a> · <span lang="en" dir="ltr">Mastering Essentials</span> · آخری نظرِ ثانی: <time datetime="${esc(a.reviewed)}">${urduDate(a.reviewed)}</time></p>
 </header>
 <div class="article-layout">
 <nav class="toc" aria-labelledby="toc-title"><h2 id="toc-title">اس رہنما میں</h2><ol>${toc.map(([, id, text]) => `<li><a href="#${id}">${text}</a></li>`).join("")}</ol></nav>
@@ -748,7 +758,7 @@ ${videoGrid(vids)}
         dateModified: a.reviewed,
         wordCount: a.words,
         image: byId.get(a.videoIds[0]).poster,
-        author: { "@id": `${BASE}/#organization` },
+        author: { "@id": "https://fauwadahmed.com/#person" },
         publisher: { "@id": `${BASE}/#organization` },
         mainEntityOfPage: `${BASE}${path}`,
         citation: a.sources.map(src => src.url),

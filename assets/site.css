@@ -189,6 +189,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .promise .icon { color: var(--brand); margin-bottom: 8px; }
 .promise h3 { font-size: 19px; }
 .promise p { color: var(--muted); font-size: 15px; }
+.editorial-note { display: flex; gap: 16px; align-items: flex-start; margin-top: 20px; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.editorial-note > .icon { width: 32px; height: 32px; margin-top: 4px; color: var(--brand); }
+.editorial-note h3 { font-size: 20px; }
+.editorial-note p:not(.kicker) { color: var(--muted); font-size: 15px; }
+.editorial-note .more { margin-top: 6px; font-weight: 700; }
 .disclaimer { display: flex; gap: 10px; align-items: flex-start; margin-top: 20px; padding: 12px 16px; border-radius: var(--radius-sm); background: var(--accent-soft); color: #6d3c08; font-size: 14px; }
 .disclaimer .icon { margin-top: 0.55em; }
 
