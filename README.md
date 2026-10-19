@@ -1,80 +1,59 @@
 # Mastering Essentials
 
-Mastering Essentials is a public-facing education website for public health, healthcare administration, and practical life topics.
+Urdu-first website for the [@MasteringEssentials](https://www.youtube.com/channel/UC8Ux9uG3hYIjKdym7mD-8GA) YouTube channel: short, practical everyday-health videos for families, plus the earlier public-health and healthcare-management lessons for students.
 
-Domain: https://masteringessentials.com
+Live at https://www.masteringessentials.com (Cloudflare Pages).
 
-## Purpose
+## How it works
 
-This repository is the starter home for the Mastering Essentials website. The first version is a lightweight static site that can be published with GitHub Pages while the brand, content categories, and publishing workflow are still being shaped.
+A static site with no database and no runtime costs. Everything is generated from JSON in `data/`:
 
-## Editorial Direction
+| File | What it holds | Maintained by |
+| --- | --- | --- |
+| `data/shorts.json` | Every public video: id, title, track, format, date, duration | `scripts/refresh-catalog.mjs` |
+| `data/video-meta.json` | Description, views, date, duration per video | `scripts/refresh-catalog.mjs` |
+| `data/health-topics.json` | Everyday-health topics and which videos belong to each | by hand |
+| `data/learning.json` | Student topics (MPH, MHA/MBA) and the two ordered starter paths | by hand |
+| `data/category-review.json` | Reviewed track (HEALTH / MPH / MHA_MBA) for older videos | by hand |
+| `site.config.json` | `gaMeasurementId` for Google Analytics 4 (empty = no analytics) | by hand |
 
-Mastering Essentials is for common public readers, not only students or healthcare professionals. The site should use simple, practical language and focus on:
+`scripts/build-site.mjs` turns that into `dist/`:
 
-- public health topics such as prevention, outbreaks, policy, data, and community health
-- healthcare administration topics such as hospitals, insurance, access, quality, cost, and leadership
-- life topics such as habits, family health, work, stress, decision-making, and daily wellbeing
+- `/` home: search, topic cards, most-watched, latest, student section
+- `/topics/<slug>/` one page per topic
+- `/learn/mph/`, `/learn/mhamba/` ordered starter paths
+- `/videos/` searchable, filterable library of every video
+- `/videos/<id>/` a watch page per video, with the description, related videos and `VideoObject` structured data
+- `sitemap.xml` (with Google video extension), `_redirects` for old URLs, `404.html`
 
-## Local Preview
+`scripts/validate-site.py` checks the build (links, one H1 per page, canonicals, JSON-LD, sitemap coverage).
 
-Open `index.html` in a browser.
-
-## Shorts Source
-
-The homepage Shorts grid is sourced directly from the `@MasteringEssentials` YouTube channel via the YouTube Data API v3. Shorts metadata is committed to `data/shorts.json` and served as a static asset.
-
-- Channel ID: `UC8Ux9uG3hYIjKdym7mD-8GA`
-- Channel: https://www.youtube.com/@MasteringEssentials
-- Filter: videos with duration ≤ 180 seconds (Shorts threshold)
-- Sort: most recently published first
-
-To refresh after posting new Shorts, run the **Refresh Mastering Essentials shorts** workflow manually from the GitHub Actions tab (`workflow_dispatch`). The workflow runs `scripts/fetch-youtube-shorts.mjs`, regenerates `data/shorts.json`, and auto-commits changes.
-
-Required GitHub secret:
-
-```text
-YOUTUBE_API_KEY
-```
-
-To run locally:
+## Local preview
 
 ```bash
-YOUTUBE_API_KEY=... node scripts/fetch-youtube-shorts.mjs
+node scripts/build-site.mjs && python3 scripts/validate-site.py
 ```
 
-## GitHub Pages Setup
-
-This repo includes a `CNAME` file for:
-
-```text
-masteringessentials.com
+```bash
+python3 -m http.server 8799 --directory dist
 ```
 
-After GitHub Pages is enabled, point the domain DNS to GitHub Pages:
+## Keeping the video library current
 
-```text
-www CNAME fauwadwali-oss.github.io
-```
+`.github/workflows/refresh-shorts.yml` runs daily (and on demand). It calls the YouTube Data API, rewrites the two catalog files, commits if anything changed, and redeploys. It costs nothing: about 10 quota units per run against the free 10,000/day.
 
-For the apex domain, add GitHub Pages A records if you want `masteringessentials.com` to redirect or resolve alongside `www.masteringessentials.com`.
+It needs either `YOUTUBE_API_KEY`, or the OAuth trio `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`, as GitHub secrets.
 
-## Cloudflare Pages Deployment
+New uploads default to the HEALTH track and appear in "latest" and the library immediately. To put a new video on a topic page, add its id to the right topic in `data/health-topics.json`. The build prints any health videos that have no topic yet.
 
-Cloudflare Pages is the preferred production host for `masteringessentials.com`.
+## Deployment
 
-The repo includes `.github/workflows/deploy-cloudflare-pages.yml`, which:
+Every push to `main` runs `.github/workflows/deploy-cloudflare-pages.yml`: build, validate, `wrangler pages deploy dist` to the `medical-essentials` project, and attach `masteringessentials.com` + `www.masteringessentials.com`.
 
-- builds a clean `dist/` folder from the public site files
-- creates the Cloudflare Pages project `medical-essentials` if needed
-- deploys `dist/` to Cloudflare Pages
-- attaches `masteringessentials.com` and `www.masteringessentials.com`
+Required secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
 
-Required GitHub secrets:
+The canonical host is `www.masteringessentials.com`. The bare domain should 301 to it with a Cloudflare Redirect Rule (Pages `_redirects` cannot redirect by hostname).
 
-```text
-CLOUDFLARE_API_TOKEN
-CLOUDFLARE_ACCOUNT_ID
-```
+## Analytics
 
-The API token needs permission to manage Cloudflare Pages projects and Pages custom domains for the account that owns the `masteringessentials.com` zone.
+Put the GA4 measurement ID (`G-XXXXXXX`) in `site.config.json`. The site then sends page views plus `video_play`, `search`, `select_content` (library filters) and `subscribe_click` events.

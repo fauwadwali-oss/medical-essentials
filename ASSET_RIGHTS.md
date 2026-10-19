@@ -1,13 +1,9 @@
 # Asset Rights
 
-This site should use only controlled Mastering Essentials assets:
+Images used on the site:
 
-- `assets/hero-learning.png`
-- `assets/mph-track.png`
-- `assets/mhamba-track.png`
-- `assets/mastering-essentials-logo-mark.svg`
-- `assets/favicon.svg`
-
-The homepage does not embed third-party stock photos or remote YouTube thumbnail images. YouTube Shorts links may open YouTube, but the cards are rendered with site-owned visual styling.
+- `assets/mastering-essentials-logo-mark.svg`, `assets/favicon.svg`, `assets/apple-touch-icon.png`: Mastering Essentials brand marks.
+- `assets/og-default.jpg`: social share image, built from the logo and thumbnails of the channel's own videos.
+- Video thumbnails loaded from `i.ytimg.com`: thumbnails of videos published by the Mastering Essentials channel itself.
 
 Do not add web-scraped, stock, or third-party images unless a license is documented in this file before deployment.

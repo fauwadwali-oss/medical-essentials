@@ -1,7 +1,12 @@
 name: Refresh Mastering Essentials shorts
 
+# Pulls the channel's public uploads (titles, dates, durations, descriptions) into
+# data/, commits any change, then redeploys. Commits made with GITHUB_TOKEN don't
+# trigger other workflows, so the deploy is called directly.
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
 
 permissions:
   contents: write
@@ -9,30 +14,43 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "22"
 
-      - name: Fetch shorts from YouTube Data API
+      - name: Fetch channel catalog from YouTube Data API
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-          CHANNEL_ID: UC8Ux9uG3hYIjKdym7mD-8GA
-          OUTPUT_PATH: data/shorts.json
-        run: node scripts/fetch-youtube-shorts.mjs
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: node scripts/refresh-catalog.mjs
 
-      - name: Commit updated shorts
+      - name: Check the site still builds
+        run: node scripts/build-site.mjs && python3 scripts/validate-site.py
+
+      - name: Commit updated catalog
+        id: commit
         run: |
-          if git diff --quiet -- data/shorts.json; then
-            echo "No shorts changes to commit."
+          if git diff --quiet -- data/; then
+            echo "No catalog changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/shorts.json
-          git commit -m "Refresh Mastering Essentials shorts"
+          git add data/shorts.json data/video-meta.json
+          git commit -m "Refresh Mastering Essentials catalog"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: refresh
+    if: needs.refresh.outputs.changed == 'true'
+    uses: ./.github/workflows/deploy-cloudflare-pages.yml
+    secrets: inherit

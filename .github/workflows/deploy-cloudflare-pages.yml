@@ -2,6 +2,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   workflow_dispatch:
+  workflow_call:
   push:
     branches:
       - main
@@ -29,6 +30,8 @@ jobs:
       - name: Check out repository
         if: steps.cloudflare.outputs.configured == 'true'
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Node
         if: steps.cloudflare.outputs.configured == 'true'
@@ -39,6 +42,10 @@ jobs:
       - name: Build static site
         if: steps.cloudflare.outputs.configured == 'true'
         run: node scripts/build-site.mjs
+
+      - name: Validate build
+        if: steps.cloudflare.outputs.configured == 'true'
+        run: python3 scripts/validate-site.py
 
       - name: Create Cloudflare Pages project if needed
         if: steps.cloudflare.outputs.configured == 'true'

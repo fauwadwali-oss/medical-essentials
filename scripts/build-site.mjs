@@ -1,139 +1,629 @@
-import { cp, mkdir, copyFile, rm, readFile, writeFile } from "node:fs/promises";
+// Builds the static site into dist/ from data/*.json. No dependencies, no database:
+// the catalog lives in git and scripts/refresh-catalog.mjs keeps it current.
+//
+//   /                     home
+//   /topics/<slug>/       everyday-health topics + student track topics
+//   /learn/<slug>/        ordered starter paths (MPH, MHA/MBA)
+//   /videos/              searchable library of every video
+//   /videos/<id>/         one watch page per video (VideoObject structured data)
+import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 
-const outputDir = "dist";
-const files = [
-  "index.html",
-  "styles.css",
-  "app.js",
-  "CNAME",
-  "_headers",
-  "robots.txt",
-  "sitemap.xml"
-];
+const OUT = "dist";
+const BASE = "https://www.masteringessentials.com";
+const CHANNEL_ID = "UC8Ux9uG3hYIjKdym7mD-8GA";
+const CHANNEL_URL = `https://www.youtube.com/channel/${CHANNEL_ID}`;
+const SUBSCRIBE_URL = `${CHANNEL_URL}?sub_confirmation=1`;
+const SITE = "Mastering Essentials";
 
-// --- Homepage video card pre-rendering (mirrors app.js so no-JS visitors and
-// crawlers get real, linked, thumbnailed cards; app.js re-renders identically). ---
+const readJson = async path => JSON.parse(await readFile(path, "utf8"));
+const config = await readJson("site.config.json");
+const { shorts } = await readJson("data/shorts.json");
+const meta = await readJson("data/video-meta.json");
+const healthTopics = await readJson("data/health-topics.json");
+const learning = await readJson("data/learning.json");
 
-const URDU_RANGE = /[؀-ۿݐ-ݿ]/;
-const MHAMBA_HINTS = [
-  "mha", "mba", "mhamba", "cphq", "healthcare", "hospital", "leadership",
-  "quality", "admin", "management", "finance", "accounting", "cost",
-  "insurance", "policy"
-];
+// ---------- helpers ----------
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+const esc = value => String(value ?? "")
+  .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+const urduDigits = value => String(value).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+const MONTHS = ["جنوری", "فروری", "مارچ", "اپریل", "مئی", "جون", "جولائی", "اگست", "ستمبر", "اکتوبر", "نومبر", "دسمبر"];
+const urduDate = iso => {
+  const d = new Date(iso);
+  return `${urduDigits(d.getUTCDate())} ${MONTHS[d.getUTCMonth()]} ${urduDigits(d.getUTCFullYear())}`;
+};
+const clock = secs => `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`;
+const isoDuration = secs => `PT${Math.floor(secs / 60) ? `${Math.floor(secs / 60)}M` : ""}${secs % 60}S`;
+const THUMB_FILE = { maxres: "maxresdefault", standard: "sddefault", high: "hqdefault" };
+const thumb = (id, size = "hqdefault") => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/${size}.jpg`;
+const watchPath = id => `/videos/${id}/`;
+const truncate = (text, max) => text.length <= max ? text : `${text.slice(0, max - 1).replace(/\s+\S*$/, "")}…`;
+const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
 
-function leadsWithUrdu(title) {
-  for (const char of title.trim()) {
-    if (URDU_RANGE.test(char)) return true;
-    if (/[A-Za-z]/.test(char)) return false;
+// Some early uploads have the description glued onto the title. Keep the first sentence.
+function cleanTitle(raw) {
+  const title = String(raw).replace(/#\S+/g, "").trim();
+  for (let i = 0; i < title.length - 1; i++) {
+    if (".؟?".includes(title[i]) && !/\s/.test(title[i + 1])) return title.slice(0, i + 1).trim();
   }
-  return false;
+  return title;
 }
 
-function classifyTrack(title) {
-  const normalized = title.toLowerCase();
-  return MHAMBA_HINTS.some((hint) => normalized.includes(hint)) ? "mhamba" : "mph";
-}
-
-function normalizeTrack(short, title) {
-  if (short.track === "HEALTH") return "health";
-  if (short.track === "MHA_MBA" || short.track === "mhamba") return "mhamba";
-  if (short.track === "MPH" || short.track === "mph") return "mph";
-  return classifyTrack(title);
-}
-
-function homepageShorts(shorts, filter = "all") {
-  return shorts.map(short => ({...short, homepageTrack: normalizeTrack(short, short.title || "")}))
-    .filter(short => filter === "all" || short.homepageTrack === filter).slice(0, 8);
-}
-
-function renderCard(short) {
-  const title = short.title || "Mastering Essentials کی اردو ویڈیو";
-  const track = short.homepageTrack || normalizeTrack(short, title);
-  const trackLabel = track === "health" ? "صحت" : track === "mhamba" ? "MHA/MBA" : "MPH";
-  const safeTitle = escapeHtml(title);
-  const rawId = short.youtube_id || "";
-  const youtubeId = encodeURIComponent(rawId);
-  const url = short.url || `https://www.youtube.com/shorts/${youtubeId}`;
-  const thumb = rawId ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg` : "";
-  const titleLang = ' lang="ur" dir="auto"';
-  const thumbImg = thumb
-    ? `<img src="${escapeHtml(thumb)}" alt="" loading="lazy" decoding="async" width="480" height="360" onerror="this.remove()" />`
-    : "";
-  const desc = track === "health" ? "روزمرہ صحت کے بارے میں اردو ویڈیو۔" : track === "mhamba"
-    ? "ہیلتھ کیئر مینجمنٹ، فنانس، accounting اور leadership آسان اردو میں۔"
-    : "عوامی صحت، بچاؤ، policy اور health systems آسان اردو میں۔";
-
-  return `          <article class="video-card" data-track="${track}">
-            <a href="${escapeHtml(url)}" target="_blank" rel="noreferrer" aria-label="${safeTitle}">
-              <div class="thumb ${track === "mhamba" ? "thumb-gold" : "thumb-teal"}">
-                ${thumbImg}
-                <span>${trackLabel}</span>
-                <small lang="ur" dir="rtl">دیکھیں</small>
-              </div>
-              <h3${titleLang}>${safeTitle}</h3>
-              <p lang="ur" dir="rtl">${desc}</p>
-            </a>
-          </article>`;
-}
-
-async function renderVideoGrid(html) {
-  let shorts = [];
-  try {
-    const payload = JSON.parse(await readFile("data/shorts.json", "utf8"));
-    if (Array.isArray(payload.shorts)) shorts = payload.shorts;
-  } catch (error) {
-    console.warn("build-site: could not read data/shorts.json, leaving placeholder cards.", error.message);
-    return html;
-  }
-  if (!shorts.length) return html;
-
-  const selected = homepageShorts(shorts);
-  const cards = selected.map(renderCard).join("\n");
-  const pattern = /(<div class="video-grid" id="video-grid">)[\s\S]*?(<\/div>\s*<\/section>)/;
-  if (!pattern.test(html)) {
-    console.warn("build-site: video-grid marker not found; skipping pre-render.");
-    return html;
-  }
-  console.log(`build-site: pre-rendered ${selected.length} homepage video cards.`);
-  return html.replace(pattern, `$1\n${cards}\n        $2`);
-}
-
-await rm(outputDir, { recursive: true, force: true });
-await mkdir(`${outputDir}/data`, { recursive: true });
-await cp("assets", `${outputDir}/assets`, { recursive: true });
-
-for (const file of files) {
-  if (file === "index.html") {
-    let html = await readFile("index.html", "utf8");
-    const catalog = JSON.parse(await readFile("data/shorts.json", "utf8"));
-    const collections = JSON.parse(await readFile("data/learning.json", "utf8"));
-    const count = String(catalog.shorts.length).replace(/\d/g, digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]);
-    html = html.replace(/تمام [۰-۹0-9]+ ویڈیوز تلاش کریں/, `تمام ${count} ویڈیوز تلاش کریں`);
-    for (const collection of collections.filter(c => c.kind === "topics")) {
-      const start = html.indexOf(`href="topics/${collection.slug}.html"`);
-      if (start < 0) throw new Error(`Missing topic link: ${collection.slug}`);
-      const spanStart = html.indexOf("<span>", start) + 6;
-      const spanEnd = html.indexOf("</span>", spanStart);
-      html = html.slice(0, spanStart) + `${collection.ids.length} ویڈیوز` + html.slice(spanEnd);
+// Description → paragraphs and bullet lists, minus hashtags and follow prompts.
+function descriptionBlocks(text) {
+  return String(text).split(/\n\s*\n/).map(block => block.trim()).filter(block =>
+    block && !/^(#\S+\s*)+$/.test(block) && !/فالو کریں|subscribe/i.test(block)
+  ).map(block => {
+    const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
+    if (lines.every(line => /^[•\-–]/.test(line))) {
+      return { list: lines.map(line => line.replace(/^[•\-–]\s*/, "")) };
     }
-    await writeFile(`${outputDir}/index.html`, await renderVideoGrid(html));
-  } else {
-    await copyFile(file, `${outputDir}/${file}`);
-  }
+    return { text: lines.join(" ").replace(/\s*#\S+/g, "").trim() };
+  }).filter(block => block.list || block.text);
+}
+const plainSummary = blocks => blocks.map(b => b.text || b.list.join("، ")).join(" ");
+
+// ---------- the catalog ----------
+
+const studentTopics = learning.filter(c => c.kind === "topics" && c.slug !== "everyday-health");
+const learnPaths = learning.filter(c => c.kind === "learn");
+const topicOf = new Map();
+for (const topic of healthTopics) for (const id of topic.ids) topicOf.set(id, topic);
+for (const topic of studentTopics) for (const id of topic.ids) if (!topicOf.has(id)) topicOf.set(id, topic);
+
+const videos = shorts.map(v => {
+  const m = meta[v.youtube_id];
+  if (!m) throw new Error(`No metadata for ${v.youtube_id}; run scripts/refresh-catalog.mjs`);
+  const blocks = descriptionBlocks(m.description);
+  const title = cleanTitle(v.title);
+  return {
+    id: v.youtube_id,
+    title,
+    youtubeUrl: v.url,
+    track: v.track,
+    format: v.format,
+    vertical: m.vertical !== false,
+    poster: thumb(v.youtube_id, THUMB_FILE[m.thumbnail] || "hqdefault"),
+    published: m.published_at,
+    seconds: m.duration_seconds,
+    views: m.views,
+    blocks,
+    summary: truncate(plainSummary(blocks) || title, 155),
+    topic: topicOf.get(v.youtube_id) || null
+  };
+}).sort((a, b) => b.published.localeCompare(a.published));
+const byId = new Map(videos.map(v => [v.id, v]));
+const health = videos.filter(v => v.track === "HEALTH");
+const popular = [...health].sort((a, b) => b.views - a.views);
+
+for (const c of [...healthTopics, ...learning]) {
+  for (const id of c.ids) if (!byId.has(id)) throw new Error(`${c.slug} lists unknown video ${id}`);
 }
 
-await copyFile("data/shorts.json", `${outputDir}/data/shorts.json`);
+const assetVersion = createHash("sha1")
+  .update(await readFile("assets/site.css")).update(await readFile("assets/site.js"))
+  .digest("hex").slice(0, 10);
 
-console.log(`Built static site in ${outputDir}`);
+// ---------- icons (lucide, MIT) ----------
 
-await import("./build-learning.mjs");
-await import("./build-library.mjs");
+const ICONS = {
+  children: '<path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/>',
+  medicines: '<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/>',
+  food: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  "home-safety": '<path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 10v6"/><path d="M9 13h6"/>',
+  conditions: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/>',
+  "body-habits": '<path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/>',
+  "air-water-heat": '<path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/>',
+  "health-sense": '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  student: '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
+  shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  arrow: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  play: '<path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5Z" fill="currentColor" stroke="none"/>',
+  youtube: '<path fill="currentColor" stroke="none" d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5a3 3 0 0 0-2.1 2.1A31.2 31.2 0 0 0 2 12a31.2 31.2 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 22 12a31.2 31.2 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/>'
+};
+const icon = (name, cls = "icon") =>
+  `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ICONS.student}</svg>`;
+
+// ---------- layout ----------
+
+const ORG = {
+  "@type": "Organization",
+  "@id": `${BASE}/#organization`,
+  name: SITE,
+  url: `${BASE}/`,
+  logo: `${BASE}/assets/mastering-essentials-logo-mark.svg`,
+  sameAs: [CHANNEL_URL]
+};
+
+function analytics() {
+  const id = config.gaMeasurementId;
+  if (!id) return "";
+  return `<script async src="https://www.googletagmanager.com/gtag/js?id=${esc(id)}"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config",${JSON.stringify(id)});</script>`;
+}
+
+function page({ path, title, description, image, imageAlt, schema = [], body, ogType = "website" }) {
+  const url = `${BASE}${path}`;
+  const fullTitle = path === "/" ? title : `${title} | ${SITE}`;
+  const img = image || `${BASE}/assets/og-default.jpg`;
+  return `<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(fullTitle)}</title>
+<meta name="description" content="${esc(description)}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#00696d">
+<link rel="canonical" href="${url}">
+<link rel="alternate" hreflang="ur" href="${url}">
+<link rel="alternate" hreflang="x-default" href="${url}">
+<meta property="og:type" content="${ogType}">
+<meta property="og:site_name" content="${SITE}">
+<meta property="og:locale" content="ur_PK">
+<meta property="og:url" content="${url}">
+<meta property="og:title" content="${esc(fullTitle)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:image" content="${esc(img)}">
+<meta property="og:image:alt" content="${esc(imageAlt || title)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(fullTitle)}">
+<meta name="twitter:description" content="${esc(description)}">
+<meta name="twitter:image" content="${esc(img)}">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://i.ytimg.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Inter:wght@500;700&display=swap">
+<link rel="stylesheet" href="/assets/site.css?v=${assetVersion}">
+${analytics()}
+${schema.length ? jsonLd({ "@context": "https://schema.org", "@graph": schema }) : ""}
+</head>
+<body>
+<a class="skip-link" href="#main">مرکزی مواد پر جائیں</a>
+${header(path)}
+<main id="main">
+${body}
+</main>
+${footer()}
+<script src="/assets/site.js?v=${assetVersion}" defer></script>
+</body>
+</html>
+`;
+}
+
+function header(path) {
+  const link = (href, label) =>
+    `<a href="${href}"${path === href || (href !== "/" && path.startsWith(href)) ? ' aria-current="page"' : ""}>${label}</a>`;
+  return `<header class="site-header">
+<div class="wrap header-inner">
+<a class="brand" href="/" aria-label="${SITE}، ہوم">
+<img src="/assets/mastering-essentials-logo-mark.svg" alt="" width="40" height="40">
+<span class="brand-name" lang="en" dir="ltr">Mastering<br>Essentials</span>
+</a>
+<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span><span class="sr-only">مینو</span></button>
+<nav class="site-nav" id="site-nav" aria-label="مرکزی">
+${link("/#topics", "موضوعات")}
+${link("/videos/", "تمام ویڈیوز")}
+${link("/#students", "طلبہ کے لیے")}
+${link("/#about", "ہمارے بارے میں")}
+</nav>
+<form class="header-search" action="/videos/" role="search">
+<label class="sr-only" for="header-q">ویڈیو تلاش کریں</label>
+<input id="header-q" name="q" type="search" placeholder="تلاش کریں…" autocomplete="off">
+<button type="submit" aria-label="تلاش">${icon("search")}</button>
+</form>
+<a class="subscribe" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")}<span>سبسکرائب</span></a>
+</div>
+</header>`;
+}
+
+function footer() {
+  const year = urduDigits(new Date().getUTCFullYear());
+  return `<footer class="site-footer">
+<div class="wrap footer-inner">
+<div class="footer-brand">
+<strong lang="en" dir="ltr">Mastering Essentials</strong>
+<p>روزمرہ صحت کی آسان اور قابلِ اعتماد باتیں، اردو میں۔</p>
+</div>
+<nav aria-label="موضوعات">
+<h2>موضوعات</h2>
+<ul>${healthTopics.map(t => `<li><a href="/topics/${t.slug}/">${esc(t.title)}</a></li>`).join("")}</ul>
+</nav>
+<nav aria-label="مزید">
+<h2>مزید</h2>
+<ul>
+<li><a href="/videos/">تمام ویڈیوز</a></li>
+<li><a href="/learn/mph/">پبلک ہیلتھ: آغاز</a></li>
+<li><a href="/learn/mhamba/">ہیلتھ کیئر مینجمنٹ: آغاز</a></li>
+<li><a href="${CHANNEL_URL}" target="_blank" rel="noopener">یوٹیوب چینل</a></li>
+</ul>
+</nav>
+</div>
+<div class="wrap footer-note">
+<p>${icon("shield")} یہ ویڈیوز عام معلومات کے لیے ہیں، ڈاکٹر کے مشورے کا متبادل نہیں۔ ہنگامی صورت میں فوراً قریبی ہسپتال جائیں۔</p>
+<p>© ${year} <span lang="en" dir="ltr">Mastering Essentials</span></p>
+</div>
+</footer>`;
+}
+
+// ---------- components ----------
+
+function videoCard(v, { eager = false, showTopic = false } = {}) {
+  return `<li class="vcard${v.vertical ? "" : " vcard-wide"}" data-title="${esc(v.title)}" data-topic="${esc(v.topic?.slug || "")}" data-track="${esc(v.track)}">
+<a href="${watchPath(v.id)}">
+<span class="vthumb"><img src="${thumb(v.id)}" alt="" width="480" height="360" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"><span class="vdur" dir="ltr">${clock(v.seconds)}</span></span>
+<span class="vtitle" dir="auto">${esc(v.title)}</span>
+${showTopic && v.topic ? `<span class="vtopic">${esc(v.topic.title)}</span>` : ""}
+</a>
+</li>`;
+}
+const videoGrid = (list, opts) => `<ul class="vgrid">${list.map(v => videoCard(v, opts)).join("\n")}</ul>`;
+const videoRail = (list, label) => `<ul class="vrail" aria-label="${esc(label)}">${list.map(v => videoCard(v)).join("\n")}</ul>`;
+
+function sectionHead(kicker, title, id, more) {
+  return `<div class="section-head">
+<div><p class="kicker">${kicker}</p><h2 id="${id}">${title}</h2></div>
+${more ? `<a class="more" href="${more.href}">${more.label} ${icon("arrow")}</a>` : ""}
+</div>`;
+}
+
+function breadcrumbs(items) {
+  return `<nav class="crumbs" aria-label="آپ یہاں ہیں"><ol>${items.map((item, i) =>
+    i === items.length - 1
+      ? `<li aria-current="page">${esc(item.name)}</li>`
+      : `<li><a href="${item.path}">${esc(item.name)}</a></li>`).join("")}</ol></nav>`;
+}
+const breadcrumbSchema = items => ({
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, i) => ({ "@type": "ListItem", position: i + 1, name: item.name, item: `${BASE}${item.path}` }))
+});
+
+// ---------- pages ----------
+
+const pages = new Map();
+
+function homePage() {
+  const hero = popular.slice(0, 3);
+  const latest = health.slice(0, 10);
+  const topicCards = healthTopics.map(t => {
+    const sample = [...t.ids].map(id => byId.get(id)).sort((a, b) => b.views - a.views).slice(0, 3);
+    return `<li><a class="topic-card topic-${t.slug}" href="/topics/${t.slug}/">
+<span class="topic-icon">${icon(t.slug)}</span>
+<span class="topic-text"><strong>${esc(t.title)}</strong><span>${esc(t.description)}</span></span>
+<span class="topic-foot"><span class="topic-count">${urduDigits(t.ids.length)} ویڈیوز</span><span class="topic-thumbs">${sample.map(v => `<img src="${thumb(v.id, "default")}" alt="" width="120" height="90" loading="lazy">`).join("")}</span></span>
+</a></li>`;
+  }).join("\n");
+  const chips = healthTopics.slice(0, 5).map(t => `<a class="chip" href="/topics/${t.slug}/">${esc(t.title)}</a>`).join("");
+
+  const body = `
+<section class="hero">
+<div class="wrap hero-inner">
+<div class="hero-copy">
+<p class="kicker">ایک منٹ، ایک کام کی بات</p>
+<h1>صحت کی آسان باتیں، اپنی زبان میں</h1>
+<p class="lede">بچوں کی دیکھ بھال، دوا کا درست استعمال، کھانا، گھر کی حفاظت اور عام بیماریاں۔ ہر سوال کا مختصر اور معتبر جواب، صاف اردو میں۔</p>
+<form class="hero-search" action="/videos/" role="search">
+<label class="sr-only" for="hero-q">کس بارے میں جاننا چاہتے ہیں؟</label>
+${icon("search")}
+<input id="hero-q" name="q" type="search" placeholder="مثلاً: بخار، شوگر، ڈینگی…" autocomplete="off">
+<button type="submit">تلاش کریں</button>
+</form>
+<div class="chips" aria-label="مقبول موضوعات">${chips}</div>
+</div>
+<div class="hero-stack" aria-hidden="true">
+${hero.map((v, i) => `<a class="stack-card stack-${i + 1}" href="${watchPath(v.id)}" tabindex="-1"><img src="${thumb(v.id)}" alt="" width="480" height="360"${i === 0 ? ' fetchpriority="high"' : ""}><span class="stack-play">${icon("play")}</span></a>`).join("")}
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="topics">
+<div class="wrap">
+${sectionHead("موضوع کے لحاظ سے", "آپ کس بارے میں جاننا چاہتے ہیں؟", "topics")}
+<ul class="topic-grid">${topicCards}</ul>
+</div>
+</section>
+
+<section class="section section-tint" aria-labelledby="popular">
+<div class="wrap">
+${sectionHead("ناظرین کی پسند", "سب سے زیادہ دیکھی گئی ویڈیوز", "popular", { href: "/videos/?sort=popular", label: "سب دیکھیں" })}
+${videoRail(popular.slice(0, 12), "سب سے زیادہ دیکھی گئی ویڈیوز")}
+</div>
+</section>
+
+<section class="section" aria-labelledby="latest">
+<div class="wrap">
+${sectionHead("ہر ہفتے نئی ویڈیوز", "تازہ ترین", "latest", { href: "/videos/", label: `تمام ${urduDigits(videos.length)} ویڈیوز` })}
+${videoGrid(latest)}
+</div>
+</section>
+
+<section class="section" aria-labelledby="about">
+<div class="wrap">
+${sectionHead("ہمارا طریقہ", "ہم یہ ویڈیوز کیسے بناتے ہیں", "about")}
+<ul class="promise">
+<li>${icon("shield", "icon icon-lg")}<h3>معتبر ذرائع</h3><p>ہر بات عالمی ادارۂ صحت اور سرکاری صحت اداروں جیسے معتبر ذرائع سے لی جاتی ہے، اور ویڈیو کی تفصیل میں حوالہ دیا جاتا ہے۔</p></li>
+<li>${icon("chat", "icon icon-lg")}<h3>صاف اردو</h3><p>مشکل طبی الفاظ کے بجائے وہ زبان جو گھر میں بولی جاتی ہے، تاکہ ہر عمر کے لوگ سمجھ سکیں۔</p></li>
+<li>${icon("clock", "icon icon-lg")}<h3>ایک منٹ سے کم</h3><p>ایک ویڈیو، ایک بات۔ جو آج ہی گھر میں آزمائی جا سکے۔</p></li>
+</ul>
+<p class="disclaimer">${icon("shield")} یہ ویڈیوز عام معلومات کے لیے ہیں۔ علاج یا دوا میں تبدیلی کے لیے ہمیشہ اپنے ڈاکٹر سے مشورہ کریں۔</p>
+</div>
+</section>
+
+<section class="section section-tint" aria-labelledby="students">
+<div class="wrap">
+${sectionHead("طلبہ اور پیشہ ور افراد کے لیے", "پبلک ہیلتھ اور ہیلتھ کیئر مینجمنٹ، اردو میں", "students")}
+<div class="paths">
+${learnPaths.map(p => `<a class="path-card" href="/learn/${p.slug}/">${icon("student", "icon icon-lg")}<strong>${esc(p.title)}</strong><span>${esc(p.description)}</span><span class="more">آغاز کریں ${icon("arrow")}</span></a>`).join("\n")}
+</div>
+<div class="chips chips-center">${studentTopics.map(t => `<a class="chip" href="/topics/${t.slug}/">${esc(t.title)} <small>${urduDigits(t.ids.length)}</small></a>`).join("")}</div>
+</div>
+</section>
+
+<section class="cta">
+<div class="wrap cta-inner">
+<div><h2>ہر ہفتے نئی ویڈیوز</h2><p>یوٹیوب پر سبسکرائب کریں اور صحت کی کوئی کام کی بات نہ چھوڑیں۔</p></div>
+<a class="btn btn-light" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")} سبسکرائب کریں</a>
+</div>
+</section>`;
+
+  return page({
+    path: "/",
+    title: `${SITE} | صحت کی آسان باتیں، اردو میں`,
+    description: "روزمرہ صحت پر مختصر اردو ویڈیوز: بچوں کی صحت، دوا کا درست استعمال، کھانا اور غذائیت، گھر کی حفاظت اور عام بیماریاں۔ معتبر ذرائع، آسان زبان۔",
+    schema: [
+      ORG,
+      {
+        "@type": "WebSite",
+        "@id": `${BASE}/#website`,
+        url: `${BASE}/`,
+        name: SITE,
+        inLanguage: "ur",
+        publisher: { "@id": `${BASE}/#organization` },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: { "@type": "EntryPoint", urlTemplate: `${BASE}/videos/?q={search_term_string}` },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ],
+    body
+  });
+}
+
+function collectionPage({ path, title, description, kicker, list, crumbs, ordered = false }) {
+  const body = `
+<section class="page-head">
+<div class="wrap">
+${breadcrumbs(crumbs)}
+<p class="kicker">${kicker} · ${urduDigits(list.length)} ویڈیوز</p>
+<h1>${esc(title)}</h1>
+<p class="lede">${esc(description)}</p>
+</div>
+</section>
+<section class="section section-tight">
+<div class="wrap">
+${ordered
+    ? `<ol class="path-list">${list.map((v, i) => `<li><a href="${watchPath(v.id)}"><span class="step">${urduDigits(i + 1)}</span><img src="${thumb(v.id)}" alt="" width="480" height="360"><span dir="auto">${esc(v.title)}</span></a></li>`).join("")}</ol>`
+    : videoGrid(list, { eager: true })}
+</div>
+</section>`;
+  return page({
+    path, title, description,
+    image: list[0]?.poster,
+    schema: [
+      ORG,
+      {
+        "@type": "CollectionPage",
+        "@id": `${BASE}${path}#page`,
+        url: `${BASE}${path}`,
+        name: title,
+        description,
+        inLanguage: "ur",
+        isPartOf: { "@id": `${BASE}/#website` },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: list.map((v, i) => ({ "@type": "ListItem", position: i + 1, url: `${BASE}${watchPath(v.id)}` }))
+        }
+      },
+      breadcrumbSchema(crumbs)
+    ],
+    body
+  });
+}
+
+function watchPage(v) {
+  const topic = v.topic;
+  const crumbs = [{ name: "ہوم", path: "/" }];
+  if (topic) crumbs.push({ name: topic.title, path: `/topics/${topic.slug}/` });
+  else crumbs.push({ name: "تمام ویڈیوز", path: "/videos/" });
+  crumbs.push({ name: v.title, path: watchPath(v.id) });
+
+  const pool = topic ? topic.ids.map(id => byId.get(id)) : videos.filter(o => o.track === v.track);
+  const related = pool.filter(o => o.id !== v.id).sort((a, b) => b.views - a.views).slice(0, 8);
+  if (related.length < 8) {
+    related.push(...(v.track === "HEALTH" ? popular : videos).filter(o => o.id !== v.id && !related.includes(o)).slice(0, 8 - related.length));
+  }
+
+  const description = v.blocks.map(b => b.list
+    ? `<ul>${b.list.map(item => `<li>${esc(item)}</li>`).join("")}</ul>`
+    : `<p>${esc(b.text)}</p>`).join("\n");
+
+  const body = `
+<article class="watch">
+<div class="wrap">
+${breadcrumbs(crumbs)}
+<div class="watch-grid${v.vertical ? "" : " watch-wide"}">
+<div class="player-col">
+<button class="player" type="button" data-video="${v.id}" data-title="${esc(v.title)}" aria-label="ویڈیو چلائیں: ${esc(v.title)}">
+<img src="${v.vertical ? thumb(v.id) : v.poster}" alt="" width="480" height="360" fetchpriority="high">
+<span class="play-btn">${icon("play")}</span>
+</button>
+</div>
+<div class="watch-copy">
+${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.title)}</a>` : ""}
+<h1 dir="auto">${esc(v.title)}</h1>
+<p class="watch-meta"><time datetime="${v.published.slice(0, 10)}">${urduDate(v.published)}</time> · <span dir="ltr">${clock(v.seconds)}</span></p>
+<div class="watch-body" dir="auto">${description}</div>
+<div class="watch-actions">
+<a class="btn" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")} سبسکرائب کریں</a>
+<a class="btn btn-ghost" href="${esc(v.youtubeUrl)}" target="_blank" rel="noopener">یوٹیوب پر کھولیں</a>
+</div>
+<p class="disclaimer">${icon("shield")} یہ عام معلومات ہیں، ڈاکٹر کے مشورے کا متبادل نہیں۔</p>
+</div>
+</div>
+</div>
+</article>
+<section class="section section-tint" aria-labelledby="related">
+<div class="wrap">
+${sectionHead(topic ? esc(topic.title) : "مزید دیکھیں", "یہ ویڈیوز بھی دیکھیں", "related", topic ? { href: `/topics/${topic.slug}/`, label: "پورا موضوع" } : null)}
+${videoGrid(related)}
+</div>
+</section>`;
+
+  return page({
+    path: watchPath(v.id),
+    title: v.title,
+    description: v.summary,
+    image: v.poster,
+    ogType: "video.other",
+    schema: [
+      ORG,
+      {
+        "@type": "VideoObject",
+        "@id": `${BASE}${watchPath(v.id)}#video`,
+        name: v.title,
+        description: truncate(plainSummary(v.blocks) || v.title, 2000),
+        thumbnailUrl: [...new Set([v.poster, thumb(v.id)])],
+        uploadDate: v.published,
+        duration: isoDuration(v.seconds),
+        embedUrl: `https://www.youtube.com/embed/${v.id}`,
+        url: `${BASE}${watchPath(v.id)}`,
+        inLanguage: "ur",
+        publisher: { "@id": `${BASE}/#organization` },
+        ...(v.views ? { interactionStatistic: { "@type": "InteractionCounter", interactionType: { "@type": "WatchAction" }, userInteractionCount: v.views } } : {})
+      },
+      breadcrumbSchema(crumbs)
+    ],
+    body
+  });
+}
+
+function libraryPage() {
+  const filters = [
+    `<button type="button" class="chip" data-filter="all" aria-pressed="true">سب</button>`,
+    ...healthTopics.map(t => `<button type="button" class="chip" data-filter="topic:${t.slug}" aria-pressed="false">${esc(t.title)}</button>`),
+    `<button type="button" class="chip" data-filter="track:MPH" aria-pressed="false">پبلک ہیلتھ</button>`,
+    `<button type="button" class="chip" data-filter="track:MHA_MBA" aria-pressed="false">ہیلتھ کیئر مینجمنٹ</button>`
+  ].join("");
+  const crumbs = [{ name: "ہوم", path: "/" }, { name: "تمام ویڈیوز", path: "/videos/" }];
+  const ordered = videos.map((v, i) => ({ v, i }));
+  const body = `
+<section class="page-head">
+<div class="wrap">
+${breadcrumbs(crumbs)}
+<h1>ویڈیو لائبریری</h1>
+<p class="lede">${urduDigits(videos.length)} مختصر اردو ویڈیوز۔ موضوع چنیں یا تلاش کریں۔</p>
+<div class="library-tools">
+<div class="library-search">${icon("search")}<label class="sr-only" for="library-q">ویڈیو تلاش کریں</label><input id="library-q" type="search" placeholder="عنوان سے تلاش کریں…" autocomplete="off"></div>
+<label class="sort"><span>ترتیب</span><select id="library-sort"><option value="new">تازہ ترین</option><option value="popular">سب سے زیادہ دیکھی گئی</option></select></label>
+</div>
+<div class="chips filters" role="group" aria-label="موضوع">${filters}</div>
+</div>
+</section>
+<section class="section section-tight">
+<div class="wrap">
+<p class="library-status" id="library-status" aria-live="polite"></p>
+<ul class="vgrid" id="library-grid">${ordered.map(({ v, i }) => videoCard(v, { showTopic: true }).replace("<li ", `<li data-order="${i}" data-views="${v.views}" `)).join("\n")}</ul>
+<p class="library-empty" id="library-empty" hidden>کوئی ویڈیو نہیں ملی۔ کوئی اور لفظ آزمائیں۔</p>
+<div class="center"><button class="btn btn-ghost" type="button" id="library-more" hidden>مزید ویڈیوز</button></div>
+</div>
+</section>`;
+  return page({
+    path: "/videos/",
+    title: "تمام ویڈیوز: صحت پر اردو ویڈیو لائبریری",
+    description: `${videos.length} مختصر اردو ویڈیوز: بچوں کی صحت، دوائیں، غذائیت، گھر کی حفاظت، عام بیماریاں، پبلک ہیلتھ اور ہیلتھ کیئر مینجمنٹ۔`,
+    schema: [ORG, breadcrumbSchema(crumbs)],
+    body
+  });
+}
+
+function notFoundPage() {
+  return page({
+    path: "/404.html",
+    title: "صفحہ نہیں ملا",
+    description: "یہ صفحہ موجود نہیں۔",
+    body: `<section class="page-head page-404"><div class="wrap">
+<h1>یہ صفحہ نہیں ملا</h1>
+<p class="lede">ہو سکتا ہے یہ لنک پرانا ہو۔ نیچے سے تلاش کریں یا ہوم پیج پر جائیں۔</p>
+<form class="hero-search" action="/videos/" role="search">${icon("search")}<label class="sr-only" for="nf-q">تلاش</label><input id="nf-q" name="q" type="search" placeholder="مثلاً: بخار، شوگر…"><button type="submit">تلاش کریں</button></form>
+<p><a class="btn btn-ghost" href="/">ہوم پیج</a></p>
+</div></section>`
+  }).replace('<meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">', '<meta name="robots" content="noindex">');
+}
+
+// ---------- write ----------
+
+pages.set("/", homePage());
+for (const t of healthTopics) {
+  const list = t.ids.map(id => byId.get(id)).sort((a, b) => b.published.localeCompare(a.published));
+  pages.set(`/topics/${t.slug}/`, collectionPage({
+    path: `/topics/${t.slug}/`, title: t.title, description: t.description, kicker: "روزمرہ صحت", list,
+    crumbs: [{ name: "ہوم", path: "/" }, { name: t.title, path: `/topics/${t.slug}/` }]
+  }));
+}
+for (const t of studentTopics) {
+  pages.set(`/topics/${t.slug}/`, collectionPage({
+    path: `/topics/${t.slug}/`, title: t.title, description: t.description, kicker: "طلبہ کے لیے",
+    list: t.ids.map(id => byId.get(id)),
+    crumbs: [{ name: "ہوم", path: "/" }, { name: "طلبہ کے لیے", path: "/#students" }, { name: t.title, path: `/topics/${t.slug}/` }]
+  }));
+}
+for (const p of learnPaths) {
+  pages.set(`/learn/${p.slug}/`, collectionPage({
+    path: `/learn/${p.slug}/`, title: p.title, description: p.description, kicker: "ترتیب سے دیکھیں", ordered: true,
+    list: p.ids.map(id => byId.get(id)),
+    crumbs: [{ name: "ہوم", path: "/" }, { name: "طلبہ کے لیے", path: "/#students" }, { name: p.title, path: `/learn/${p.slug}/` }]
+  }));
+}
+pages.set("/videos/", libraryPage());
+for (const v of videos) pages.set(watchPath(v.id), watchPage(v));
+
+await rm(OUT, { recursive: true, force: true });
+await cp("assets", `${OUT}/assets`, { recursive: true });
+for (const [path, html] of pages) {
+  const dir = `${OUT}${path}`;
+  await mkdir(dir, { recursive: true });
+  await writeFile(`${dir}index.html`, html);
+}
+await writeFile(`${OUT}/404.html`, notFoundPage());
+
+// Sitemap with video extension so Google can index each watch page as a video.
+const newest = list => list.map(v => v.published).sort().at(-1).slice(0, 10);
+const lastmod = new Map([["/", newest(videos)], ["/videos/", newest(videos)]]);
+for (const c of [...healthTopics, ...studentTopics]) lastmod.set(`/topics/${c.slug}/`, newest(c.ids.map(id => byId.get(id))));
+for (const p of learnPaths) lastmod.set(`/learn/${p.slug}/`, newest(p.ids.map(id => byId.get(id))));
+const xml = s => esc(s);
+const urls = [...pages.keys()].map(path => {
+  const v = path.startsWith("/videos/") && path !== "/videos/" ? byId.get(path.split("/")[2]) : null;
+  return `<url><loc>${BASE}${path}</loc><lastmod>${v ? v.published.slice(0, 10) : lastmod.get(path)}</lastmod>${v ? `
+<video:video><video:thumbnail_loc>${v.poster}</video:thumbnail_loc><video:title>${xml(v.title)}</video:title><video:description>${xml(truncate(plainSummary(v.blocks) || v.title, 2000))}</video:description><video:player_loc>https://www.youtube.com/embed/${v.id}</video:player_loc><video:duration>${v.seconds}</video:duration><video:publication_date>${v.published}</video:publication_date></video:video>` : ""}</url>`;
+}).join("\n");
+await writeFile(`${OUT}/sitemap.xml`, `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+${urls}
+</urlset>
+`);
+
+for (const file of ["robots.txt", "_headers", "_redirects", "CNAME"]) await cp(file, `${OUT}/${file}`);
+await cp("data/shorts.json", `${OUT}/data/shorts.json`);
+
+const unplaced = health.filter(v => !v.topic);
+if (unplaced.length) console.warn(`build-site: ${unplaced.length} health videos have no topic yet (add them to data/health-topics.json): ${unplaced.map(v => v.id).join(" ")}`);
+console.log(`build-site: ${pages.size} pages (${videos.length} watch pages) in ${OUT}/`);

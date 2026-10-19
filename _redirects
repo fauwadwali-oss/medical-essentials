@@ -1,0 +1,6 @@
+/library.html                      /videos/                 301
+/topics/everyday-health.html       /#topics                 301
+/topics/everyday-health/           /#topics                 301
+/topics/:slug.html                 /topics/:slug/           301
+/learn/:slug.html                  /learn/:slug/            301
+/index.html                        /                        301
