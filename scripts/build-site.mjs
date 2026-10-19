@@ -351,7 +351,7 @@ ${socialLinks("social")}
 </div>
 <div class="wrap footer-note">
 <p>${icon("shield")} یہ ویڈیوز عام معلومات کے لیے ہیں، ڈاکٹر کے مشورے کا متبادل نہیں۔ ہنگامی صورت میں فوراً قریبی ہسپتال جائیں۔</p>
-<p>© ${year} <span lang="en" dir="ltr">Mastering Essentials</span></p>
+<p>© ${year} <span lang="en" dir="ltr">Mastering Essentials</span> · <a href="https://nusratwaliventures.com"><span lang="en" dir="ltr">Nusrat Wali Ventures</span> کا حصہ</a></p>
 </div>
 </footer>`;
 }
