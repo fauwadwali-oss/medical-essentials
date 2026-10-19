@@ -15,6 +15,14 @@ const CHANNEL_ID = "UC8Ux9uG3hYIjKdym7mD-8GA";
 const CHANNEL_URL = `https://www.youtube.com/channel/${CHANNEL_ID}`;
 const SUBSCRIBE_URL = `${CHANNEL_URL}?sub_confirmation=1`;
 const SITE = "Mastering Essentials";
+const SOCIAL = [
+  { name: "YouTube", url: "https://www.youtube.com/@MasteringEssentials" },
+  { name: "TikTok", url: "https://www.tiktok.com/@masteringessentials" },
+  { name: "Instagram", url: "https://www.instagram.com/masteringessentials/" },
+  { name: "Facebook", url: "https://www.facebook.com/people/Mastering-Essentials/61589283063649/" },
+  { name: "Threads", url: "https://www.threads.com/@masteringessentials" }
+];
+const socialLinks = cls => `<ul class="${cls}">${SOCIAL.map(s => `<li><a href="${s.url}" target="_blank" rel="noopener me" data-event="social_click" lang="en" dir="ltr">${s.name}</a></li>`).join("")}</ul>`;
 
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 const config = await readJson("site.config.json");
@@ -137,7 +145,7 @@ const ORG = {
   name: SITE,
   url: `${BASE}/`,
   logo: `${BASE}/assets/mastering-essentials-logo-mark.svg`,
-  sameAs: [CHANNEL_URL]
+  sameAs: [CHANNEL_URL, ...SOCIAL.map(s => s.url)]
 };
 
 function analytics() {
@@ -231,6 +239,8 @@ function footer() {
 <div class="footer-brand">
 <strong lang="en" dir="ltr">Mastering Essentials</strong>
 <p>روزمرہ صحت کی آسان اور قابلِ اعتماد باتیں، اردو میں۔</p>
+<h2 class="follow-title">ہمیں فالو کریں</h2>
+${socialLinks("social")}
 </div>
 <nav aria-label="موضوعات">
 <h2>موضوعات</h2>
@@ -368,8 +378,8 @@ ${learnPaths.map(p => `<a class="path-card" href="/learn/${p.slug}/">${icon("stu
 
 <section class="cta">
 <div class="wrap cta-inner">
-<div><h2>ہر ہفتے نئی ویڈیوز</h2><p>یوٹیوب پر سبسکرائب کریں اور صحت کی کوئی کام کی بات نہ چھوڑیں۔</p></div>
-<a class="btn btn-light" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")} سبسکرائب کریں</a>
+<div><h2>ہر روز نئی ویڈیوز</h2><p>جہاں آپ ویڈیوز دیکھتے ہیں، وہیں ہمیں فالو کریں۔</p></div>
+${socialLinks("social social-cta")}
 </div>
 </section>`;
 

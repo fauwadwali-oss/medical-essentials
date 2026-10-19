@@ -260,6 +260,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .library-status { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
 .library-empty { text-align: center; padding: 40px; color: var(--muted); }
 
+/* social links */
+.social { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.social a { display: inline-flex; align-items: center; height: 36px; padding-inline: 14px; border-radius: 999px; border: 1px solid rgb(255 255 255 / 25%); font-family: var(--latin); font-size: 14px; font-weight: 500; }
+.social a:hover { background: rgb(255 255 255 / 12%); color: #fff; }
+.social-cta a { height: 44px; padding-inline: 18px; background: #fff; color: var(--brand-ink); border: 0; }
+.social-cta a:hover { background: var(--accent-soft); color: var(--brand-ink); }
+.follow-title { margin-top: 18px; }
+
 /* ---------- footer ---------- */
 .site-footer { background: #10201f; color: #c9d4d2; padding-top: 48px; font-size: 15px; }
 .footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; padding-bottom: 32px; }
