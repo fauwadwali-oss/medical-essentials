@@ -197,6 +197,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .disclaimer { display: flex; gap: 10px; align-items: flex-start; margin-top: 20px; padding: 12px 16px; border-radius: var(--radius-sm); background: var(--accent-soft); color: #6d3c08; font-size: 14px; }
 .disclaimer .icon { margin-top: 0.55em; }
 
+/* frequently asked questions */
+.faq-wrap { max-width: 900px; }
+.faq-list { display: grid; gap: 12px; }
+.faq-list details { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 0 20px; }
+.faq-list details[open] { border-color: var(--brand); box-shadow: var(--shadow); }
+.faq-list summary { cursor: pointer; padding-block: 16px; font-size: 18px; font-weight: 700; color: var(--brand-ink); }
+.faq-list p { padding: 0 0 18px; color: var(--muted); }
+
 /* students */
 .paths { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .path-card { display: flex; flex-direction: column; gap: 8px; padding: 24px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
