@@ -26,6 +26,7 @@ function trackCentralYouTubeEngagement() {
 }
 
 document.addEventListener("click", event => {
+  if (!event.isTrusted) return;
   const anchor = event.target instanceof Element ? event.target.closest("a") : null;
   if (!anchor) return;
   try {
@@ -52,7 +53,8 @@ if (toggle) {
 
 // Click-to-load YouTube player: no YouTube scripts or cookies until the visitor presses play.
 document.querySelectorAll(".player[data-video]").forEach(button => {
-  button.addEventListener("click", () => {
+  button.addEventListener("click", event => {
+    if (!event.isTrusted) return;
     const id = button.dataset.video;
     const iframe = document.createElement("iframe");
     iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
