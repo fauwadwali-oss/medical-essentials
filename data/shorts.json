@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-20T03:33:16.570Z",
+  "exported_at": "2026-10-21T03:34:00.774Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 320,
+  "count": 322,
   "shorts": [
+    {
+      "youtube_id": "D-cRFee3TN0",
+      "title": "سڑک کے کنارے فون سے نظر ہٹائیں",
+      "url": "https://www.youtube.com/shorts/D-cRFee3TN0",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-20T14:01:00Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "LJz_KsS-hPY",
+      "title": "بچوں کے کمرے کا فرنیچر دیوار سے باندھیں",
+      "url": "https://www.youtube.com/shorts/LJz_KsS-hPY",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-20T07:00:36Z",
+      "duration_seconds": 48
+    },
     {
       "youtube_id": "6gVaxlcjpDI",
       "title": "خراٹوں کے دوران سانس رک جائے تو؟",
