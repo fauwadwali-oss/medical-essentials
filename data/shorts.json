@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-21T03:34:00.774Z",
+  "exported_at": "2026-10-22T03:33:53.059Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 322,
+  "count": 324,
   "shorts": [
+    {
+      "youtube_id": "5JyrqBg0vOo",
+      "title": "باہر ہوا خراب ہو تو کمرہ کیسے رکھیں؟",
+      "url": "https://www.youtube.com/shorts/5JyrqBg0vOo",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-21T14:01:06Z",
+      "duration_seconds": 46
+    },
+    {
+      "youtube_id": "5wxLgB7QCWk",
+      "title": "جنریٹر کہاں رکھنا ہے، یہ فیصلہ اہم ہے",
+      "url": "https://www.youtube.com/shorts/5wxLgB7QCWk",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-21T07:00:38Z",
+      "duration_seconds": 52
+    },
     {
       "youtube_id": "D-cRFee3TN0",
       "title": "سڑک کے کنارے فون سے نظر ہٹائیں",
