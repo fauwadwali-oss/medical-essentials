@@ -223,7 +223,6 @@ const ICONS = {
   search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
   arrow: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
   play: '<path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5Z" fill="currentColor" stroke="none"/>',
-  youtube: '<path fill="currentColor" stroke="none" d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.6 12 4.6 12 4.6s-5.7 0-7.5.5a3 3 0 0 0-2.1 2.1A31.2 31.2 0 0 0 2 12a31.2 31.2 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.8.5 7.5.5 7.5.5s5.7 0 7.5-.5a3 3 0 0 0 2.1-2.1A31.2 31.2 0 0 0 22 12a31.2 31.2 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/>'
 };
 const icon = (name, cls = "icon") =>
   `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ICONS.student}</svg>`;
@@ -320,7 +319,7 @@ ${link("/#about", "ہمارے بارے میں")}
 <input id="header-q" name="q" type="search" placeholder="تلاش کریں…" autocomplete="off">
 <button type="submit" aria-label="تلاش">${icon("search")}</button>
 </form>
-<a class="subscribe" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")}<span>سبسکرائب</span></a>
+<a class="subscribe" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click"><span>سبسکرائب</span></a>
 </div>
 </header>`;
 }
@@ -361,13 +360,14 @@ ${socialLinks("social")}
 function videoCard(v, { eager = false, showTopic = false } = {}) {
   return `<li class="vcard${v.vertical ? "" : " vcard-wide"}" data-title="${esc(v.title)}" data-topic="${esc(v.topic?.slug || "")}" data-track="${esc(v.track)}">
 <a href="${watchPath(v.id)}">
-<span class="vthumb"><img src="${thumb(v.id)}" alt="" width="480" height="360" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"><span class="vdur" dir="ltr">${clock(v.seconds)}</span>${v.guide ? `<span class="vguide">تحریری رہنما</span>` : ""}</span>
+<span class="vthumb"><img src="${thumb(v.id)}" alt="" width="480" height="360" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></span>
+<span class="vmeta"><span class="vdur" dir="ltr">${clock(v.seconds)}</span>${v.guide ? `<span class="vguide">تحریری رہنما</span>` : ""}</span>
 <span class="vtitle" dir="auto">${esc(v.title)}</span>
 ${showTopic && v.topic ? `<span class="vtopic">${esc(v.topic.title)}</span>` : ""}
 </a>
 </li>`;
 }
-const videoGrid = (list, opts) => `<ul class="vgrid">${list.map(v => videoCard(v, opts)).join("\n")}</ul>`;
+const videoGrid = (list, opts) => `<ul class="vgrid">${list.map(v => videoCard(v, opts)).join("\n")}</ul>\n<p class="yt-src">ویڈیوز بشکریہ <a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube</a></p>`;
 const videoRail = (list, label) => `<ul class="vrail" aria-label="${esc(label)}">${list.map(v => videoCard(v)).join("\n")}</ul>`;
 
 function sectionHead(kicker, title, id, more) {
@@ -421,7 +421,7 @@ ${icon("search")}
 <div class="chips" aria-label="مقبول موضوعات">${chips}</div>
 </div>
 <div class="hero-stack" aria-hidden="true">
-${hero.map((v, i) => `<a class="stack-card stack-${i + 1}" href="${watchPath(v.id)}" tabindex="-1"><img src="${thumb(v.id)}" alt="" width="480" height="360"${i === 0 ? ' fetchpriority="high"' : ""}><span class="stack-play">${icon("play")}</span></a>`).join("")}
+${hero.map((v, i) => `<a class="stack-card stack-${i + 1}" href="${watchPath(v.id)}" tabindex="-1"><img src="${thumb(v.id)}" alt="" width="480" height="360"${i === 0 ? ' fetchpriority="high"' : ""}></a>`).join("")}
 </div>
 </div>
 </section>
@@ -572,10 +572,7 @@ function watchPage(v) {
 ${breadcrumbs(crumbs)}
 <div class="watch-grid${v.vertical ? "" : " watch-wide"}">
 <div class="player-col">
-<button class="player" type="button" data-video="${v.id}" data-title="${esc(v.title)}" aria-label="ویڈیو چلائیں: ${esc(v.title)}">
-<img src="${v.vertical ? thumb(v.id) : v.poster}" alt="" width="480" height="360" fetchpriority="high">
-<span class="play-btn">${icon("play")}</span>
-</button>
+<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(v.id)}?rel=0&playsinline=1" title="${esc(v.title)}"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
 </div>
 <div class="watch-copy">
 ${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.title)}</a>` : ""}
@@ -585,7 +582,7 @@ ${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.t
 ${v.guide ? `<a class="guide-jump" href="#guide">مکمل تحریری رہنما پڑھیں ${icon("arrow")}</a>` : ""}
 ${articleOf.has(v.id) ? `<a class="article-backlink" href="/guides/${articleOf.get(v.id).slug}/">${icon("student")}<span>یہ ویڈیو اس مکمل رہنما کا حصہ ہے: <strong>${esc(articleOf.get(v.id).title)}</strong></span></a>` : ""}
 <div class="watch-actions">
-<a class="btn" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">${icon("youtube")} سبسکرائب کریں</a>
+<a class="btn" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">سبسکرائب کریں</a>
 <a class="btn btn-ghost" href="${esc(v.youtubeUrl)}" target="_blank" rel="noopener">یوٹیوب پر کھولیں</a>
 </div>
 <p class="disclaimer">${icon("shield")} یہ عام معلومات ہیں، ڈاکٹر کے مشورے کا متبادل نہیں۔</p>
@@ -668,9 +665,7 @@ function articleCards(list) {
 function inlineVideo(id) {
   const v = byId.get(id);
   return `<figure class="inline-video">
-<button class="player" type="button" data-video="${v.id}" data-title="${esc(v.title)}" aria-label="ویڈیو چلائیں: ${esc(v.title)}">
-<img src="${thumb(v.id)}" alt="" width="480" height="360" loading="lazy"><span class="play-btn">${icon("play")}</span>
-</button>
+<a class="inline-thumb" href="${watchPath(v.id)}"><img src="${thumb(v.id)}" alt="" width="480" height="360" loading="lazy"></a>
 <figcaption><strong dir="auto">${esc(v.title)}</strong><span dir="ltr">${clock(v.seconds)}</span><a href="${watchPath(v.id)}">${v.guide ? "ویڈیو کا صفحہ اور تحریری رہنما" : "ویڈیو کا صفحہ"} ${icon("arrow")}</a></figcaption>
 </figure>`;
 }

@@ -50,22 +50,6 @@ if (toggle) {
   matchMedia("(max-width: 860px)").addEventListener("change", e => { if (!e.matches) close(); });
 }
 
-// Click-to-load YouTube player: no YouTube scripts or cookies until the visitor presses play.
-document.querySelectorAll(".player[data-video]").forEach(button => {
-  button.addEventListener("click", () => {
-    const id = button.dataset.video;
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
-    iframe.title = button.dataset.title || "YouTube video";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-    iframe.allowFullscreen = true;
-    button.replaceWith(iframe);
-    iframe.focus();
-    track("video_play", { video_id: id, video_title: button.dataset.title || "" });
-    trackCentralYouTubeEngagement();
-  }, { once: true });
-});
-
 document.querySelectorAll("[data-event]").forEach(el =>
   el.addEventListener("click", () => track(el.dataset.event, { link_url: el.href || "" })));
 
