@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-22T03:33:53.059Z",
+  "exported_at": "2026-10-23T03:34:08.177Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 324,
+  "count": 326,
   "shorts": [
+    {
+      "youtube_id": "1xwZarZ3yaY",
+      "title": "دوسری رائے لینا بےاعتمادی نہیں",
+      "url": "https://www.youtube.com/shorts/1xwZarZ3yaY",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-22T14:00:31Z",
+      "duration_seconds": 42
+    },
+    {
+      "youtube_id": "yQ93pJ1qi1o",
+      "title": "کسی کے تجربے اور آزمائش میں فرق ہے",
+      "url": "https://www.youtube.com/shorts/yQ93pJ1qi1o",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-22T07:00:32Z",
+      "duration_seconds": 47
+    },
     {
       "youtube_id": "5JyrqBg0vOo",
       "title": "باہر ہوا خراب ہو تو کمرہ کیسے رکھیں؟",
