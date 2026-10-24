@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-23T03:34:08.177Z",
+  "exported_at": "2026-10-24T03:32:22.905Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 326,
+  "count": 328,
   "shorts": [
+    {
+      "youtube_id": "yrn6ObNnUxE",
+      "title": "کھانے کی الرجی اور عدم برداشت میں فرق",
+      "url": "https://www.youtube.com/shorts/yrn6ObNnUxE",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-23T14:00:43Z",
+      "duration_seconds": 52
+    },
+    {
+      "youtube_id": "hlkaK_PVXUc",
+      "title": "انرجی ڈرنک کا لیبل پڑھ کر پیئیں",
+      "url": "https://www.youtube.com/shorts/hlkaK_PVXUc",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-23T07:00:40Z",
+      "duration_seconds": 47
+    },
     {
       "youtube_id": "1xwZarZ3yaY",
       "title": "دوسری رائے لینا بےاعتمادی نہیں",
