@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-24T03:32:22.905Z",
+  "exported_at": "2026-10-25T03:35:13.124Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 328,
+  "count": 330,
   "shorts": [
+    {
+      "youtube_id": "pLXvwyAo7hg",
+      "title": "بچے کو اپنی تکلیف بتانا سکھائیں",
+      "url": "https://www.youtube.com/shorts/pLXvwyAo7hg",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-24T14:00:34Z",
+      "duration_seconds": 46
+    },
+    {
+      "youtube_id": "faeErrC7-Qk",
+      "title": "ہوم ورک کے دوران آنکھوں کو وقفہ دیں",
+      "url": "https://www.youtube.com/shorts/faeErrC7-Qk",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-24T07:00:36Z",
+      "duration_seconds": 45
+    },
     {
       "youtube_id": "yrn6ObNnUxE",
       "title": "کھانے کی الرجی اور عدم برداشت میں فرق",
