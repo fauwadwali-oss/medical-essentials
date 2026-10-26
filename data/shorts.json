@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-25T03:35:13.124Z",
+  "exported_at": "2026-10-26T03:38:45.769Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 330,
+  "count": 332,
   "shorts": [
+    {
+      "youtube_id": "GKvMYUDFh_M",
+      "title": "دوا سے تکلیف ہو تو کیا بتانا ہے؟",
+      "url": "https://www.youtube.com/shorts/GKvMYUDFh_M",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-25T14:00:33Z",
+      "duration_seconds": 42
+    },
+    {
+      "youtube_id": "zinixx_fFPk",
+      "title": "نزلہ زکام کی دوا: اجزا دو بار نہ لیں",
+      "url": "https://www.youtube.com/shorts/zinixx_fFPk",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-25T07:00:26Z",
+      "duration_seconds": 47
+    },
     {
       "youtube_id": "pLXvwyAo7hg",
       "title": "بچے کو اپنی تکلیف بتانا سکھائیں",
