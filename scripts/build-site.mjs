@@ -380,6 +380,8 @@ ${socialLinks("social")}
 <li><a href="/learn/mph/">پبلک ہیلتھ: آغاز</a></li>
 <li><a href="/learn/mhamba/">ہیلتھ کیئر مینجمنٹ: آغاز</a></li>
 <li><a href="${CHANNEL_URL}" target="_blank" rel="noopener">یوٹیوب چینل</a></li>
+<li><a href="/privacy/">پرائیویسی پالیسی</a></li>
+<li><a href="/terms/">شرائطِ استعمال</a></li>
 </ul>
 </nav>
 </div>
@@ -864,6 +866,101 @@ ${breadcrumbs(crumbs)}
   });
 }
 
+// Legal pages are in English (with an Urdu summary) so they can be reviewed by
+// Google's YouTube API Services team; keep them in step with refresh-catalog.mjs.
+const LEGAL_UPDATED = "October 25, 2026";
+const LEGAL_CONTACT = "info@masteringseries.com";
+
+function legalPage({ path, title, description, summary, sections }) {
+  const crumbs = [{ name: "ہوم", path: "/" }, { name: title, path }];
+  return page({
+    path,
+    title,
+    description,
+    schema: [ORG, breadcrumbSchema(crumbs)],
+    body: `<section class="page-head"><div class="wrap">
+${breadcrumbs(crumbs)}
+<h1>${esc(title)}</h1>
+<p class="lede">${summary}</p>
+</div></section>
+<section class="section section-tight"><div class="wrap">
+<div class="legal-body" lang="en" dir="ltr">
+<p><strong>Last updated: ${LEGAL_UPDATED}</strong></p>
+${sections}
+</div>
+</div></section>`
+  });
+}
+
+function privacyPage() {
+  return legalPage({
+    path: "/privacy/",
+    title: "پرائیویسی پالیسی",
+    description: "Mastering Essentials privacy policy: what we collect, how we use YouTube API Services, analytics, and how to contact us.",
+    summary: "خلاصہ: ہم آپ کا نام، ای میل یا کوئی اکاؤنٹ نہیں مانگتے۔ ویڈیوز کی معلومات ہمارے اپنے یوٹیوب چینل سے یوٹیوب API کے ذریعے روزانہ تازہ کی جاتی ہیں۔ ویب سائٹ کے استعمال کو سمجھنے کے لیے ہم Google Analytics استعمال کرتے ہیں۔ تفصیل نیچے انگریزی میں ہے۔",
+    sections: `
+<h2>Who we are</h2>
+<p>Mastering Essentials (masteringessentials.com) is a free Urdu health-information website run by Nusrat Wali Ventures LLC. Contact: <a href="mailto:${LEGAL_CONTACT}">${LEGAL_CONTACT}</a>.</p>
+
+<h2>Information we collect from you</h2>
+<p>The site has no accounts, sign-up forms or comment boxes. We do not ask for or store your name, email address or contact details.</p>
+
+<h2 id="youtube-api-services">YouTube API Services</h2>
+<p>This website uses YouTube API Services. By using the site you also agree to the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of Service</a>, and Google's handling of data is described in the <a href="http://www.google.com/policies/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+<ul>
+<li><strong>What we access:</strong> our backend reads the uploads playlist, details and publication status of the videos on our own Mastering Essentials YouTube channel, using credentials authorized by the channel owner. We keep and publish only videos reported as public. We never request access to a visitor's Google or YouTube account.</li>
+<li><strong>What we store:</strong> for each public video on our channel, its video ID, title, description, publish time, duration, view count, orientation (vertical or horizontal), the size of the thumbnail image to show, and whether it is a Short or a regular video. Topic and category assignments are our own.</li>
+<li><strong>How we use and disclose it:</strong> to build the video pages and lists on this site, to sort videos by popularity, and to provide page metadata and sitemap entries to search engines. This information is published on this website and served through our hosting provider, Cloudflare. YouTube and Google provide the thumbnails and the embedded player.</li>
+<li><strong>Refresh and deletion:</strong> this information is refreshed from the YouTube Data API every day. A video that is no longer public on YouTube is removed from the site at the next daily refresh.</li>
+<li><strong>Selling:</strong> we do not sell YouTube API data.</li>
+</ul>
+<p>Watch pages load YouTube's embedded player in privacy-enhanced mode. When a watch page loads, basic device and request information is shared with YouTube so it can show the player. Playing a video shares more information with YouTube. YouTube may use cookies or similar technologies and may show third-party content, including advertisements, in the player, as described in the Google Privacy Policy. This site never asks visitors to authorize access to their Google account. If you have connected any app to your Google account, you can review or remove it in <a href="https://security.google.com/settings/security/permissions" target="_blank" rel="noopener">Google security settings</a>.</p>
+
+<h2>Analytics and site monitoring</h2>
+<ul>
+<li><strong>Google Analytics:</strong> we use Google Analytics to understand and improve how the site is used. It receives page addresses, referring sites, approximate location derived from your IP address, device and browser details, and interactions such as search terms, topic filters, Subscribe clicks and social-link clicks. Google Analytics uses cookies or similar identifiers. You can opt out with the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out add-on</a>.</li>
+<li><strong>Site monitoring:</strong> our own monitoring service at msdrills.com receives page-speed measurements and counts of clicks that open YouTube. Each click record contains the site name, the type of event and a random ID, but no name, email address or account. Like any website, the service and its providers may process ordinary request details, such as IP address and browser type, for delivery and security.</li>
+</ul>
+
+<h2>Your choices and deletion requests</h2>
+<p>You can block or delete cookies in your browser settings. We do not keep user accounts. To ask about or request deletion of data we control, email <a href="mailto:${LEGAL_CONTACT}">${LEGAL_CONTACT}</a>. Where we can identify the data, we will delete it within 7 days. This does not delete information held separately by YouTube or Google.</p>
+
+<h2>Children</h2>
+<p>The site offers general health information for families. We do not knowingly collect personal information from children.</p>
+
+<h2>Changes</h2>
+<p>If this policy changes, we will update this page and the date above.</p>
+<p>See also our <a href="/terms/">Terms of Use</a>.</p>`
+  });
+}
+
+function termsPage() {
+  return legalPage({
+    path: "/terms/",
+    title: "شرائطِ استعمال",
+    description: "Mastering Essentials terms of use, including the YouTube Terms of Service for embedded videos.",
+    summary: "خلاصہ: یہ ویب سائٹ عام صحت کی معلومات کے لیے ہے، ڈاکٹر کے مشورے کا متبادل نہیں۔ ویڈیوز یوٹیوب سے دکھائی جاتی ہیں، اس لیے ان کے استعمال پر یوٹیوب کی شرائط بھی لاگو ہوتی ہیں۔ تفصیل نیچے انگریزی میں ہے۔",
+    sections: `
+<h2>About these terms</h2>
+<p>These terms apply to masteringessentials.com, run by Nusrat Wali Ventures LLC. By using the site you agree to them.</p>
+
+<h2>Health information, not medical advice</h2>
+<p>The videos and guides are general health information. They are not a substitute for advice from a doctor or other qualified health professional. In an emergency, go to the nearest hospital straight away.</p>
+
+<h2>YouTube</h2>
+<p>masteringessentials.com uses YouTube API Services. By using this site, you agree to be bound by the <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">YouTube Terms of Service</a>. Google's handling of data is described in the <a href="http://www.google.com/policies/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>. How this site uses YouTube API Services is explained in our <a href="/privacy/#youtube-api-services">Privacy Policy</a>.</p>
+
+<h2>Our content</h2>
+<p>The text, guides and our own videos belong to Mastering Essentials. You may share links to any page. Please do not republish our content without permission.</p>
+
+<h2>Links to other sites</h2>
+<p>We link to sources and to other websites. We are not responsible for their content or privacy practices.</p>
+
+<h2>Contact</h2>
+<p>Questions about these terms: <a href="mailto:${LEGAL_CONTACT}">${LEGAL_CONTACT}</a>.</p>`
+  });
+}
+
 function notFoundPage() {
   return page({
     path: "/404.html",
@@ -909,6 +1006,8 @@ if (articles.size) {
 }
 pages.set("/videos/", libraryPage());
 for (const v of videos) pages.set(watchPath(v.id), watchPage(v));
+pages.set("/privacy/", privacyPage());
+pages.set("/terms/", termsPage());
 
 await rm(OUT, { recursive: true, force: true });
 await cp("assets", `${OUT}/assets`, { recursive: true });
@@ -926,6 +1025,8 @@ for (const c of [...healthTopics, ...studentTopics]) lastmod.set(`/topics/${c.sl
 for (const p of learnPaths) lastmod.set(`/learn/${p.slug}/`, newest(p.ids.map(id => byId.get(id))));
 for (const a of articles.values()) lastmod.set(`/guides/${a.slug}/`, a.reviewed);
 if (articles.size) lastmod.set("/guides/", [...articles.values()].map(a => a.reviewed).sort().at(-1));
+lastmod.set("/privacy/", "2026-10-25");
+lastmod.set("/terms/", "2026-10-25");
 const xml = s => esc(s);
 const urls = [...pages.keys()].map(path => {
   const v = path.startsWith("/videos/") && path !== "/videos/" ? byId.get(path.split("/")[2]) : null;
