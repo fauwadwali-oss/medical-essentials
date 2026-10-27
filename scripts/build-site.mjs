@@ -5,9 +5,11 @@
 //   /topics/<slug>/       everyday-health topics + student track topics
 //   /learn/<slug>/        ordered starter paths (MPH, MHA/MBA)
 //   /videos/              searchable library of every video
-//   /videos/<id>/         one watch page per video (VideoObject structured data)
-import { cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
+//   /videos/<slug>/       one watch page per video (VideoObject structured data);
+//                         /videos/<id>/ until the video has a slug, then a 301
+import { appendFile, cp, mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
+import { cleanTitle } from "./titles.mjs";
 
 const OUT = "dist";
 const BASE = "https://www.masteringessentials.com";
@@ -30,6 +32,33 @@ const { shorts } = await readJson("data/shorts.json");
 const meta = await readJson("data/video-meta.json");
 const healthTopics = await readJson("data/health-topics.json");
 const learning = await readJson("data/learning.json");
+
+// Readable URLs: data/video-slugs.json maps a YouTube id to { slug, roman?, romanSummary? }.
+// roman/romanSummary are Roman Urdu, shown under the title so "bachon ka bukhar" searches match.
+// A slug is permanent once published: the old /videos/<id>/ URL 301s to it.
+const slugInfo = await readJson("data/video-slugs.json");
+const slugOf = new Map();
+{
+  const ids = new Set(shorts.map(v => v.youtube_id));
+  const seen = new Set();
+  for (const [id, s] of Object.entries(slugInfo)) {
+    if (!ids.has(id)) throw new Error(`video-slugs.json: unknown video ${id}`);
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(s.slug || "") || s.slug.length > 80) throw new Error(`video-slugs.json: bad slug "${s.slug}" for ${id}`);
+    // 11 characters could be read as a YouTube id, so /videos/<11 chars>/ stays reserved for ids.
+    if (seen.has(s.slug) || s.slug.length === 11) throw new Error(`video-slugs.json: slug "${s.slug}" is taken or looks like a video id`);
+    if (!s.roman !== !s.romanSummary) throw new Error(`video-slugs.json: ${id} needs both roman and romanSummary, or neither`);
+    seen.add(s.slug);
+    slugOf.set(id, s.slug);
+  }
+}
+
+// Share cards: assets/og/<id>.jpg, made locally by scripts/make-share-cards.mjs (1200x630).
+// The ?v= hash makes WhatsApp and Facebook fetch a redrawn card instead of their cached copy.
+const shareCards = new Map();
+for (const file of (await readdir("assets/og").catch(() => [])).filter(f => f.endsWith(".jpg"))) {
+  const hash = createHash("sha1").update(await readFile(`assets/og/${file}`)).digest("hex").slice(0, 8);
+  shareCards.set(file.slice(0, -4), `/assets/og/${file}?v=${hash}`);
+}
 
 // Written guides: data/guides/<youtube_id>.md, shown under the video on its watch page.
 // Format: a front matter block (summary, reviewed, sources as "Name | URL" lines),
@@ -127,18 +156,9 @@ const clock = secs => `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, 
 const isoDuration = secs => `PT${Math.floor(secs / 60) ? `${Math.floor(secs / 60)}M` : ""}${secs % 60}S`;
 const THUMB_FILE = { maxres: "maxresdefault", standard: "sddefault", high: "hqdefault" };
 const thumb = (id, size = "hqdefault") => `https://i.ytimg.com/vi/${encodeURIComponent(id)}/${size}.jpg`;
-const watchPath = id => `/videos/${id}/`;
+const watchPath = id => `/videos/${slugOf.get(id) || id}/`;
 const truncate = (text, max) => text.length <= max ? text : `${text.slice(0, max - 1).replace(/\s+\S*$/, "")}…`;
 const jsonLd = data => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`;
-
-// Some early uploads have the description glued onto the title. Keep the first sentence.
-function cleanTitle(raw) {
-  const title = String(raw).replace(/#\S+/g, "").trim();
-  for (let i = 0; i < title.length - 1; i++) {
-    if (".؟?".includes(title[i]) && !/\s/.test(title[i + 1])) return title.slice(0, i + 1).trim();
-  }
-  return title;
-}
 
 // Description → paragraphs and bullet lists, minus hashtags and follow prompts.
 function descriptionBlocks(text) {
@@ -170,6 +190,9 @@ const videos = shorts.map(v => {
   return {
     id: v.youtube_id,
     title,
+    roman: slugInfo[v.youtube_id]?.roman || "",
+    romanSummary: slugInfo[v.youtube_id]?.romanSummary || "",
+    shareCard: shareCards.get(v.youtube_id) || "",
     youtubeUrl: v.url,
     track: v.track,
     format: v.format,
@@ -220,6 +243,7 @@ const ICONS = {
   shield: '<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
   clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
   chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.59 13.51 6.83 3.98"/><path d="m15.41 6.51-6.82 3.98"/>',
   search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
   arrow: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
   play: '<path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5Z" fill="currentColor" stroke="none"/>',
@@ -280,10 +304,13 @@ function analytics() {
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config",${JSON.stringify(id)});</script>`;
 }
 
+// image: a full URL, or a site path to one of our own 1200x630 JPEGs (share cards, og-default).
 function page({ path, title, description, image, imageAlt, schema = [], body, ogType = "website" }) {
   const url = `${BASE}${path}`;
   const fullTitle = path === "/" ? title : `${title} | ${SITE}`;
-  const img = image || `${BASE}/assets/og-default.jpg`;
+  const own = !image || image.startsWith("/");
+  const img = own ? `${BASE}${image || "/assets/og-default.jpg"}` : image;
+  const imgSize = own ? `\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n<meta property="og:image:type" content="image/jpeg">` : "";
   return `<!doctype html>
 <html lang="ur" dir="rtl">
 <head>
@@ -303,7 +330,7 @@ function page({ path, title, description, image, imageAlt, schema = [], body, og
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(fullTitle)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:image" content="${esc(img)}">
+<meta property="og:image" content="${esc(img)}">${imgSize}
 <meta property="og:image:alt" content="${esc(imageAlt || title)}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(fullTitle)}">
@@ -395,7 +422,7 @@ ${socialLinks("social")}
 // ---------- components ----------
 
 function videoCard(v, { eager = false, showTopic = false } = {}) {
-  return `<li class="vcard${v.vertical ? "" : " vcard-wide"}" data-title="${esc(v.title)}" data-topic="${esc(v.topic?.slug || "")}" data-track="${esc(v.track)}">
+  return `<li class="vcard${v.vertical ? "" : " vcard-wide"}" data-title="${esc(v.title)}"${v.roman ? ` data-roman="${esc(v.roman)}"` : ""} data-topic="${esc(v.topic?.slug || "")}" data-track="${esc(v.track)}">
 <a href="${watchPath(v.id)}">
 <span class="vthumb"><img src="${thumb(v.id)}" alt="" width="480" height="360" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async"></span>
 <span class="vmeta"><span class="vdur" dir="ltr">${clock(v.seconds)}</span>${v.guide ? `<span class="vguide">تحریری رہنما</span>` : ""}</span>
@@ -420,6 +447,18 @@ function breadcrumbs(items) {
       ? `<li aria-current="page">${esc(item.name)}</li>`
       : `<li><a href="${item.path}">${esc(item.name)}</a></li>`).join("")}</ol></nav>`;
 }
+// WhatsApp first: it is where Urdu-speaking families pass health tips on. The second
+// button uses the phone's share sheet, or copies the link where there is none (site.js).
+function shareBar(path, title) {
+  const url = `${BASE}${path}`;
+  const text = `${title}\n${url}`;
+  return `<div class="share" data-share-url="${esc(url)}" data-share-title="${esc(title)}">
+<a class="btn btn-whatsapp" href="https://wa.me/?text=${encodeURIComponent(text)}" target="_blank" rel="noopener" data-share="whatsapp">${icon("chat")}<span>واٹس ایپ پر شیئر کریں</span></a>
+<button class="btn btn-ghost" type="button" data-share="native">${icon("share")}<span>شیئر کریں</span></button>
+<span class="share-status" role="status" aria-live="polite"></span>
+</div>`;
+}
+
 const breadcrumbSchema = items => ({
   "@type": "BreadcrumbList",
   itemListElement: items.map((item, i) => ({ "@type": "ListItem", position: i + 1, name: item.name, item: `${BASE}${item.path}` }))
@@ -639,6 +678,7 @@ ${breadcrumbs(crumbs)}
 <div class="watch-copy">
 ${topic ? `<a class="chip chip-soft" href="/topics/${topic.slug}/">${esc(topic.title)}</a>` : ""}
 <h1 dir="auto">${esc(v.title)}</h1>
+${v.roman ? `<div class="roman" lang="ur-Latn" dir="ltr"><p class="roman-title">${esc(v.roman)}</p><p>${esc(v.romanSummary)}</p></div>` : ""}
 <p class="watch-meta"><time datetime="${v.published.slice(0, 10)}">${urduDate(v.published)}</time> · <span dir="ltr">${clock(v.seconds)}</span></p>
 <div class="watch-body" dir="auto">${v.guide ? `<p>${esc(v.guide.summary)}</p>` : description}</div>
 ${v.guide ? `<a class="guide-jump" href="#guide">مکمل تحریری رہنما پڑھیں ${icon("arrow")}</a>` : ""}
@@ -647,6 +687,7 @@ ${articleOf.has(v.id) ? `<a class="article-backlink" href="/guides/${articleOf.g
 <a class="btn" href="${SUBSCRIBE_URL}" target="_blank" rel="noopener" data-event="subscribe_click">سبسکرائب کریں</a>
 <a class="btn btn-ghost" href="${esc(v.youtubeUrl)}" target="_blank" rel="noopener">یوٹیوب پر کھولیں</a>
 </div>
+${shareBar(watchPath(v.id), v.title)}
 <p class="disclaimer">${icon("shield")} یہ عام معلومات ہیں، ڈاکٹر کے مشورے کا متبادل نہیں۔</p>
 </div>
 </div>
@@ -674,7 +715,8 @@ ${videoGrid(related)}
     path: watchPath(v.id),
     title: v.title,
     description: v.guide ? v.guide.summary : v.summary,
-    image: v.poster,
+    image: v.shareCard || v.poster,
+    imageAlt: v.shareCard ? `${v.title}، Mastering Essentials` : v.title,
     ogType: v.guide ? "article" : "video.other",
     schema: [
       ORG,
@@ -682,6 +724,7 @@ ${videoGrid(related)}
         "@type": "VideoObject",
         "@id": `${BASE}${watchPath(v.id)}#video`,
         name: v.title,
+        ...(v.roman ? { alternateName: v.roman } : {}),
         description: truncate(plainSummary(v.blocks) || v.title, 2000),
         thumbnailUrl: [...new Set([v.poster, thumb(v.id)])],
         uploadDate: v.published,
@@ -761,6 +804,7 @@ ${breadcrumbs(crumbs)}
 <h1>${esc(a.title)}</h1>
 <p class="lede">${esc(a.summary)}</p>
 <p class="byline"><a href="https://fauwadahmed.com/">فواد احمد</a> · <span lang="en" dir="ltr">Mastering Essentials</span> · آخری نظرِ ثانی: <time datetime="${esc(a.reviewed)}">${urduDate(a.reviewed)}</time></p>
+${shareBar(path, a.title)}
 </header>
 <div class="article-layout">
 <nav class="toc" aria-labelledby="toc-title"><h2 id="toc-title">اس رہنما میں</h2><ol>${toc.map(([, id, text]) => `<li><a href="#${id}">${text}</a></li>`).join("")}</ol></nav>
@@ -1028,8 +1072,9 @@ if (articles.size) lastmod.set("/guides/", [...articles.values()].map(a => a.rev
 lastmod.set("/privacy/", "2026-10-25");
 lastmod.set("/terms/", "2026-10-25");
 const xml = s => esc(s);
+const videoAt = new Map(videos.map(v => [watchPath(v.id), v]));
 const urls = [...pages.keys()].map(path => {
-  const v = path.startsWith("/videos/") && path !== "/videos/" ? byId.get(path.split("/")[2]) : null;
+  const v = videoAt.get(path);
   return `<url><loc>${BASE}${path}</loc><lastmod>${v ? (v.guide?.reviewed || v.published.slice(0, 10)) : lastmod.get(path)}</lastmod>${v ? `
 <video:video><video:thumbnail_loc>${v.poster}</video:thumbnail_loc><video:title>${xml(v.title)}</video:title><video:description>${xml(truncate(plainSummary(v.blocks) || v.title, 2000))}</video:description><video:player_loc>https://www.youtube.com/embed/${v.id}</video:player_loc><video:duration>${v.seconds}</video:duration><video:publication_date>${v.published}</video:publication_date></video:video>` : ""}</url>`;
 }).join("\n");
@@ -1040,9 +1085,17 @@ ${urls}
 `);
 
 for (const file of ["robots.txt", "_headers", "_redirects", "CNAME"]) await cp(file, `${OUT}/${file}`);
+// Old id URLs → slug URLs, after the hand-written rules (Pages allows 2,000 static rules).
+const moved = videos.filter(v => slugOf.has(v.id));
+await appendFile(`${OUT}/_redirects`, `\n# Generated by build-site.mjs from data/video-slugs.json\n${moved.map(v =>
+  `/videos/${v.id}/ ${watchPath(v.id)} 301\n/videos/${v.id} ${watchPath(v.id)} 301`).join("\n")}\n`);
 await cp("data/shorts.json", `${OUT}/data/shorts.json`);
 
 const unplaced = health.filter(v => !v.topic);
 if (unplaced.length) console.warn(`build-site: ${unplaced.length} health videos have no topic yet (add them to data/health-topics.json): ${unplaced.map(v => v.id).join(" ")}`);
-console.log(`build-site: ${guides.size} written guides, ${articles.size} topic articles`);
+const noSlug = videos.filter(v => !slugOf.has(v.id));
+if (noSlug.length) console.warn(`build-site: ${noSlug.length} videos have no slug yet (add them to data/video-slugs.json): ${noSlug.map(v => v.id).join(" ")}`);
+const noCard = health.filter(v => !v.shareCard);
+if (noCard.length) console.warn(`build-site: ${noCard.length} health videos have no share card (run scripts/make-share-cards.mjs)`);
+console.log(`build-site: ${guides.size} written guides, ${articles.size} topic articles, ${moved.length} slug redirects, ${shareCards.size} share cards`);
 console.log(`build-site: ${pages.size} pages (${videos.length} watch pages) in ${OUT}/`);

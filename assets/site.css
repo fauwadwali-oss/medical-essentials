@@ -251,6 +251,17 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .watch-actions .btn:first-child { background: var(--cta); }
 .watch-actions .btn:first-child:hover { background: #c81d23; }
 
+/* Roman Urdu under the title; right-aligned so it sits under the Urdu heading */
+.roman { margin-block: 2px 8px; text-align: end; font-family: var(--latin); font-size: 15px; line-height: 1.6; color: var(--muted); }
+.roman .roman-title { color: var(--ink); font-weight: 700; font-size: 16px; }
+
+/* share */
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+.btn-whatsapp { background: #1a7f45; }
+.btn-whatsapp:hover { background: #136234; }
+.share-status { color: var(--brand-ink); font-size: 14px; font-weight: 700; }
+.article-head .share { margin-top: 16px; }
+
 /* written guide */
 .vguide { padding: 0 8px; border-radius: 6px; background: var(--accent); color: #fff; font-size: 11px; line-height: 2; }
 .guide-jump { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; color: var(--brand); font-weight: 700; }

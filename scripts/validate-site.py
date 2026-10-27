@@ -65,15 +65,38 @@ for p, page in pages.items():
         assert resolve(href).exists(), (rel, 'broken link', href)
 
 catalog = json.loads((root / 'data/shorts.json').read_text())['shorts']
+slugs = {k: v['slug'] for k, v in json.loads((root.parent / 'data/video-slugs.json').read_text()).items()}
+redirects = (root / '_redirects').read_text()
+rules = [l for l in redirects.splitlines() if l.strip() and not l.lstrip().startswith('#')]
+assert len(rules) <= 2000, ('Cloudflare Pages allows 2,000 static redirects', len(rules))
 sitemap = (root / 'sitemap.xml').read_text()
 locs = re.findall(r'<loc>([^<]+)</loc>', sitemap)
 assert len(locs) == len(set(locs)), 'duplicate sitemap URLs'
 assert len(locs) == len(pages) - 1, ('sitemap vs pages', len(locs), len(pages))
 for v in catalog:
-    watch = root / 'videos' / v['youtube_id'] / 'index.html'
-    assert watch.exists(), ('missing watch page', v['youtube_id'])
-    assert f"{BASE}/videos/{v['youtube_id']}/" in locs, ('not in sitemap', v['youtube_id'])
+    vid = v['youtube_id']
+    seg = slugs.get(vid, vid)
+    watch = root / 'videos' / seg / 'index.html'
+    assert watch.exists(), ('missing watch page', vid)
+    assert f"{BASE}/videos/{seg}/" in locs, ('not in sitemap', vid)
+    if vid in slugs:
+        assert not (root / 'videos' / vid).exists(), ('old id page still built', vid)
+        assert f"/videos/{vid}/ /videos/{seg}/ 301" in redirects, ('no redirect from id URL', vid)
     types = [n['@type'] for g in pages[watch].ld for n in g['@graph']]
     assert 'VideoObject' in types, ('no VideoObject', v['youtube_id'])
 
-print(f'PASS: {len(pages)} pages, {len(catalog)} watch pages, links, H1s, canonicals, JSON-LD, sitemap.')
+# Share cards are ours, so their declared 1200x630 size must be true.
+for card in (root / 'assets/og').glob('*.jpg'):
+    data = card.read_bytes()
+    assert data[:2] == b'\xff\xd8', ('share card is not a JPEG', card.name)
+    size, i = None, 2
+    while i + 9 < len(data) and data[i] == 0xFF:
+        marker, length = data[i + 1], int.from_bytes(data[i + 2:i + 4], 'big')
+        if marker in (0xC0, 0xC1, 0xC2):
+            size = (int.from_bytes(data[i + 7:i + 9], 'big'), int.from_bytes(data[i + 5:i + 7], 'big'))
+            break
+        i += 2 + length
+    assert size == (1200, 630), ('share card size', card.name, size)
+    assert len(data) < 300_000, ('share card too large', card.name, len(data))
+
+print(f'PASS: {len(pages)} pages, {len(catalog)} watch pages, links, H1s, canonicals, JSON-LD, sitemap, slug redirects.')
