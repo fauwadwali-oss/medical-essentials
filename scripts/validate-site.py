@@ -68,7 +68,10 @@ catalog = json.loads((root / 'data/shorts.json').read_text())['shorts']
 slugs = {k: v['slug'] for k, v in json.loads((root.parent / 'data/video-slugs.json').read_text()).items()}
 redirects = (root / '_redirects').read_text()
 rules = [l for l in redirects.splitlines() if l.strip() and not l.lstrip().startswith('#')]
-assert len(rules) <= 2000, ('Cloudflare Pages allows 2,000 static redirects', len(rules))
+# Pages treats every rule after the first dynamic one as dynamic (limit 100, extras ignored).
+first_dynamic = next((i for i, l in enumerate(rules) if ':' in l.split()[0] or '*' in l.split()[0]), len(rules))
+assert first_dynamic <= 2000, ('Cloudflare Pages allows 2,000 static redirects', first_dynamic)
+assert len(rules) - first_dynamic <= 100, ('rules after the first dynamic redirect count as dynamic; limit 100', len(rules) - first_dynamic)
 sitemap = (root / 'sitemap.xml').read_text()
 locs = re.findall(r'<loc>([^<]+)</loc>', sitemap)
 assert len(locs) == len(set(locs)), 'duplicate sitemap URLs'
