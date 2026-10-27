@@ -51,6 +51,49 @@ if (toggle) {
   matchMedia("(max-width: 860px)").addEventListener("change", e => { if (!e.matches) close(); });
 }
 
+// Share: the WhatsApp link works on its own; the other button prefers the phone's share
+// sheet and falls back to copying the link.
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const field = Object.assign(document.createElement("textarea"), { value: text });
+    field.setAttribute("readonly", "");
+    field.style.cssText = "position:fixed;opacity:0";
+    document.body.append(field);
+    field.select();
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch { /* not supported */ }
+    field.remove();
+    return ok;
+  }
+}
+document.querySelectorAll(".share").forEach(bar => {
+  const { shareUrl: url, shareTitle: title } = bar.dataset;
+  const status = bar.querySelector(".share-status");
+  const say = text => { status.textContent = text; setTimeout(() => { status.textContent = ""; }, 4000); };
+  bar.querySelector('[data-share="whatsapp"]').addEventListener("click", () =>
+    track("share", { method: "whatsapp", content_type: "page", item_id: location.pathname }));
+  bar.querySelector('[data-share="native"]').addEventListener("click", async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text: title, url });
+        track("share", { method: "native", content_type: "page", item_id: location.pathname });
+        return;
+      } catch (error) {
+        if (error?.name === "AbortError") return; // closed the share sheet
+      }
+    }
+    if (await copyText(url)) {
+      say("لنک کاپی ہو گیا");
+      track("share", { method: "copy", content_type: "page", item_id: location.pathname });
+    } else {
+      say(url);
+    }
+  });
+});
+
 document.querySelectorAll("[data-event]").forEach(el =>
   el.addEventListener("click", () => track(el.dataset.event, { link_url: el.href || "" })));
 
@@ -88,7 +131,7 @@ if (grid) {
     const matches = order.filter(card => {
       if (kind === "topic" && card.dataset.topic !== value) return false;
       if (kind === "track" && card.dataset.track !== value) return false;
-      const title = normalize(card.dataset.title);
+      const title = normalize(`${card.dataset.title} ${card.dataset.roman || ""}`);
       return words.every(w => title.includes(w));
     });
     const visible = new Set(matches.slice(0, limit));
