@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-26T03:38:45.769Z",
+  "exported_at": "2026-10-27T03:35:22.813Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 332,
+  "count": 334,
   "shorts": [
+    {
+      "youtube_id": "PV2loyvc0PU",
+      "title": "سردی میں بلڈ پریشر کی ریڈنگ بدل سکتی ہے؟",
+      "url": "https://www.youtube.com/shorts/PV2loyvc0PU",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-26T14:01:09Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "uCbNuLuK3G4",
+      "title": "موسم باہر نہ جانے دے تو گھر میں حرکت",
+      "url": "https://www.youtube.com/shorts/uCbNuLuK3G4",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-26T07:00:41Z",
+      "duration_seconds": 48
+    },
     {
       "youtube_id": "GKvMYUDFh_M",
       "title": "دوا سے تکلیف ہو تو کیا بتانا ہے؟",
