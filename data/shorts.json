@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-27T03:35:22.813Z",
+  "exported_at": "2026-10-28T03:26:29.150Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 334,
+  "count": 336,
   "shorts": [
+    {
+      "youtube_id": "J9b0UdKuLL0",
+      "title": "پانی صرف باتھ روم میں نہیں ہوتا",
+      "url": "https://www.youtube.com/shorts/J9b0UdKuLL0",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-27T14:00:53Z",
+      "duration_seconds": 50
+    },
+    {
+      "youtube_id": "rSmc07LgWCg",
+      "title": "گیس کی بو آئے تو پہلا کام کیا؟",
+      "url": "https://www.youtube.com/shorts/rSmc07LgWCg",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-27T07:00:32Z",
+      "duration_seconds": 46
+    },
     {
       "youtube_id": "PV2loyvc0PU",
       "title": "سردی میں بلڈ پریشر کی ریڈنگ بدل سکتی ہے؟",
