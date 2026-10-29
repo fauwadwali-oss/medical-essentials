@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-28T03:26:29.150Z",
+  "exported_at": "2026-10-29T03:26:29.921Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 336,
+  "count": 338,
   "shorts": [
+    {
+      "youtube_id": "7StJu8zuYp8",
+      "title": "اے سی کا فلٹر: ہدایت کے مطابق صاف کریں",
+      "url": "https://www.youtube.com/shorts/7StJu8zuYp8",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-28T14:00:53Z",
+      "duration_seconds": 45
+    },
+    {
+      "youtube_id": "NmjpIHk4Imk",
+      "title": "اے کیو آئی زیادہ ہے، اب کیا کریں؟",
+      "url": "https://www.youtube.com/shorts/NmjpIHk4Imk",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-28T07:00:31Z",
+      "duration_seconds": 43
+    },
     {
       "youtube_id": "J9b0UdKuLL0",
       "title": "پانی صرف باتھ روم میں نہیں ہوتا",
