@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-29T03:26:29.921Z",
+  "exported_at": "2026-10-30T03:26:18.727Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 338,
+  "count": 340,
   "shorts": [
+    {
+      "youtube_id": "qISRJ6ffmFs",
+      "title": "ڈاکٹر کوئی لفظ بولے جو سمجھ نہ آئے؟",
+      "url": "https://www.youtube.com/shorts/qISRJ6ffmFs",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-29T14:00:38Z",
+      "duration_seconds": 46
+    },
+    {
+      "youtube_id": "W8ejZ0G9-rA",
+      "title": "امیونٹی بوسٹر: دعویٰ کیا ہے؟",
+      "url": "https://www.youtube.com/shorts/W8ejZ0G9-rA",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-29T07:00:41Z",
+      "duration_seconds": 47
+    },
     {
       "youtube_id": "7StJu8zuYp8",
       "title": "اے سی کا فلٹر: ہدایت کے مطابق صاف کریں",
