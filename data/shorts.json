@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-10-30T03:26:18.727Z",
+  "exported_at": "2026-10-31T03:21:22.803Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 340,
+  "count": 342,
   "shorts": [
+    {
+      "youtube_id": "dCILvMPWuNQ",
+      "title": "ناشتے کا ڈبہ: سامنے کا دعویٰ کافی نہیں",
+      "url": "https://www.youtube.com/shorts/dCILvMPWuNQ",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-30T14:00:36Z",
+      "duration_seconds": 47
+    },
+    {
+      "youtube_id": "CtIsmwhdMEU",
+      "title": "بازار جانے سے پہلے فہرست بنا لیں",
+      "url": "https://www.youtube.com/shorts/CtIsmwhdMEU",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-10-30T07:00:37Z",
+      "duration_seconds": 45
+    },
     {
       "youtube_id": "qISRJ6ffmFs",
       "title": "ڈاکٹر کوئی لفظ بولے جو سمجھ نہ آئے؟",
