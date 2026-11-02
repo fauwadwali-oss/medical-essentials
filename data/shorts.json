@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-01T03:25:05.790Z",
+  "exported_at": "2026-11-02T03:24:43.490Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 344,
+  "count": 346,
   "shorts": [
+    {
+      "youtube_id": "euSfEnNJ3KM",
+      "title": "سپلیمنٹ بھی دوا کے ساتھ ٹکرا سکتے ہیں",
+      "url": "https://www.youtube.com/shorts/euSfEnNJ3KM",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-01T14:00:36Z",
+      "duration_seconds": 49
+    },
+    {
+      "youtube_id": "eg5YJSmSPsI",
+      "title": "دوگنی خوراک سے فائدہ دگنا نہیں ہوتا",
+      "url": "https://www.youtube.com/shorts/eg5YJSmSPsI",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-01T07:00:33Z",
+      "duration_seconds": 47
+    },
     {
       "youtube_id": "MMgxpaIlrjY",
       "title": "پولیو کے قطرے بار بار کیوں؟",
