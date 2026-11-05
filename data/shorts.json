@@ -1,12 +1,72 @@
 {
-  "exported_at": "2026-11-02T03:24:43.490Z",
+  "exported_at": "2026-11-05T03:23:15.143Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 346,
+  "count": 352,
   "shorts": [
+    {
+      "youtube_id": "ndidhBzHfOM",
+      "title": "بند کمرے میں انگیٹھی، بو کے بغیر خطرہ",
+      "url": "https://www.youtube.com/shorts/ndidhBzHfOM",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-04T14:00:40Z",
+      "duration_seconds": 50
+    },
+    {
+      "youtube_id": "Y7L5r2QQOME",
+      "title": "ہیٹر کے گرد جگہ خالی رکھیں",
+      "url": "https://www.youtube.com/shorts/Y7L5r2QQOME",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-04T07:00:27Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "yO5zIdEsb8Q",
+      "title": "بائیک کی پچھلی بتی جلتی ہے؟",
+      "url": "https://www.youtube.com/shorts/yO5zIdEsb8Q",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-03T14:00:38Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "iA5LUqGFU1o",
+      "title": "گیلے ہاتھ اور بجلی کا آلہ، ساتھ نہیں",
+      "url": "https://www.youtube.com/shorts/iA5LUqGFU1o",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-03T07:00:38Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "RsShr-X49Wo",
+      "title": "جبڑا بھینچنے کی عادت پر توجہ دیں",
+      "url": "https://www.youtube.com/shorts/RsShr-X49Wo",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-02T14:00:32Z",
+      "duration_seconds": 52
+    },
+    {
+      "youtube_id": "iNyxXB8U3lU",
+      "title": "کام کے دوران حرکت کا مختصر وقفہ",
+      "url": "https://www.youtube.com/shorts/iNyxXB8U3lU",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-02T07:00:48Z",
+      "duration_seconds": 45
+    },
     {
       "youtube_id": "euSfEnNJ3KM",
       "title": "سپلیمنٹ بھی دوا کے ساتھ ٹکرا سکتے ہیں",
