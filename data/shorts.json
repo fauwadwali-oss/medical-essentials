@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-05T03:23:15.143Z",
+  "exported_at": "2026-11-06T03:22:54.034Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 352,
+  "count": 354,
   "shorts": [
+    {
+      "youtube_id": "yQaQllwhdXo",
+      "title": "علامات کی تلاش، تشخیص نہیں ہوتی",
+      "url": "https://www.youtube.com/shorts/yQaQllwhdXo",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-05T14:00:34Z",
+      "duration_seconds": 45
+    },
+    {
+      "youtube_id": "V5GdMXttzKg",
+      "title": "پندرہ دن میں شوگر ختم؟ سوال پوچھیں",
+      "url": "https://www.youtube.com/shorts/V5GdMXttzKg",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-05T07:00:35Z",
+      "duration_seconds": 52
+    },
     {
       "youtube_id": "ndidhBzHfOM",
       "title": "بند کمرے میں انگیٹھی، بو کے بغیر خطرہ",
