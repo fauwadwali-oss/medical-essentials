@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-06T03:22:54.034Z",
+  "exported_at": "2026-11-07T03:21:24.731Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 354,
+  "count": 356,
   "shorts": [
+    {
+      "youtube_id": "9oJdKXwjqk8",
+      "title": "جو کھانا پہلے سے پکتا ہے، اسی میں سبزی بڑھائیں",
+      "url": "https://www.youtube.com/shorts/9oJdKXwjqk8",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-06T14:00:40Z",
+      "duration_seconds": 47
+    },
+    {
+      "youtube_id": "k26yv7CWJaE",
+      "title": "کھانے کے ساتھ چائے، اور فولاد",
+      "url": "https://www.youtube.com/shorts/k26yv7CWJaE",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-06T07:00:32Z",
+      "duration_seconds": 48
+    },
     {
       "youtube_id": "yQaQllwhdXo",
       "title": "علامات کی تلاش، تشخیص نہیں ہوتی",
