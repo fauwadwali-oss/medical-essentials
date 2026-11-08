@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-07T03:21:24.731Z",
+  "exported_at": "2026-11-08T03:23:21.848Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 356,
+  "count": 358,
   "shorts": [
+    {
+      "youtube_id": "AOfcbqOFSv0",
+      "title": "جسم کی شکل پر تبصرہ کرنے سے پہلے",
+      "url": "https://www.youtube.com/shorts/AOfcbqOFSv0",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-07T14:00:34Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "8lUZo_oHZQ4",
+      "title": "ماہواری کے بارے میں سوال پوچھنا معیوب نہیں",
+      "url": "https://www.youtube.com/shorts/8lUZo_oHZQ4",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-07T07:01:11Z",
+      "duration_seconds": 48
+    },
     {
       "youtube_id": "9oJdKXwjqk8",
       "title": "جو کھانا پہلے سے پکتا ہے، اسی میں سبزی بڑھائیں",
