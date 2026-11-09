@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-08T03:23:21.848Z",
+  "exported_at": "2026-11-09T03:24:58.156Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 358,
+  "count": 360,
   "shorts": [
+    {
+      "youtube_id": "3zXR0PGTs5s",
+      "title": "اینٹی بائیوٹک کے بعد خارش یا دانے؟",
+      "url": "https://www.youtube.com/shorts/3zXR0PGTs5s",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-08T14:00:37Z",
+      "duration_seconds": 49
+    },
+    {
+      "youtube_id": "G64AUj2MQe4",
+      "title": "ایمرجنسی کے لیے دواؤں کی ایک فہرست",
+      "url": "https://www.youtube.com/shorts/G64AUj2MQe4",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-08T07:00:49Z",
+      "duration_seconds": 46
+    },
     {
       "youtube_id": "AOfcbqOFSv0",
       "title": "جسم کی شکل پر تبصرہ کرنے سے پہلے",
