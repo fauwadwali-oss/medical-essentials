@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-09T03:24:58.156Z",
+  "exported_at": "2026-11-10T03:22:55.746Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 360,
+  "count": 362,
   "shorts": [
+    {
+      "youtube_id": "31B_aTIUHDk",
+      "title": "کھانے کی میز پر فون، ایک چھوٹی حد",
+      "url": "https://www.youtube.com/shorts/31B_aTIUHDk",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-09T14:00:40Z",
+      "duration_seconds": 44
+    },
+    {
+      "youtube_id": "eOXe0a4A-K4",
+      "title": "شیشے کا پانی دھوئیں کو محفوظ نہیں کرتا",
+      "url": "https://www.youtube.com/shorts/eOXe0a4A-K4",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-09T07:00:26Z",
+      "duration_seconds": 48
+    },
     {
       "youtube_id": "3zXR0PGTs5s",
       "title": "اینٹی بائیوٹک کے بعد خارش یا دانے؟",
