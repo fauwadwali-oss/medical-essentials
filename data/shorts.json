@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-10T03:22:55.746Z",
+  "exported_at": "2026-11-11T03:23:31.144Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 362,
+  "count": 364,
   "shorts": [
+    {
+      "youtube_id": "gZ6UpaLUiVw",
+      "title": "باہر نکلنے کے بعد سب کہاں جمع ہوں گے؟",
+      "url": "https://www.youtube.com/shorts/gZ6UpaLUiVw",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-10T14:00:28Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "OZYv18QWSyA",
+      "title": "فون تکیے کے نیچے چارج نہ کریں",
+      "url": "https://www.youtube.com/shorts/OZYv18QWSyA",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-10T07:00:50Z",
+      "duration_seconds": 51
+    },
     {
       "youtube_id": "31B_aTIUHDk",
       "title": "کھانے کی میز پر فون، ایک چھوٹی حد",
