@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-12T03:23:27.917Z",
+  "exported_at": "2026-11-13T03:23:40.887Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 366,
+  "count": 368,
   "shorts": [
+    {
+      "youtube_id": "CSnKktvQH24",
+      "title": "مضمون کس نے لکھا، اور کب؟",
+      "url": "https://www.youtube.com/shorts/CSnKktvQH24",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-12T14:00:27Z",
+      "duration_seconds": 45
+    },
+    {
+      "youtube_id": "vHVMj3d1KAQ",
+      "title": "شوگر کی ایک زیادہ ریڈنگ، اس کا مطلب؟",
+      "url": "https://www.youtube.com/shorts/vHVMj3d1KAQ",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-12T07:00:30Z",
+      "duration_seconds": 52
+    },
     {
       "youtube_id": "LuhB8qFU3-M",
       "title": "فلو کے ٹیکے سے پہلے کیا پوچھیں؟",
