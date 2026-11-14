@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-13T03:23:40.887Z",
+  "exported_at": "2026-11-14T03:22:12.552Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 368,
+  "count": 370,
   "shorts": [
+    {
+      "youtube_id": "_GJjYVsV_Vc",
+      "title": "آٹا، میدہ اور چکی کا آٹا، فرق کیا؟",
+      "url": "https://www.youtube.com/shorts/_GJjYVsV_Vc",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-13T14:00:22Z",
+      "duration_seconds": 49
+    },
+    {
+      "youtube_id": "AzWwqk1h_TQ",
+      "title": "کاربوہائیڈریٹ: بند کرنے کے بجائے مقدار دیکھیں",
+      "url": "https://www.youtube.com/shorts/AzWwqk1h_TQ",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-13T07:00:33Z",
+      "duration_seconds": 50
+    },
     {
       "youtube_id": "CSnKktvQH24",
       "title": "مضمون کس نے لکھا، اور کب؟",
