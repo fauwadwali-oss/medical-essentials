@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-14T03:22:12.552Z",
+  "exported_at": "2026-11-15T03:23:32.600Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 370,
+  "count": 372,
   "shorts": [
+    {
+      "youtube_id": "yNUskHv9_hA",
+      "title": "خسرے کا ایک ٹیکہ لگ چکا ہے، اب؟",
+      "url": "https://www.youtube.com/shorts/yNUskHv9_hA",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-14T14:00:36Z",
+      "duration_seconds": 46
+    },
+    {
+      "youtube_id": "soeyFJ3h0V8",
+      "title": "بچے کو مسلسل قبض؟ معائنے کی تیاری",
+      "url": "https://www.youtube.com/shorts/soeyFJ3h0V8",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-14T07:01:01Z",
+      "duration_seconds": 54
+    },
     {
       "youtube_id": "_GJjYVsV_Vc",
       "title": "آٹا، میدہ اور چکی کا آٹا، فرق کیا؟",
