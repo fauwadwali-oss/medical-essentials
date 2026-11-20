@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-19T03:23:35.367Z",
+  "exported_at": "2026-11-20T03:23:54.926Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 380,
+  "count": 382,
   "shorts": [
+    {
+      "youtube_id": "G0yxfMdL1QI",
+      "title": "ایچ بی اے ون سی اور آج کی شوگر، فرق کیا؟",
+      "url": "https://www.youtube.com/shorts/G0yxfMdL1QI",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-19T14:00:28Z",
+      "duration_seconds": 47
+    },
+    {
+      "youtube_id": "Mef7SK3nCvE",
+      "title": "پری ذیابیطس کی خبر ملے تو کیا پوچھیں؟",
+      "url": "https://www.youtube.com/shorts/Mef7SK3nCvE",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-19T11:38:36Z",
+      "duration_seconds": 47
+    },
     {
       "youtube_id": "-z67wBhG0-Q",
       "title": "گھر میں کوئی بیمار ہو تو کمزور افراد کا خیال",
