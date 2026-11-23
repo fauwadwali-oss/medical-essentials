@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-22T03:23:35.097Z",
+  "exported_at": "2026-11-23T03:25:57.732Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 386,
+  "count": 388,
   "shorts": [
+    {
+      "youtube_id": "LfFjF9PB18s",
+      "title": "دوا ختم ہونے سے پہلے انتظام کر لیں",
+      "url": "https://www.youtube.com/shorts/LfFjF9PB18s",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-22T14:00:42Z",
+      "duration_seconds": 44
+    },
+    {
+      "youtube_id": "hb1X68mY8S8",
+      "title": "فریج والی دوا اور سفر کی منصوبہ بندی",
+      "url": "https://www.youtube.com/shorts/hb1X68mY8S8",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-22T07:00:46Z",
+      "duration_seconds": 41
+    },
     {
       "youtube_id": "byXkvniG7Lo",
       "title": "بچہ سبزی نہیں کھاتا؟ لڑائی کم کریں",
