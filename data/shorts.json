@@ -1,12 +1,32 @@
 {
-  "exported_at": "2026-11-25T03:25:47.052Z",
+  "exported_at": "2026-11-26T03:24:23.488Z",
   "source": {
     "channel_id": "UC8Ux9uG3hYIjKdym7mD-8GA",
     "method": "youtube-data-api",
     "ordering": "newest first"
   },
-  "count": 392,
+  "count": 394,
   "shorts": [
+    {
+      "youtube_id": "Rz9-c8HOSOE",
+      "title": "ایگزاسٹ نہ ہو تو کچن کا دھواں کہاں جاتا ہے؟",
+      "url": "https://www.youtube.com/shorts/Rz9-c8HOSOE",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-25T14:00:26Z",
+      "duration_seconds": 48
+    },
+    {
+      "youtube_id": "w6sKidWBZLc",
+      "title": "دیوار پر پھپھوندی؟ پہلے پانی کا راستہ ڈھونڈیں",
+      "url": "https://www.youtube.com/shorts/w6sKidWBZLc",
+      "track": "HEALTH",
+      "format": "short",
+      "vertical": true,
+      "published_at": "2026-11-25T07:00:35Z",
+      "duration_seconds": 45
+    },
     {
       "youtube_id": "TSVKXcwiyFE",
       "title": "چولہے کے پاس دوپٹہ: خطرہ ہاتھ بھر کے فاصلے پر",
